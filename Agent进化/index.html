@@ -22,7 +22,7 @@
     -->
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-01 21:28) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-01 21:59) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -1840,7 +1840,6 @@ textarea.input {
 
 		        :root {
 		            --tuning-queue-w: 228px;
-		            --tuning-queue-w-collapsed: 56px;
 		        }
 
 		        .tuning-wb { grid-template-columns: var(--tuning-queue-w) 1fr; min-height: 520px; }
@@ -1852,35 +1851,6 @@ textarea.input {
 		        .tuning-wb .wb-list { padding: 8px; gap: 6px; }
 		        .tuning-wb .wb-item .t { display: flex; align-items: center; gap: 6px; min-width: 0; }
 		        .tuning-wb .wb-item .t .t-title { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-		        .tuning-wb .wb-side-head [data-tune-action="toggle-queue"] {
-		            width: 34px;
-		            height: 34px;
-		            padding: 0;
-		            border-radius: 12px;
-		            border: 1px solid var(--eva-border);
-		            background: white;
-		            font-weight: 900;
-		            color: var(--eva-text-secondary);
-		        }
-		        .tuning-wb .wb-side-head [data-tune-action="toggle-queue"]:hover { background: var(--eva-border-light); color: var(--eva-text-primary); }
-
-		        .tuning-wb.is-collapsed { grid-template-columns: var(--tuning-queue-w-collapsed) 1fr; }
-		        .tuning-wb.is-collapsed .wb-side-head { padding: 12px 8px; justify-content: center; }
-		        .tuning-wb.is-collapsed .wb-side-head > div { display: none; }
-		        .tuning-wb.is-collapsed .wb-side-title,
-		        .tuning-wb.is-collapsed .wb-side-meta { display: none; }
-		        .tuning-wb.is-collapsed .wb-list { padding: 10px 6px; }
-		        .tuning-wb.is-collapsed .wb-item { padding: 10px 6px; }
-		        .tuning-wb.is-collapsed .wb-item .t,
-		        .tuning-wb.is-collapsed .wb-item .m { display: none; }
-		        .tuning-wb.is-collapsed .wb-add-from-qbank { padding: 10px; margin: 6px; justify-content: center; }
-		        .tuning-wb.is-collapsed .wb-add-from-qbank .text { display: none; }
-		        .tuning-wb.is-collapsed .wb-empty-guide { padding: 16px 6px; }
-		        .tuning-wb.is-collapsed .wb-empty-guide-icon { font-size: 20px; margin-bottom: 6px; }
-		        .tuning-wb.is-collapsed .wb-empty-guide-title,
-		        .tuning-wb.is-collapsed .wb-empty-guide-desc { display: none; }
-		        .tuning-wb.is-collapsed .wb-empty-guide-btn { padding: 10px; }
-		        .tuning-wb.is-collapsed .wb-empty-guide-btn .text { display: none; }
 
 	        .wb-item.leaving { opacity: 0; transform: translateY(-6px) scale(0.985); }
 
@@ -2776,7 +2746,6 @@ textarea.input {
         /* 演示用清空按钮 */
         .demo-clear-btn { display: inline-flex; align-items: center; gap: 2px; margin-top: 4px; padding: 2px 6px; font-size: 10px; color: var(--eva-text-tertiary); background: var(--eva-border-light); border: 1px dashed var(--eva-border); border-radius: 4px; cursor: pointer; transition: all var(--eva-transition-fast); }
         .demo-clear-btn:hover { color: var(--eva-error); border-color: var(--eva-error); background: var(--eva-error-bg); }
-        .tuning-wb.is-collapsed .demo-clear-btn { display: none; }
 
         .wb-list {
             padding: 10px;
@@ -2825,7 +2794,6 @@ textarea.input {
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        .tuning-wb.is-collapsed .wb-item-comment { display: none; }
 
         .wb-main {
             padding: 12px 14px 12px;
@@ -4144,8 +4112,7 @@ textarea.input {
 	            wheelIgnoreSnapUntil: 0,
 	            tuningMode: 'single',
 	            tuningAbilityId: null,
-	            tuningQid: null,
-	            tuningQueueCollapsed: false
+	            tuningQid: null
 	        };
 
         function cloneSeed() {
@@ -4772,12 +4739,6 @@ textarea.input {
 			                    e.preventDefault();
 			                    gap.click();
 			                }
-			            } else if (e.key === 'q' || e.key === 'Q') {
-		                const btn = document.querySelector('#tuningHost [data-tune-action=\"toggle-queue\"]');
-		                if (btn) {
-		                    e.preventDefault();
-		                    btn.click();
-		                }
 		            }
 		        });
 
@@ -5503,14 +5464,13 @@ textarea.input {
 		            host.style.setProperty('--ability-color-border', hexToRgba(a.color, 0.24));
 
 		            host.innerHTML = `
-		                <div class="wb tuning-wb ${uiState.tuningQueueCollapsed ? 'is-collapsed' : ''}" style="--ability-color:${a.color};--ability-color-light:${mixHex(a.color, '#FFFFFF', 0.45)};--ability-color-bg:${hexToRgba(a.color, 0.10)};--ability-color-border:${hexToRgba(a.color, 0.24)};">
+		                <div class="wb tuning-wb" style="--ability-color:${a.color};--ability-color-light:${mixHex(a.color, '#FFFFFF', 0.45)};--ability-color-bg:${hexToRgba(a.color, 0.10)};--ability-color-border:${hexToRgba(a.color, 0.24)};">
 		                    <div class="wb-side">
 		                        <div class="wb-side-head">
 	                            <div>
 	                                <div class="wb-side-title">待处理题目 (${a.pending})</div>
 	                                <button class="demo-clear-btn" type="button" data-tune-action="demo-clear-queue" title="清空队列（仅用于产品演示）">🧹 清空（演示）</button>
 	                            </div>
-	                            <button class="btn btn-ghost" type="button" data-tune-action="toggle-queue" title="收起/展开">${uiState.tuningQueueCollapsed ? '&#9654;' : '&#9664;'}</button>
 	                        </div>
 	                        <div class="wb-list">${renderTuningQueue(a, activeQid)}</div>
 	                    </div>
@@ -5805,11 +5765,6 @@ textarea.input {
 	            const q = qid && a.queue ? (a.queue.find(x => x.id === qid) || null) : null;
 	            if (action === 'back') {
 	                goOverview();
-	                return;
-	            }
-	            if (action === 'toggle-queue') {
-	                uiState.tuningQueueCollapsed = !uiState.tuningQueueCollapsed;
-	                renderTuningPage();
 	                return;
 	            }
 	            if (action === 'open-qbank') {
