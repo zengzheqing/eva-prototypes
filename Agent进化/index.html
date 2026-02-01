@@ -22,7 +22,7 @@
     -->
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-01 20:33) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-01 21:28) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -4345,7 +4345,7 @@ textarea.input {
 	            if (title) {
 	                if (uiState.route === 'tuning') {
 	                    const a = abilities.find(x => x.id === uiState.tuningAbilityId);
-	                    title.textContent = a ? `${a.name} · 进化工作台` : '进化工作台';
+	                    title.textContent = '进化工作台';
 	                } else {
 	                    title.textContent = 'Agent进化';
 	                }
@@ -5636,7 +5636,7 @@ textarea.input {
 		            ` : '';
 
 		            openModal({
-		                title: `补充题目 · ${escapeHtml(a.name)}`,
+		                title: '补充题目',
 		                size: 'qbank-modal',
 		                bodyHtml: `
 		                    <div class="qbank-filters" style="border-bottom: 1px solid var(--eva-border); padding-bottom: 12px; margin-bottom: 12px;">
