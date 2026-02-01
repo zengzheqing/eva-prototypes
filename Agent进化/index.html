@@ -22,7 +22,7 @@
     -->
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-01 18:44) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-01 20:33) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -3176,7 +3176,7 @@ textarea.input {
         .qbank-item-title { font-size: 13px; font-weight: 600; color: var(--eva-text-primary); line-height: 1.5; }
         .qbank-item-meta { display: flex; align-items: center; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
         .qbank-item-tag { font-size: 11px; padding: 2px 6px; border-radius: 4px; }
-        .qbank-item-tag.suggest { background: var(--eva-warning-bg); color: var(--eva-warning); }
+        .qbank-item-tag.suggest { background: var(--eva-error-bg); color: var(--eva-error); }
         .qbank-item-tag.in-queue { background: var(--eva-border-light); color: var(--eva-text-tertiary); }
         .qbank-item-status { font-size: 14px; line-height: 1; }
 
@@ -3488,7 +3488,6 @@ textarea.input {
                                     <div style="width:36px;height:36px;border-radius:14px;background:#ecfdf5;border:1px solid rgba(16,185,129,.2);display:flex;align-items:center;justify-content:center;">&#128172;</div>
                                     <div>
                                         <div style="font-weight:900;">智能客服 <span style="margin-left:8px;font-size:12px;color:#10b981;">v3.0</span></div>
-                                        <div style="font-size:12px;color:#6b7280;">处理用户咨询、售后支持</div>
                                     </div>
                                 </div>
                                 <div style="width:28px;height:28px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;display:flex;align-items:center;justify-content:center;color:#6b7280;">&#9660;</div>
@@ -3507,7 +3506,6 @@ textarea.input {
                                     <div style="width:36px;height:36px;border-radius:14px;background:#eff6ff;border:1px solid rgba(59,130,246,.2);display:flex;align-items:center;justify-content:center;">&#9997;</div>
                                     <div>
                                         <div style="font-weight:900;">内容营销 <span style="margin-left:8px;font-size:12px;color:#3b82f6;">v2.0</span></div>
-                                        <div style="font-size:12px;color:#6b7280;">生成营销文案、社媒内容</div>
                                     </div>
                                 </div>
                                 <div style="width:28px;height:28px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;display:flex;align-items:center;justify-content:center;color:#6b7280;">&#9660;</div>
@@ -3526,7 +3524,6 @@ textarea.input {
                                     <div style="width:36px;height:36px;border-radius:14px;background:#f5f3ff;border:1px solid rgba(139,92,246,.2);display:flex;align-items:center;justify-content:center;">&#128188;</div>
                                     <div>
                                         <div style="font-weight:900;">销售推广 <span style="margin-left:8px;font-size:12px;color:#8b5cf6;">v2.0</span> <span style="margin-left:8px;font-size:12px;color:#10b981;">可升级</span></div>
-                                        <div style="font-size:12px;color:#6b7280;">产品推荐、转化引导</div>
                                     </div>
                                 </div>
                                 <div style="width:28px;height:28px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;display:flex;align-items:center;justify-content:center;color:#6b7280;">&#9660;</div>
@@ -3734,7 +3731,7 @@ textarea.input {
 	                        <div class="icon">&#10024;</div>
 	                        <div style="min-width:0;">
 	                            <h2>能力进化</h2>
-	                            <p>进化答案 · 升级版本</p>
+	                            <p></p>
 	                        </div>
 	                    </div>
 
@@ -3877,7 +3874,7 @@ textarea.input {
                 name: '智能客服',
                 icon: '&#128172;',
                 color: '#10B981',
-                description: '处理用户咨询、售后支持',
+                description: '',
                 progress: 68,
                 version: 'v3.0',
                 roundTotal: 50,
@@ -3905,7 +3902,7 @@ textarea.input {
                 name: '内容营销',
                 icon: '&#9997;',
                 color: '#3B82F6',
-                description: '生成营销文案、社媒内容',
+                description: '',
                 progress: 32,
                 version: 'v2.0',
                 roundTotal: 50,
@@ -3932,7 +3929,7 @@ textarea.input {
                 name: '销售推广',
                 icon: '&#128188;',
                 color: '#8B5CF6',
-                description: '产品推荐、转化引导',
+                description: '',
                 progress: 100,
                 version: 'v2.0',
                 roundTotal: 50,
@@ -3950,7 +3947,7 @@ textarea.input {
                 name: '商业情报',
                 icon: '&#128202;',
                 color: '#F59E0B',
-                description: '市场分析、竞品调研',
+                description: '',
                 progress: 45,
                 version: 'v1.0',
                 roundTotal: 40,
@@ -4567,7 +4564,7 @@ textarea.input {
                                 <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(a.name)}</span>
                                 ${tag}
                             </div>
-                            <div class="desc">${escapeHtml(a.description)}</div>
+                            ${a.description ? `<div class="desc">${escapeHtml(a.description)}</div>` : ''}
                         </div>
                     </div>
                     <div class="detail-actions">
@@ -5312,7 +5309,7 @@ textarea.input {
 			            const choosePanel = q ? `
 			                <div class="callout tune-mode">
 			                    <div class="callout-title">&#127919; 选择进化方式</div>
-			                    <div class="callout-desc">二选一完成本题进化</div>
+			                    <div class="callout-desc"></div>
 			                    ${(isGap && !gapAccepted) ? `
 			                        <div class="gap-blocking-bar">
 			                            <div class="gap-blocking-icon">⚠️</div>
@@ -5604,7 +5601,7 @@ textarea.input {
 
 		            const statusTagMap = {
 		                pass: '', // 已通过不显示任何标签
-		                fail: '<span class="qbank-item-tag suggest">待改进</span>'
+		                fail: '<span class="qbank-item-tag suggest">知识缺口</span> ' // 句首显示
 		            };
 
 		            const listHtml = pageList.length === 0
@@ -5615,13 +5612,13 @@ textarea.input {
 		                    const isSelected = qbankState.selectedIds.has(fullId);
 		                    const disabledClass = inQueue ? 'disabled' : '';
 		                    const selectedClass = isSelected ? 'selected' : '';
+		                    const statusTag = statusTagMap[q.status] || '';
 		                    return `
 		                        <label class="qbank-item ${disabledClass} ${selectedClass}" data-qbank-id="${fullId}">
 		                            <input type="checkbox" ${isSelected ? 'checked' : ''} ${inQueue ? 'disabled' : ''}>
 		                            <div class="qbank-item-content">
-		                                <div class="qbank-item-title">${escapeHtml(q.title)}</div>
+		                                <div class="qbank-item-title">${statusTag}${escapeHtml(q.title)}</div>
 		                                <div class="qbank-item-meta">
-		                                    ${statusTagMap[q.status] || ''}
 		                                    ${inQueue ? '<span class="qbank-item-tag in-queue">已在队列</span>' : ''}
 		                                </div>
 		                            </div>
