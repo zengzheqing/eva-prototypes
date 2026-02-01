@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVA Agent · 控制台</title>
+    <title>语境天择Agent · 控制台</title>
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-01 18:06) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-01 22:59) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -3206,9 +3206,9 @@ textarea.input {
                                     <div style="position:absolute;inset:-4px;border:3px solid #22c55e;border-radius:50%;opacity:0.3;"></div>
                                     <div style="width:100%;height:100%;background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;">&#129302;</div>
                                 </div>
-                                <div style="font-size:16px;font-weight:700;margin-bottom:8px;">EVA Agent</div>
+                                <div style="font-size:16px;font-weight:700;margin-bottom:8px;">语境天择Agent</div>
                                 <div style="font-size:13px;color:#22c55e;margin-bottom:8px;">&#9679; 工作中</div>
-                                <div style="font-size:12px;color:#64748b;margin-bottom:16px;">今日已处理 128 条对话</div>
+                                <div style="font-size:12px;color:#64748b;margin-bottom:16px;">今日已处理 128 条消息</div>
                                 <button style="width:100%;padding:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;color:#64748b;">&#9881; Agent 设置</button>
                             </div>
                             <!-- 待办事项列表 -->
@@ -3226,12 +3226,12 @@ textarea.input {
                                     <div style="display:flex;align-items:center;gap:12px;padding:12px;background:#fef2f2;border-left:3px solid #ef4444;border-radius:0 8px 8px 0;">
                                         <div style="width:32px;height:32px;background:#fee2e2;border-radius:8px;display:flex;align-items:center;justify-content:center;">&#128078;</div>
                                         <div style="flex:1;"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">3个用户点踩待处理</div><div style="font-size:11px;color:#64748b;">用户反馈回答不准确，需人工审核优化</div></div>
-                                        <button style="padding:6px 12px;background:transparent;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#64748b;">去处理 &#8594;</button>
+                                        <button style="padding:6px 12px;background:transparent;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#64748b;">去进化 &#8594;</button>
                                     </div>
                                     <div style="display:flex;align-items:center;gap:12px;padding:12px;background:#f0fdf4;border-left:3px solid #22c55e;border-radius:0 8px 8px 0;">
                                         <div style="width:32px;height:32px;background:#dcfce7;border-radius:8px;display:flex;align-items:center;justify-content:center;">&#10024;</div>
-                                        <div style="flex:1;"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">「智能客服」能力可进化</div><div style="font-size:11px;color:#64748b;">已收集足够训练数据，可升级至更高等级</div></div>
-                                        <button style="padding:6px 12px;background:transparent;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#64748b;">去进化 &#8594;</button>
+                                        <div style="flex:1;"><div style="font-size:13px;font-weight:600;margin-bottom:2px;">「智能客服」能力可升级</div><div style="font-size:11px;color:#64748b;">已收集足够训练数据，可升级至更高等级</div></div>
+                                        <button style="padding:6px 12px;background:transparent;border:1px solid #e2e8f0;border-radius:6px;font-size:11px;color:#64748b;">去升级 &#8594;</button>
                                     </div>
                                 </div>
                             </div>
@@ -3245,14 +3245,13 @@ textarea.input {
                                         <div class="module-icon playground">&#128172;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">Agent效果体验</div>
-                                            <div class="module-subtitle">与Agent实时对话测试</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
-                                <div class="module-desc">与Agent进行实时对话，测试回答质量和效果。支持多轮对话、上下文记忆、实时反馈，帮助您快速验证Agent的服务能力。</div>
+                                <div class="module-desc">与Agent实时对话，测试回答质量和效果。支持多轮对话、上下文记忆，快速验证服务能力。</div>
                                 <div class="module-action">
                                     <button class="module-action-btn">&#128640; 开始对话</button>
                                 </div>
@@ -3264,7 +3263,6 @@ textarea.input {
                                         <div class="module-icon knowledge">&#128218;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">知识库管理</div>
-                                            <div class="module-subtitle">管理Agent知识来源</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
@@ -3272,7 +3270,7 @@ textarea.input {
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
-                                <div class="module-desc">管理Agent的知识来源，上传文档并训练。检测到3个知识缺口，建议补充相关资料以提升回答准确度和覆盖范围。</div>
+                                <div class="module-desc">管理Agent的知识来源，上传文档并训练。检测到3个知识缺口，建议补充资料提升覆盖率。</div>
                                 <div class="module-stats" style="grid-template-columns: repeat(2, 1fr);">
                                     <div class="module-stat">
                                         <div class="module-stat-value">256</div>
@@ -3291,11 +3289,10 @@ textarea.input {
                                         <div class="module-icon evolve">&#10024;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">Agent进化</div>
-                                            <div class="module-subtitle">提升Agent能力等级</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
-                                        <span class="module-badge success">2可进化</span>
+                                        <span class="module-badge success">2可升级</span>
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
@@ -3306,7 +3303,7 @@ textarea.input {
                                             <span class="ability-name">智能客服</span>
                                             <span class="ability-desc">处理用户咨询、售后支持</span>
                                         </div>
-                                        <span class="ability-tag">可进化</span>
+                                        <span class="ability-tag">可升级</span>
                                     </div>
                                     <div class="ability-item">
                                         <span class="ability-level">v2.0</span>
@@ -3314,7 +3311,7 @@ textarea.input {
                                             <span class="ability-name">内容营销</span>
                                             <span class="ability-desc">生成营销文案、社媒内容</span>
                                         </div>
-                                        <span class="ability-tag">可进化</span>
+                                        <span class="ability-tag">可升级</span>
                                     </div>
                                     <div class="ability-item">
                                         <span class="ability-level">v2.0</span>
@@ -3332,29 +3329,28 @@ textarea.input {
                                     </div>
                                 </div>
                             </div>
-                            <!-- 题库（展示官方题库+自建题库）-->
+                            <!-- 会话管理（查看用户对话记录）-->
                             <div class="module-card">
                                 <div class="module-header">
                                     <div class="module-header-left">
-                                        <div class="module-icon quiz">&#128221;</div>
+                                        <div class="module-icon quiz">&#128172;</div>
                                         <div class="module-header-title">
-                                            <div class="module-title">题库管理</div>
-                                            <div class="module-subtitle">评估Agent回答准确度</div>
+                                            <div class="module-title">会话管理</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
-                                <div class="module-desc">管理测试用例，评估Agent回答准确度。支持批量导入测试题、自动评分、错题分析，持续优化Agent的回答质量。</div>
+                                <div class="module-desc">查看C端用户与Agent的对话记录，了解真实使用情况，发现常见问题。</div>
                                 <div class="module-stats" style="grid-template-columns: repeat(2, 1fr);">
                                     <div class="module-stat">
-                                        <div class="module-stat-value">128</div>
-                                        <div class="module-stat-label">官方题库</div>
+                                        <div class="module-stat-value">156</div>
+                                        <div class="module-stat-label">今日会话</div>
                                     </div>
                                     <div class="module-stat">
-                                        <div class="module-stat-value">384</div>
-                                        <div class="module-stat-label">自建题库</div>
+                                        <div class="module-stat-value">2,847</div>
+                                        <div class="module-stat-label">历史会话</div>
                                     </div>
                                 </div>
                             </div>
@@ -3365,14 +3361,13 @@ textarea.input {
                                         <div class="module-icon deploy">&#128640;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">部署管理</div>
-                                            <div class="module-subtitle">配置部署方式</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
-                                <div class="module-desc">将Agent部署到不同场景。支持独立网页、网站嵌入、API接入三种方式，灵活满足各类接入需求。</div>
+                                <div class="module-desc">配置Agent部署方式。支持独立网页、网站嵌入、API接入，灵活满足各类接入需求。</div>
                                 <div class="config-list">
                                     <div class="config-item">
                                         <span class="config-name">独立网页</span>
@@ -3392,14 +3387,13 @@ textarea.input {
                                         <div class="module-icon security">&#128274;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">安全合规</div>
-                                            <div class="module-subtitle">配置安全策略</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
-                                <div class="module-desc">配置业务红线、拒绝话术、智能安全护栏等安全策略。确保Agent的回答符合法律法规和企业合规要求。</div>
+                                <div class="module-desc">配置业务红线、拒绝话术、智能安全护栏等安全策略，确保回答合规。</div>
                                 <div class="config-list">
                                     <div class="config-item">
                                         <span class="config-name">业务红线</span>
@@ -3456,7 +3450,7 @@ textarea.input {
                                     <div style="position:absolute;inset:-4px;border-radius:50%;border:2px solid #3b82f6;opacity:0.3;animation:pulse 2s ease-in-out infinite;"></div>
                                     <div style="width:100%;height:100%;background:linear-gradient(135deg,#eff6ff,#dbeafe);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;">&#129302;</div>
                                 </div>
-                                <div style="font-size:16px;font-weight:700;margin-bottom:8px;">EVA Agent</div>
+                                <div style="font-size:16px;font-weight:700;margin-bottom:8px;">语境天择Agent</div>
                                 <div style="font-size:13px;color:#3b82f6;margin-bottom:8px;font-weight:600;">&#9679; 学习中</div>
                                 <div style="font-size:12px;color:#64748b;margin-bottom:16px;">Agent正在学习你的知识库...</div>
                                 <button style="width:100%;padding:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;color:#64748b;">&#9881; Agent 设置</button>
@@ -3482,7 +3476,6 @@ textarea.input {
                                         <div class="module-icon playground">&#128172;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">Agent效果体验</div>
-                                            <div class="module-subtitle">与Agent实时对话测试</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
@@ -3501,7 +3494,6 @@ textarea.input {
                                         <div class="module-icon knowledge">&#128218;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">知识库管理</div>
-                                            <div class="module-subtitle">管理Agent知识来源</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
@@ -3528,7 +3520,6 @@ textarea.input {
                                         <div class="module-icon evolve">&#10024;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">Agent进化</div>
-                                            <div class="module-subtitle">提升Agent能力等级</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
@@ -3544,7 +3535,6 @@ textarea.input {
                                         <div class="module-icon security">&#128274;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">安全合规</div>
-                                            <div class="module-subtitle">配置安全策略</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
@@ -3568,29 +3558,28 @@ textarea.input {
                                     </div>
                                 </div>
                             </div>
-                            <!-- 题库（空状态）-->
+                            <!-- 会话管理（空状态）-->
                             <div class="module-card">
                                 <div class="module-header">
                                     <div class="module-header-left">
-                                        <div class="module-icon quiz">&#128221;</div>
+                                        <div class="module-icon quiz">&#128172;</div>
                                         <div class="module-header-title">
-                                            <div class="module-title">题库管理</div>
-                                            <div class="module-subtitle">评估Agent回答准确度</div>
+                                            <div class="module-title">会话管理</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
                                         <div class="module-arrow">&#8594;</div>
                                     </div>
                                 </div>
-                                <div class="module-desc" style="color: var(--eva-text-tertiary);">创建测试题库，评估回答质量</div>
+                                <div class="module-desc" style="color: var(--eva-text-tertiary);">暂无对话记录</div>
                                 <div class="module-stats" style="grid-template-columns: repeat(2, 1fr);">
                                     <div class="module-stat">
                                         <div class="module-stat-value" style="color: var(--eva-text-tertiary);">0</div>
-                                        <div class="module-stat-label">官方题库</div>
+                                        <div class="module-stat-label">今日会话</div>
                                     </div>
                                     <div class="module-stat">
                                         <div class="module-stat-value" style="color: var(--eva-text-tertiary);">0</div>
-                                        <div class="module-stat-label">自建题库</div>
+                                        <div class="module-stat-label">历史会话</div>
                                     </div>
                                 </div>
                             </div>
@@ -3601,7 +3590,6 @@ textarea.input {
                                         <div class="module-icon deploy">&#128640;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">部署管理</div>
-                                            <div class="module-subtitle">配置部署方式</div>
                                         </div>
                                     </div>
                                     <div class="module-header-right">
@@ -3670,7 +3658,7 @@ textarea.input {
                                 <div style="width:80px;height:80px;margin:0 auto 16px;position:relative;">
                                     <div style="width:100%;height:100%;background:linear-gradient(135deg,#fef2f2,#fee2e2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:40px;opacity:0.8;">&#129302;</div>
                                 </div>
-                                <div style="font-size:16px;font-weight:700;margin-bottom:8px;">EVA Agent</div>
+                                <div style="font-size:16px;font-weight:700;margin-bottom:8px;">语境天择Agent</div>
                                 <div style="font-size:13px;color:#dc2626;margin-bottom:8px;">&#9679; 服务异常</div>
                                 <div style="font-size:12px;color:#94a3b8;margin-bottom:16px;">无法获取状态</div>
                                 <button style="width:100%;padding:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;font-size:12px;color:#64748b;">&#9881; Agent 设置</button>
@@ -3695,7 +3683,6 @@ textarea.input {
                                         <div class="module-icon playground">&#128172;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">Agent效果体验</div>
-                                            <div class="module-subtitle" style="color:var(--eva-text-tertiary);">暂时无法访问</div>
                                         </div>
                                     </div>
                                 </div>
@@ -3706,7 +3693,6 @@ textarea.input {
                                         <div class="module-icon knowledge">&#128218;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">知识库管理</div>
-                                            <div class="module-subtitle" style="color:var(--eva-text-tertiary);">暂时无法访问</div>
                                         </div>
                                     </div>
                                 </div>
@@ -3717,7 +3703,6 @@ textarea.input {
                                         <div class="module-icon evolve">&#10024;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">Agent进化</div>
-                                            <div class="module-subtitle" style="color:var(--eva-text-tertiary);">暂时无法访问</div>
                                         </div>
                                     </div>
                                 </div>
@@ -3728,7 +3713,6 @@ textarea.input {
                                         <div class="module-icon security">&#128274;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">安全合规</div>
-                                            <div class="module-subtitle" style="color:var(--eva-text-tertiary);">暂时无法访问</div>
                                         </div>
                                     </div>
                                 </div>
@@ -3736,10 +3720,9 @@ textarea.input {
                             <div class="module-card" style="opacity:0.6;">
                                 <div class="module-header">
                                     <div class="module-header-left">
-                                        <div class="module-icon quiz">&#128221;</div>
+                                        <div class="module-icon quiz">&#128172;</div>
                                         <div class="module-header-title">
-                                            <div class="module-title">题库管理</div>
-                                            <div class="module-subtitle" style="color:var(--eva-text-tertiary);">暂时无法访问</div>
+                                            <div class="module-title">会话管理</div>
                                         </div>
                                     </div>
                                 </div>
@@ -3750,7 +3733,6 @@ textarea.input {
                                         <div class="module-icon deploy">&#128640;</div>
                                         <div class="module-header-title">
                                             <div class="module-title">部署管理</div>
-                                            <div class="module-subtitle" style="color:var(--eva-text-tertiary);">暂时无法访问</div>
                                         </div>
                                     </div>
                                 </div>
@@ -4051,9 +4033,9 @@ textarea.input {
                                 <div class="status-ring working"></div>
                                 &#129302;
                             </div>
-                            <div class="status-name">EVA Agent</div>
+                            <div class="status-name">语境天择Agent</div>
                             <div class="status-label" style="color: var(--eva-success);">&#9679; 运行中</div>
-                            <div class="status-detail">今日已处理 128 条对话</div>
+                            <div class="status-detail">今日已处理 128 条消息</div>
                         </div>
                     </div>
                 </div>
@@ -4072,7 +4054,7 @@ textarea.input {
                                 <div class="status-ring" style="border-color: var(--eva-error); opacity: 0.5;"></div>
                                 &#128308;
                             </div>
-                            <div class="status-name">EVA Agent</div>
+                            <div class="status-name">语境天择Agent</div>
                             <div class="status-label" style="color: var(--eva-error);">&#9679; 异常</div>
                             <div class="status-detail">服务连接中断，请检查配置</div>
                         </div>
@@ -4093,7 +4075,7 @@ textarea.input {
                                 <div class="status-ring learning"></div>
                                 &#129504;
                             </div>
-                            <div class="status-name">EVA Agent</div>
+                            <div class="status-name">语境天择Agent</div>
                             <div class="status-label" style="color: var(--eva-info);">&#9679; 学习中</div>
                             <div class="status-detail">正在学习「客服话术规范」...</div>
                         </div>
@@ -4114,7 +4096,7 @@ textarea.input {
                                 <div class="status-ring evolving"></div>
                                 &#128142;
                             </div>
-                            <div class="status-name">EVA Agent</div>
+                            <div class="status-name">语境天择Agent</div>
                             <div class="status-label" style="color: #a855f7;">&#9679; 进化中</div>
                             <div class="status-detail">能力「商业情报」升级至 v2.0</div>
                         </div>
@@ -4153,15 +4135,15 @@ textarea.input {
                                         <div class="todo-content-title">3个用户点踩待处理</div>
                                         <div class="todo-content-desc">用户反馈回答不准确</div>
                                     </div>
-                                    <button class="btn btn-ghost" style="font-size: 12px;">去调优 &#8594;</button>
+                                    <button class="btn btn-ghost" style="font-size: 12px;">去进化 &#8594;</button>
                                 </div>
                                 <div class="todo-item type-evolve">
                                     <div class="todo-icon evolve">&#10024;</div>
                                     <div class="todo-content">
-                                        <div class="todo-content-title">「智能客服」可进化</div>
+                                        <div class="todo-content-title">「智能客服」可升级</div>
                                         <div class="todo-content-desc">已满足升级条件</div>
                                     </div>
-                                    <button class="btn btn-ghost" style="font-size: 12px;">去进化 &#8594;</button>
+                                    <button class="btn btn-ghost" style="font-size: 12px;">去升级 &#8594;</button>
                                 </div>
                             </div>
                         </div>
@@ -4203,16 +4185,16 @@ textarea.input {
                                 <div class="todo-content-title">5个用户点踩待处理</div>
                                 <div class="todo-content-desc">用户反馈答案不准确，需人工审核优化</div>
                             </div>
-                            <button class="btn btn-ghost" style="font-size: 12px;">去调优 &#8594;</button>
+                            <button class="btn btn-ghost" style="font-size: 12px;">去进化 &#8594;</button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- #16: 能力可进化 -->
+            <!-- #16: 能力可升级 -->
             <div class="artboard" id="artboard-16">
                 <div class="artboard-label">
-                    <span>能力可进化（绿色）</span>
+                    <span>能力可升级（绿色）</span>
                     <span class="artboard-label-id">#16</span>
                 </div>
                 <div class="artboard-content">
@@ -4220,10 +4202,10 @@ textarea.input {
                         <div class="todo-item type-evolve" style="width: 100%; background: white; border: 1px solid var(--eva-border);">
                             <div class="todo-icon evolve">&#10024;</div>
                             <div class="todo-content">
-                                <div class="todo-content-title">「商业情报」能力可进化</div>
+                                <div class="todo-content-title">「商业情报」能力可升级</div>
                                 <div class="todo-content-desc">已收集足够训练数据，可升级至 v3.0</div>
                             </div>
-                            <button class="btn btn-ghost" style="font-size: 12px;">去进化 &#8594;</button>
+                            <button class="btn btn-ghost" style="font-size: 12px;">去升级 &#8594;</button>
                         </div>
                     </div>
                 </div>
@@ -4246,7 +4228,6 @@ textarea.input {
                                     <div class="module-icon playground">&#128172;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">Agent效果体验</div>
-                                        <div class="module-subtitle">与Agent实时对话测试</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4276,7 +4257,6 @@ textarea.input {
                                     <div class="module-icon playground">&#128172;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">Agent效果体验</div>
-                                        <div class="module-subtitle">与Agent实时对话测试</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4309,7 +4289,6 @@ textarea.input {
                                     <div class="module-icon knowledge">&#128218;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">知识库管理</div>
-                                        <div class="module-subtitle">管理Agent知识来源</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4346,7 +4325,6 @@ textarea.input {
                                     <div class="module-icon knowledge">&#128218;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">知识库管理</div>
-                                        <div class="module-subtitle">管理Agent知识来源</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4383,7 +4361,6 @@ textarea.input {
                                     <div class="module-icon knowledge">&#128218;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">知识库管理</div>
-                                        <div class="module-subtitle">管理Agent知识来源</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4424,7 +4401,6 @@ textarea.input {
                                     <div class="module-icon evolve">&#10024;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">Agent进化</div>
-                                        <div class="module-subtitle">提升Agent能力等级</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4480,7 +4456,6 @@ textarea.input {
                                     <div class="module-icon evolve">&#10024;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">Agent进化</div>
-                                        <div class="module-subtitle">提升Agent能力等级</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4522,10 +4497,10 @@ textarea.input {
                 </div>
             </div>
 
-            <!-- #24: 有可进化能力 -->
+            <!-- #24: 有可升级能力 -->
             <div class="artboard" id="artboard-24">
                 <div class="artboard-label">
-                    <span>Agent进化 有可进化能力提示</span>
+                    <span>Agent进化 有可升级能力提示</span>
                     <span class="artboard-label-id">#24</span>
                 </div>
                 <div class="artboard-content">
@@ -4536,11 +4511,10 @@ textarea.input {
                                     <div class="module-icon evolve">&#10024;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">Agent进化</div>
-                                        <div class="module-subtitle">提升Agent能力等级</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
-                                    <span class="module-badge success">2可进化</span>
+                                    <span class="module-badge success">2可升级</span>
                                     <div class="module-arrow">&#8594;</div>
                                 </div>
                             </div>
@@ -4551,7 +4525,7 @@ textarea.input {
                                         <span class="ability-name">智能客服</span>
                                         <span class="ability-desc">处理用户咨询、售后支持</span>
                                     </div>
-                                    <span class="ability-tag">可进化</span>
+                                    <span class="ability-tag">可升级</span>
                                 </div>
                                 <div class="ability-item">
                                     <span class="ability-level">v2.0</span>
@@ -4559,7 +4533,7 @@ textarea.input {
                                         <span class="ability-name">内容营销</span>
                                         <span class="ability-desc">生成营销文案、社媒内容</span>
                                     </div>
-                                    <span class="ability-tag">可进化</span>
+                                    <span class="ability-tag">可升级</span>
                                 </div>
                                 <div class="ability-item">
                                     <span class="ability-level">v2.0</span>
@@ -4581,13 +4555,13 @@ textarea.input {
                 </div>
             </div>
 
-            <!-- ==================== 分类8：题库引导块（2个）==================== -->
-            <div class="artboard-section-title" data-title="题库引导块"><span>&#128221;</span></div>
+            <!-- ==================== 分类8：会话管理引导块（2个）==================== -->
+            <div class="artboard-section-title" data-title="会话管理引导块"><span>&#128172;</span></div>
 
             <!-- #25: 默认状态 -->
             <div class="artboard" id="artboard-25">
                 <div class="artboard-label">
-                    <span>题库 默认状态</span>
+                    <span>会话管理 默认状态</span>
                     <span class="artboard-label-id">#25</span>
                 </div>
                 <div class="artboard-content">
@@ -4595,25 +4569,24 @@ textarea.input {
                         <div class="module-card" style="width: 100%;">
                             <div class="module-header">
                                 <div class="module-header-left">
-                                    <div class="module-icon quiz">&#128221;</div>
+                                    <div class="module-icon quiz">&#128172;</div>
                                     <div class="module-header-title">
-                                        <div class="module-title">题库管理</div>
-                                        <div class="module-subtitle">评估Agent回答准确度</div>
+                                        <div class="module-title">会话管理</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
                                     <div class="module-arrow">&#8594;</div>
                                 </div>
                             </div>
-                            <div class="module-desc">管理测试用例，评估Agent回答准确度。支持批量导入测试题、自动评分、错题分析，持续优化Agent的回答质量。</div>
+                            <div class="module-desc">查看和管理C端用户与Agent的对话记录，了解用户真实使用情况，发现常见问题。</div>
                             <div class="module-stats" style="grid-template-columns: repeat(2, 1fr);">
                                 <div class="module-stat">
-                                    <div class="module-stat-value">128</div>
-                                    <div class="module-stat-label">官方题库</div>
+                                    <div class="module-stat-value">156</div>
+                                    <div class="module-stat-label">今日会话</div>
                                 </div>
                                 <div class="module-stat">
-                                    <div class="module-stat-value">384</div>
-                                    <div class="module-stat-label">自建题库</div>
+                                    <div class="module-stat-value">2,847</div>
+                                    <div class="module-stat-label">历史会话</div>
                                 </div>
                             </div>
                         </div>
@@ -4624,7 +4597,7 @@ textarea.input {
             <!-- #26: Hover状态 -->
             <div class="artboard" id="artboard-26">
                 <div class="artboard-label">
-                    <span>题库 Hover状态</span>
+                    <span>会话管理 Hover状态</span>
                     <span class="artboard-label-id">#26</span>
                 </div>
                 <div class="artboard-content">
@@ -4632,25 +4605,24 @@ textarea.input {
                         <div class="module-card" style="width: 100%; border-color: var(--eva-primary); box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15); transform: translateY(-4px);">
                             <div class="module-header">
                                 <div class="module-header-left">
-                                    <div class="module-icon quiz">&#128221;</div>
+                                    <div class="module-icon quiz">&#128172;</div>
                                     <div class="module-header-title">
-                                        <div class="module-title">题库管理</div>
-                                        <div class="module-subtitle">评估Agent回答准确度</div>
+                                        <div class="module-title">会话管理</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
                                     <div class="module-arrow">&#8594;</div>
                                 </div>
                             </div>
-                            <div class="module-desc">管理测试用例，评估Agent回答准确度。支持批量导入测试题、自动评分、错题分析，持续优化Agent的回答质量。</div>
+                            <div class="module-desc">查看和管理C端用户与Agent的对话记录，了解用户真实使用情况，发现常见问题。</div>
                             <div class="module-stats" style="grid-template-columns: repeat(2, 1fr);">
                                 <div class="module-stat">
-                                    <div class="module-stat-value">128</div>
-                                    <div class="module-stat-label">官方题库</div>
+                                    <div class="module-stat-value">156</div>
+                                    <div class="module-stat-label">今日会话</div>
                                 </div>
                                 <div class="module-stat">
-                                    <div class="module-stat-value">384</div>
-                                    <div class="module-stat-label">自建题库</div>
+                                    <div class="module-stat-value">2,847</div>
+                                    <div class="module-stat-label">历史会话</div>
                                 </div>
                             </div>
                         </div>
@@ -4675,7 +4647,6 @@ textarea.input {
                                     <div class="module-icon deploy">&#128640;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">部署管理</div>
-                                        <div class="module-subtitle">配置部署方式</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4713,7 +4684,6 @@ textarea.input {
                                     <div class="module-icon deploy">&#128640;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">部署管理</div>
-                                        <div class="module-subtitle">配置部署方式</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4754,7 +4724,6 @@ textarea.input {
                                     <div class="module-icon security">&#128274;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">安全合规</div>
-                                        <div class="module-subtitle">配置安全策略</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4795,7 +4764,6 @@ textarea.input {
                                     <div class="module-icon security">&#128274;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">安全合规</div>
-                                        <div class="module-subtitle">配置安全策略</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4836,7 +4804,6 @@ textarea.input {
                                     <div class="module-icon security">&#128274;</div>
                                     <div class="module-header-title">
                                         <div class="module-title">安全合规</div>
-                                        <div class="module-subtitle">配置安全策略</div>
                                     </div>
                                 </div>
                                 <div class="module-header-right">
@@ -4994,7 +4961,7 @@ textarea.input {
                         <div class="scoring-detail-section">
                             <div class="scoring-detail-title">评分构成</div>
                             <div class="scoring-breakdown">
-                                <div class="scoring-breakdown-item">基础能力：58分（知识覆盖32分 + 能力成熟度26分）</div>
+                                <div class="scoring-breakdown-item">基础能力：58分（知识覆盖32分 + 能力升级26分）</div>
                                 <div class="scoring-breakdown-item">活跃加分：20分（近期进化+15分，知识更新+5分）</div>
                             </div>
                         </div>
@@ -5017,9 +4984,9 @@ textarea.input {
                         <div class="status-ring working"></div>
                         &#129302;
                     </div>
-                    <div class="status-name">EVA Agent</div>
+                    <div class="status-name">语境天择Agent</div>
                     <div class="status-label" style="color: var(--eva-success);">&#9679; 工作中</div>
-                    <div class="status-detail">今日已处理 128 条对话</div>
+                    <div class="status-detail">今日已处理 128 条消息</div>
                     <button class="agent-settings-btn" onclick="openAgentSettings()">
                         <span>&#9881;</span> Agent 设置
                     </button>
@@ -5046,15 +5013,15 @@ textarea.input {
                                 <div class="todo-content-title">3个用户点踩待处理</div>
                                 <div class="todo-content-desc">用户反馈回答不准确，需人工审核优化</div>
                             </div>
-                            <button class="btn btn-ghost" style="font-size: 12px;">去调优 &#8594;</button>
+                            <button class="btn btn-ghost" style="font-size: 12px;">去进化 &#8594;</button>
                         </div>
                         <div class="todo-item type-evolve">
                             <div class="todo-icon evolve">&#10024;</div>
                             <div class="todo-content">
-                                <div class="todo-content-title">「智能客服」能力可进化</div>
+                                <div class="todo-content-title">「智能客服」能力可升级</div>
                                 <div class="todo-content-desc">已收集足够训练数据，可升级至更高等级</div>
                             </div>
-                            <button class="btn btn-ghost" style="font-size: 12px;">去进化 &#8594;</button>
+                            <button class="btn btn-ghost" style="font-size: 12px;">去升级 &#8594;</button>
                         </div>
                     </div>
                 </div>
@@ -5069,7 +5036,6 @@ textarea.input {
                             <div class="module-icon playground">&#128172;</div>
                             <div class="module-header-title">
                                 <div class="module-title">Agent效果体验</div>
-                                <div class="module-subtitle">与Agent实时对话测试</div>
                             </div>
                         </div>
                         <div class="module-header-right">
@@ -5089,7 +5055,6 @@ textarea.input {
                             <div class="module-icon knowledge">&#128218;</div>
                             <div class="module-header-title">
                                 <div class="module-title">知识库管理</div>
-                                <div class="module-subtitle">管理Agent知识来源</div>
                             </div>
                         </div>
                         <div class="module-header-right">
@@ -5117,11 +5082,10 @@ textarea.input {
                             <div class="module-icon evolve">&#10024;</div>
                             <div class="module-header-title">
                                 <div class="module-title">Agent进化</div>
-                                <div class="module-subtitle">提升Agent能力等级</div>
                             </div>
                         </div>
                         <div class="module-header-right">
-                            <span class="module-badge success">2可进化</span>
+                            <span class="module-badge success">2可升级</span>
                             <div class="module-arrow">&#8594;</div>
                         </div>
                     </div>
@@ -5132,7 +5096,7 @@ textarea.input {
                                 <span class="ability-name">智能客服</span>
                                 <span class="ability-desc">处理用户咨询、售后支持</span>
                             </div>
-                            <span class="ability-tag">可进化</span>
+                            <span class="ability-tag">可升级</span>
                         </div>
                         <div class="ability-item">
                             <span class="ability-level">v2.0</span>
@@ -5140,7 +5104,7 @@ textarea.input {
                                 <span class="ability-name">内容营销</span>
                                 <span class="ability-desc">生成营销文案、社媒内容</span>
                             </div>
-                            <span class="ability-tag">可进化</span>
+                            <span class="ability-tag">可升级</span>
                         </div>
                         <div class="ability-item">
                             <span class="ability-level">v2.0</span>
@@ -5166,7 +5130,6 @@ textarea.input {
                             <div class="module-icon security">&#128274;</div>
                             <div class="module-header-title">
                                 <div class="module-title">安全合规</div>
-                                <div class="module-subtitle">配置安全策略</div>
                             </div>
                         </div>
                         <div class="module-header-right">
@@ -5190,29 +5153,28 @@ textarea.input {
                     </div>
                 </div>
 
-                <!-- 题库（展示官方题库+自建题库）-->
+                <!-- 会话管理（查看用户对话记录）-->
                 <div class="module-card">
                     <div class="module-header">
                         <div class="module-header-left">
-                            <div class="module-icon quiz">&#128221;</div>
+                            <div class="module-icon quiz">&#128172;</div>
                             <div class="module-header-title">
-                                <div class="module-title">题库管理</div>
-                                <div class="module-subtitle">评估Agent回答准确度</div>
+                                <div class="module-title">会话管理</div>
                             </div>
                         </div>
                         <div class="module-header-right">
                             <div class="module-arrow">&#8594;</div>
                         </div>
                     </div>
-                    <div class="module-desc">管理测试用例，评估Agent回答准确度。支持批量导入测试题、自动评分、错题分析，持续优化Agent的回答质量。</div>
+                    <div class="module-desc">查看和管理C端用户与Agent的对话记录，了解用户真实使用情况，发现常见问题。</div>
                     <div class="module-stats" style="grid-template-columns: repeat(2, 1fr);">
                         <div class="module-stat">
-                            <div class="module-stat-value">128</div>
-                            <div class="module-stat-label">官方题库</div>
+                            <div class="module-stat-value">156</div>
+                            <div class="module-stat-label">今日会话</div>
                         </div>
                         <div class="module-stat">
-                            <div class="module-stat-value">384</div>
-                            <div class="module-stat-label">自建题库</div>
+                            <div class="module-stat-value">2,847</div>
+                            <div class="module-stat-label">历史会话</div>
                         </div>
                     </div>
                 </div>
@@ -5224,7 +5186,6 @@ textarea.input {
                             <div class="module-icon deploy">&#128640;</div>
                             <div class="module-header-title">
                                 <div class="module-title">部署管理</div>
-                                <div class="module-subtitle">配置部署方式</div>
                             </div>
                         </div>
                         <div class="module-header-right">
@@ -5258,7 +5219,7 @@ textarea.input {
             <div class="modal-body">
                 <div class="form-group">
                     <label class="form-label">Agent 名称</label>
-                    <input type="text" class="form-input" value="EVA Agent" placeholder="输入Agent名称">
+                    <input type="text" class="form-input" value="语境天择Agent" placeholder="输入Agent名称">
                     <span style="font-size: 12px; color: var(--eva-text-tertiary);">提示：EVA 为默认名称，可替换为您的公司简称</span>
                 </div>
                 <div class="form-group">
