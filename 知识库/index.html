@@ -10,7 +10,7 @@
     
     
     <!-- ========== @END-FROZEN ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-03 16:28) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-03 20:11) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -3467,14 +3467,13 @@ textarea.input {
                                 <div style="flex:1;padding:14px 20px;font-size:13px;color:var(--text-secondary);background:var(--bg-subtle);text-align:center">📤 从文件上传</div>
                                 <div style="flex:1;padding:14px 20px;font-size:13px;font-weight:600;color:var(--accent);border-bottom:2px solid var(--accent);background:white;text-align:center">🌐 从网页上传</div>
                             </div>
-                            <div style="padding:24px;text-align:center">
-                                <div style="font-size:40px;margin-bottom:12px">🔗</div>
-                                <div style="font-size:15px;font-weight:600;margin-bottom:6px">粘贴链接，自动识别内容</div>
-                                <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">系统将自动爬取网页内容并解析为知识节点</div>
-                                <div style="display:flex;gap:8px;max-width:400px;margin:0 auto 16px">
-                                    <input type="text" value="https://mp.weixin.qq.com/s/..." readonly style="flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:13px">
-                                    <button style="padding:12px 20px;background:var(--accent);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">添加链接</button>
-                                </div>
+	                                <div style="padding:24px;text-align:center">
+	                                    <div style="font-size:40px;margin-bottom:12px">🔗</div>
+	                                    <div style="font-size:15px;font-weight:600;margin-bottom:6px">粘贴链接，自动识别内容</div>
+	                                    <div style="display:flex;gap:8px;max-width:400px;margin:0 auto 16px">
+	                                        <input type="text" value="https://mp.weixin.qq.com/s/..." readonly style="flex:1;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:13px">
+	                                        <button style="padding:12px 20px;background:var(--accent);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">添加链接</button>
+	                                    </div>
                                 <div style="display:flex;justify-content:center;gap:12px;font-size:12px;color:var(--text-muted)">
                                     <span>🌐 官网</span><span>📱 公众号</span><span>📕 小红书</span><span>🐦 微博</span>
                                 </div>
@@ -4319,9 +4318,6 @@ textarea.input {
                         </div>
                     </div>
 
-                    <!-- 评测通过数（圆环下方独立显示） -->
-                    <div style="font-size:12px; color:var(--text-secondary);">评测通过 312/400</div>
-
                     <!-- 评测控制区 -->
                     <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
                         <button id="kb-evalTriggerBtn" style="padding:6px 14px; font-size:13px; background:white; color:var(--text); border:1px solid var(--border); border-radius:6px; cursor:pointer;" onclick="refreshScore()">刷新评分</button>
@@ -4422,7 +4418,6 @@ textarea.input {
                     <div class="upload-section" id="uploadArea" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
                         <div class="upload-icon">📤</div>
                         <div class="upload-title">拖拽文件到此处，或点击上传</div>
-                        <div class="upload-desc">上传成功后，建议刷新评分以更新完整度</div>
                         <div class="upload-types">
                             <div class="upload-type"><span class="upload-type-icon">📕</span> PDF</div>
                             <div class="upload-type"><span class="upload-type-icon">📘</span> Word</div>
@@ -4441,7 +4436,6 @@ textarea.input {
                     <div class="link-paste-area" id="linkDefaultState">
                         <div class="link-paste-icon">🔗</div>
                         <div class="link-paste-title">粘贴链接，自动识别内容</div>
-                        <div class="link-paste-desc">系统将自动爬取网页内容并解析为知识节点</div>
                         <div class="link-input-wrapper">
                             <input type="text" class="link-input" id="linkInput" placeholder="https://mp.weixin.qq.com/s/...">
                             <button class="link-input-btn" onclick="addLink()">添加链接</button>
