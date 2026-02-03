@@ -16,13 +16,13 @@
 
     说明:
     - 本文件为唯一入口（主线原型）
-    - 交互模式: 可点击能力卡片（手风琴展开），支持进化、升级动效与结果反馈
+    - 交互模式: 可点击能力卡片进入进化工作台，支持进化、升级动效与结果反馈
     - 画板模式: 展示关键页面状态与弹窗快照
     ============================================================
     -->
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-03 13:14) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-03 16:28) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -51,6 +51,7 @@
 
     /* 主色调 */
     --accent: #6366f1;
+    --accent-dark: #4f46e5;
     --accent-light: #e0e7ff;
     --accent-glow: rgba(99, 102, 241, 0.15);
     --accent-hover: #4f46e5;
@@ -2286,7 +2287,7 @@ textarea.input {
             user-select: none;
         }
 
-        /* ========== Agent进化：能力手风琴 ========== */
+        /* ========== Agent进化：能力卡片列表 ========== */
         .abilities-list { display: flex; flex-direction: column; gap: 12px; }
 
         .ability-card {
@@ -3437,7 +3438,7 @@ textarea.input {
     <div class="artboard-container" id="artboardContainer">
         <div class="artboard-header">
             <h1>Agent进化 · 原型画板</h1>
-            <p>关键页面状态与弹窗 · 手风琴交互 + 进化动效</p>
+            <p>关键页面状态与弹窗 · 进化工作台 + 升级动效</p>
         </div>
 
         <div class="artboard-grid">
@@ -3634,7 +3635,18 @@ textarea.input {
     <!-- ========== 侧边栏导航 ========== -->
     <div class="sidebar" id="sidebar">
         <div class="logo">
-            <div class="logo-icon">E</div>
+            <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4C4 4 8 6 12 6C16 6 20 4 20 4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 9C4 9 8 11 12 11C16 11 20 9 20 9" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M4 14C4 14 8 12 12 12C16 12 20 14 20 14" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M4 19C4 19 8 17 12 17C16 17 20 19 20 19" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="4" cy="4" r="1.5" fill="white"/>
+                    <circle cx="20" cy="4" r="1.5" fill="white"/>
+                    <circle cx="4" cy="19" r="1.5" fill="white"/>
+                    <circle cx="20" cy="19" r="1.5" fill="white"/>
+                </svg>
+            </div>
             <span>EVA</span>
         </div>
 
@@ -3661,7 +3673,7 @@ textarea.input {
                 <span>题库</span>
             </a>
             <a href="#" class="nav-item">
-                <span class="nav-item-icon">&#128490;</span>
+                <span class="nav-item-icon">📋</span>
                 <span>会话记录</span>
             </a>
             <a href="#" class="nav-item">
