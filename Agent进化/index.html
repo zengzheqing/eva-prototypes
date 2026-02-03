@@ -22,7 +22,7 @@
     -->
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-01 21:59) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-03 13:14) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -4578,19 +4578,6 @@ textarea.input {
                                 <h4>&#128338; 升级记录</h4>
                                 <div class="timeline">${renderHistory(a)}</div>
                             </div>
-
-                            <div class="detail-section">
-                                <h4>&#128218; 知识库概况</h4>
-                                <div class="stats" style="grid-template-columns:1fr 1fr;">
-                                    <div class="stat"><div class="k">文档数</div><div class="v">46</div></div>
-                                    <div class="stat"><div class="k">节点数</div><div class="v">1,284</div></div>
-                                    <div class="stat"><div class="k">完整性</div><div class="v">78%</div></div>
-                                    <div class="stat"><div class="k">知识缺口</div><div class="v">12</div></div>
-                                </div>
-                                <div class="inline-note" style="margin-top:8px;">
-                                    知识完整性影响进化质量，进而影响进化效果。建议保持 ≥ 85%，完整性越高进化效果越好。
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -4996,8 +4983,29 @@ textarea.input {
 
 	        function validateCustomAnswer(text) {
 	            const t = String(text || '').trim();
-	            if (t.length < 16) return { ok: false, reason: '答案过短' };
-	            if (!/[\\u4e00-\\u9fa5A-Za-z]/.test(t)) return { ok: false, reason: '缺少有效内容' };
+	            // Rule-15a: 自行作答输入校验（5条规则）
+	            // 1. 最小长度
+	            const chineseCount = (t.match(/[\u4e00-\u9fa5]/g) || []).length;
+	            if (chineseCount < 10 && t.length < 20) {
+	                return { ok: false, reason: '回答内容过短，请补充完整' };
+	            }
+	            // 2. 最大长度
+	            if (t.length > 2000) {
+	                return { ok: false, reason: '回答内容过长，请精简' };
+	            }
+	            // 3. 纯数字/符号/空格
+	            if (/^[\d\s\W]+$/.test(t) && !/[\u4e00-\u9fa5A-Za-z]/.test(t)) {
+	                return { ok: false, reason: '请输入有效的回答内容' };
+	            }
+	            // 4. 连续重复字符 ≥ 5次
+	            if (/(.)\1{4,}/.test(t)) {
+	                return { ok: false, reason: '请输入有效的回答内容' };
+	            }
+	            // 5. 汉字多样性：不同汉字 < 3个
+	            const uniqueChinese = new Set(t.match(/[\u4e00-\u9fa5]/g) || []);
+	            if (chineseCount > 0 && uniqueChinese.size < 3) {
+	                return { ok: false, reason: '请输入有效的回答内容' };
+	            }
 	            return { ok: true, reason: '' };
 	        }
 
@@ -5010,14 +5018,11 @@ textarea.input {
 
 	        function generateCandidates(a, q, rating, tags) {
 	            const tagHint = (tags || []).slice(0, 2).join('、');
-	            const r = (rating === 'good' || rating === 'bad' || rating === 'mid') ? rating : 'mid';
 	            const base = q?.title || '问题';
-	            const channel = channelLabel(inferChannel(q));
-	            const prefix = r === 'good' ? '更完整、更可执行' : r === 'bad' ? '更稳妥、更严谨' : '更清晰、更直接';
 	            return [
-	                `（${channel}）我理解你的情况。针对「${base}」，我先帮你确认关键信息，然后给你明确的处理步骤与时间预期。${tagHint ? `重点补齐：${tagHint}。` : ''}`,
-	                `（${prefix}）关于「${base}」，我建议按 3 步处理：1) 先确认必要信息；2) 给出可选方案与边界；3) 告知下一步与预计时间。`,
-	                `（更友好）我能理解这让人很困扰。关于「${base}」，我这边马上为你核对，并把对应规则与可执行方案一次性说明清楚。`
+	                `我理解你的情况。针对「${base}」，我先帮你确认关键信息，然后给你明确的处理步骤与时间预期。${tagHint ? `重点补齐：${tagHint}。` : ''}`,
+	                `关于「${base}」，我建议按 3 步处理：1) 先确认必要信息；2) 给出可选方案与边界；3) 告知下一步与预计时间。`,
+	                `我能理解这让人很困扰。关于「${base}」，我这边马上为你核对，并把对应规则与可执行方案一次性说明清楚。`
 	            ];
 	        }
 
@@ -5025,29 +5030,13 @@ textarea.input {
 	            const base = q?.title || '问题';
 	            const feedback = feedbackText || '';
 	            const historyHint = (feedbackHistory || []).length > 0
-	                ? `（结合历史点评：${feedbackHistory.slice(-2).join('；')}）`
+	                ? `结合历史点评：${feedbackHistory.slice(-2).join('；')}。`
 	                : '';
 
-	            // 根据点评内容生成更针对性的推荐回答
-	            const feedbackLower = feedback.toLowerCase();
-	            let style1 = '更精准';
-	            let style2 = '更完整';
-	            let style3 = '更友好';
-
-	            if (feedbackLower.includes('数据') || feedbackLower.includes('具体')) {
-	                style1 = '补充具体数据';
-	            }
-	            if (feedbackLower.includes('步骤') || feedbackLower.includes('流程')) {
-	                style2 = '明确操作步骤';
-	            }
-	            if (feedbackLower.includes('语气') || feedbackLower.includes('态度')) {
-	                style3 = '调整表达语气';
-	            }
-
 	            return [
-	                `（${style1}）针对「${base}」，根据您的点评"${feedback.slice(0, 30)}${feedback.length > 30 ? '…' : ''}"，我重新整理回答：首先明确核心信息，然后给出可验证的数据支撑，最后说明后续步骤。${historyHint}`,
-	                `（${style2}）关于「${base}」，我补充完善如下：1) 问题背景确认；2) 详细解决方案（含边界情况）；3) 预期结果与时间节点。`,
-	                `（${style3}）我理解您的关注点。关于「${base}」，让我更清晰地说明：这个问题的关键在于…，建议的处理方式是…，如有疑问随时告诉我。`
+	                `针对「${base}」，根据您的点评"${feedback.slice(0, 30)}${feedback.length > 30 ? '…' : ''}"，我重新整理回答：首先明确核心信息，然后给出可验证的数据支撑，最后说明后续步骤。${historyHint}`,
+	                `关于「${base}」，我补充完善如下：1) 问题背景确认；2) 详细解决方案（含边界情况）；3) 预期结果与时间节点。`,
+	                `我理解您的关注点。关于「${base}」，让我更清晰地说明：这个问题的关键在于…，建议的处理方式是…，如有疑问随时告诉我。`
 	            ];
 	        }
 
@@ -5338,6 +5327,31 @@ textarea.input {
 		                    <div class="h">&#8987; 正在生成推荐回答</div>
 		                    <div class="d">根据您的点评生成 3 个推荐回答…</div>
 		                    ${state.feedbackText ? `<div class="feedback-preview">点评：${escapeHtml(state.feedbackText)}</div>` : ''}
+		                    <div style="margin-top:16px;padding-top:12px;border-top:1px dashed var(--eva-border);">
+		                        <button class="btn btn-ghost" type="button" data-tune-action="simulate-fail" style="width:100%;color:var(--eva-error);">&#9888; 模拟生成失败（验收用）</button>
+		                    </div>
+		                </div>
+		            ` : '';
+
+		            const generateFailedPanel = q ? `
+		                <div class="tune-panel">
+		                    <div class="h">选择合适的回答</div>
+		                    <div class="d">选择最符合预期的推荐回答</div>
+		                    <div class="tune-form">
+		                        ${state.feedbackText ? `<div class="feedback-preview" style="margin-bottom:12px;">您的点评：${escapeHtml(state.feedbackText)}</div>` : ''}
+		                        <div style="background:var(--eva-error-bg, #fef2f2);border:1px solid var(--eva-error-border, #fecaca);border-radius:8px;padding:16px;text-align:center;">
+		                            <div style="font-size:32px;margin-bottom:8px;">&#128533;</div>
+		                            <div style="font-weight:500;color:var(--eva-error);margin-bottom:4px;">推荐答案生成失败</div>
+		                            <div style="font-size:13px;color:var(--eva-text-secondary);">网络波动或服务繁忙，请稍后重试</div>
+		                        </div>
+		                        <div class="tune-row" style="justify-content:space-between;align-items:center;margin-top:16px;">
+		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+		                            <div style="display:flex;gap:8px;">
+		                                <button class="btn btn-ghost" type="button" data-tune-action="retry-generate">重新生成</button>
+		                                <button class="btn btn-primary" type="button" data-tune-action="go-custom">直接输入正确答案</button>
+		                            </div>
+		                        </div>
+		                    </div>
 		                </div>
 		            ` : '';
 
@@ -5403,9 +5417,11 @@ textarea.input {
 		                        ? feedbackPanel
 		                        : stage === 'generating'
 		                            ? generatingPanel
-		                            : stage === 'candidates'
-		                                ? candidatesPanel
-		                                : customPanel;
+		                            : stage === 'generateFailed'
+		                                ? generateFailedPanel
+		                                : stage === 'candidates'
+		                                    ? candidatesPanel
+		                                    : customPanel;
 
 		            const disableTune = !q || evolvable;
 		            const primaryHtml = evolvable
@@ -5862,11 +5878,32 @@ textarea.input {
 	                state.candidates = [];
 	                renderTuningPage();
 	                setTimeout(() => {
+	                    if (state.stage !== 'generating') return; // 被中断则不执行
 	                    state.candidates = generateCandidatesFromFeedback(a, q, state.feedbackText, state.feedbackHistory);
 	                    state.selectedCandidate = 'A';
 	                    state.stage = 'candidates';
 	                    renderTuningPage();
-	                }, 700);
+	                }, 2500);
+	                return;
+	            }
+	            if (action === 'retry-generate') {
+	                // 从失败状态重新尝试生成
+	                state.stage = 'generating';
+	                state.candidates = [];
+	                renderTuningPage();
+	                setTimeout(() => {
+	                    if (state.stage !== 'generating') return; // 被中断则不执行
+	                    state.candidates = generateCandidatesFromFeedback(a, q, state.feedbackText, state.feedbackHistory);
+	                    state.selectedCandidate = 'A';
+	                    state.stage = 'candidates';
+	                    renderTuningPage();
+	                }, 2500);
+	                return;
+	            }
+	            if (action === 'simulate-fail') {
+	                // 模拟生成失败（仅供原型验收）
+	                state.stage = 'generateFailed';
+	                renderTuningPage();
 	                return;
 	            }
 
@@ -5885,11 +5922,12 @@ textarea.input {
 	                    state.candidates = [];
 	                    renderTuningPage();
 	                    setTimeout(() => {
+	                        if (state.stage !== 'generating') return; // 被中断则不执行
 	                        state.candidates = generateCandidatesFromFeedback(a, q, state.feedbackText, state.feedbackHistory);
 	                        state.selectedCandidate = 'A';
 	                        state.stage = 'candidates';
 	                        renderTuningPage();
-	                    }, 700);
+	                    }, 2500);
 	                    return;
 	                }
 	                if (next === 'submit-custom') {
