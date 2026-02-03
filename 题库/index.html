@@ -1,0 +1,4794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVA · 题库</title>
+
+    <!--
+    ============================================================
+    EVA 原型模板 v1.1
+    ============================================================
+    设计规范: ../EVA-Design-System.md (第10节)
+    协作规范: ../../AI协作/AI-Collaboration-Guide.md (第8节)
+    模板上下文: _CONTEXT.md
+
+    @FROZEN 区域说明:
+    - 设计系统核心样式: CSS变量、重置、通用组件
+    - 画板模式核心架构: 模式切换、画板容器、画板样式
+    - 核心JavaScript: 模式切换、截图、打印功能
+
+    AI 可修改区域:
+    - {{占位符}} 替换
+    - 模块特有样式 (标记为 TODO)
+    - 交互模式的实际内容
+    - 画板内容填充
+    ============================================================
+    -->
+
+    <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-03 16:28) ========== -->
+<style>
+/* ========== eva-base.css ========== */
+/**
+ * EVA Design System - Base Styles
+ * Version: 2.0
+ *
+ * 使用说明: 在 HTML 的 <head> 中引用
+ * <link rel="stylesheet" href="eva-base.css">
+ *
+ * 规范文档: EVA-Design-System.md
+ * 视觉参考: eva-enterprise-onboarding (Google AI Studio)
+ */
+
+/* ========== @FROZEN: 色彩系统 ========== */
+/* 说明: 所有颜色值遵循 EVA-Design-System.md */
+:root {
+    /* 背景色 */
+    --bg: #f8fafc;
+    --bg-elevated: #ffffff;
+    --bg-subtle: #f1f5f9;
+
+    /* 文字色 */
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    /* 主色调 */
+    --accent: #6366f1;
+    --accent-dark: #4f46e5;
+    --accent-light: #e0e7ff;
+    --accent-glow: rgba(99, 102, 241, 0.15);
+    --accent-hover: #4f46e5;
+
+    /* 功能色 */
+    --success: #10b981;
+    --success-light: #ecfdf5;
+    --warning: #f59e0b;
+    --warning-light: #fffbeb;
+    --danger: #ef4444;
+    --danger-light: #fef2f2;
+
+    /* 边框色 */
+    --border: #e2e8f0;
+    --border-subtle: #f1f5f9;
+
+    /* 阴影 - 升级版 */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-accent: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+
+    /* 圆角 - 升级版（更大更现代） */
+    --radius-sm: 12px;
+    --radius: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-2xl: 40px;
+    --radius-3xl: 48px;
+    --radius-full: 9999px;
+
+    /* 间距系统 */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* 过渡时间 */
+    --duration-fast: 0.15s;
+    --duration: 0.3s;
+    --duration-slow: 0.5s;
+    --duration-slower: 0.7s;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 全局重置 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 排版系统 ========== */
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.025em;
+}
+
+.title-xl {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 字体工具类 */
+.font-black {
+    font-weight: 900;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.tracking-tighter {
+    letter-spacing: -0.05em;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+.tracking-normal {
+    letter-spacing: 0;
+}
+
+.tracking-wide {
+    letter-spacing: 0.025em;
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+.tracking-widest {
+    letter-spacing: 0.1em;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 按钮系统 ========== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 40px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    transition: all var(--duration);
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-accent);
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn-lg {
+    padding: 22px 48px;
+    font-size: 18px;
+    font-weight: 900;
+    border-radius: var(--radius-2xl);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-subtle);
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 10px 20px;
+}
+
+.btn-ghost:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-sm {
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-dark {
+    background: var(--text);
+    color: white;
+}
+
+.btn-dark:hover {
+    background: #1e293b;
+    box-shadow: var(--shadow-lg);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 输入框系统 ========== */
+.input-box {
+    margin-bottom: 28px;
+}
+
+.input {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    font-size: 16px;
+    outline: none;
+    transition: all var(--duration);
+    background: var(--bg);
+    color: var(--text);
+}
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.input:focus {
+    background: white;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-light);
+}
+
+.input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+textarea.input {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.input-lg {
+    padding: 20px 24px;
+    font-size: 18px;
+    border-radius: var(--radius-xl);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 卡片系统 ========== */
+.card {
+    background: var(--bg-elevated);
+    padding: 32px;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-card);
+    border: 2px solid transparent;
+    transition: all var(--duration-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card.active {
+    border-color: var(--success);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.card.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--success);
+}
+
+.card.dim {
+    opacity: 0.5;
+    transform: scale(0.98);
+    filter: grayscale(0.3);
+}
+
+.card-lg {
+    padding: 40px;
+    border-radius: var(--radius-3xl);
+}
+
+.card-interactive {
+    cursor: pointer;
+}
+
+.card-interactive:hover {
+    border-color: var(--accent);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 标签/徽章系统 ========== */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+.tag.core {
+    background: #eef2ff;
+    color: var(--accent);
+    border-color: #c7d2fe;
+    font-weight: 600;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.badge.success {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+}
+
+.badge.warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+}
+
+.badge.danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
+
+.badge.info {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 进度指示器 ========== */
+.stepper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.step-dot {
+    width: 32px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    transition: all var(--duration);
+}
+
+.step-dot.active {
+    background: var(--accent);
+    width: 48px;
+}
+
+.step-dot.done {
+    background: var(--success);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 图标容器 ========== */
+.icon-box {
+    width: 48px;
+    height: 48px;
+    background: var(--bg-subtle);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all var(--duration);
+}
+
+.icon-box.active {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.icon-box.accent {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 网格系统 ========== */
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-12 {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.col-2 {
+    grid-column: span 2;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.col-6 {
+    grid-column: span 6;
+}
+
+.col-8 {
+    grid-column: span 8;
+}
+
+.col-12 {
+    grid-column: span 12;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 工具类 ========== */
+/* Flex */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-sm {
+    gap: 8px;
+}
+
+.gap-md {
+    gap: 16px;
+}
+
+.gap-lg {
+    gap: 24px;
+}
+
+/* Spacing */
+.mt-sm {
+    margin-top: 8px;
+}
+
+.mt-md {
+    margin-top: 16px;
+}
+
+.mt-lg {
+    margin-top: 24px;
+}
+
+.mt-xl {
+    margin-top: 32px;
+}
+
+.mb-sm {
+    margin-bottom: 8px;
+}
+
+.mb-md {
+    margin-bottom: 16px;
+}
+
+.mb-lg {
+    margin-bottom: 24px;
+}
+
+.mb-xl {
+    margin-bottom: 32px;
+}
+
+/* Text */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.text-success {
+    color: var(--success);
+}
+
+.font-bold {
+    font-weight: 600;
+}
+
+/* Display */
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @STABLE: 页面切换 ========== */
+/* 说明: 可以调整动画参数，但不要删除 */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: flex;
+}
+
+/* ========== @END-STABLE ========== */
+
+/* ========== eva-animations.css ========== */
+/**
+ * EVA Design System - Animations
+ * Version: 2.0
+ *
+ * 使用说明: 在 HTML 的 <head> 中引用（在 eva-base.css 之后）
+ * <link rel="stylesheet" href="eva-animations.css">
+ *
+ * 来源: 深色版的优秀视觉效果 + 白色版的轨道动画 + Google AI Studio 版本动效
+ */
+
+/* ========== @FROZEN: 环境动画背景 (来源: 深色版) ========== */
+/* 说明: 已适配浅色主题，创造柔和的动态背景效果 */
+.ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ambient::before {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 65%);
+    top: -20%;
+    left: -15%;
+    animation: drift1 40s ease-in-out infinite;
+}
+
+.ambient::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.05), transparent 65%);
+    bottom: -15%;
+    right: -10%;
+    animation: drift2 35s ease-in-out infinite;
+}
+
+/* 环境圆（白色版原有的，保留兼容） */
+.ambient-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+.ac-1 {
+    width: 600px;
+    height: 600px;
+    background: rgba(99, 102, 241, 0.08);
+    top: -10%;
+    right: 10%;
+}
+
+.ac-2 {
+    width: 500px;
+    height: 500px;
+    background: rgba(236, 72, 153, 0.05);
+    bottom: -10%;
+    left: 20%;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 漂移动画关键帧 ========== */
+@keyframes drift1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(50px, 50px);
+    }
+}
+
+@keyframes drift2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-30px, -30px);
+    }
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 轨道动画 (来源: 白色版) ========== */
+/* 说明: 用于 Hero 区域的装饰性动画 */
+.hero-illustration {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px dashed #cbd5e1;
+    border-radius: 50%;
+}
+
+.o1 {
+    width: 280px;
+    height: 280px;
+    animation: spin 20s linear infinite;
+}
+
+.o2 {
+    width: 460px;
+    height: 460px;
+    animation: spin 30s linear infinite reverse;
+}
+
+.agent-center {
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+    z-index: 2;
+}
+
+.orbit-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow-card, 0 4px 6px -1px rgba(0, 0, 0, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 通用动画关键帧 ========== */
+/* 旋转 */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 淡入 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 淡入（无位移） */
+@keyframes fadeInSimple {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 脉冲 */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* 弹跳 */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 缩放脉冲 */
+@keyframes scalePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 闪烁 */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 滑入（从右） */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 滑入（从左） */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 动画工具类 ========== */
+/* 基础淡入 */
+.fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-fast {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.fade-in-slow {
+    animation: fadeIn 1s ease forwards;
+}
+
+/* 脉冲 */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* 旋转 */
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+.spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+/* 弹跳 */
+.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* 滑入 */
+.slide-in-right {
+    animation: slideInRight 0.4s ease forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.4s ease forwards;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 加载指示器 ========== */
+.loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent, #6366f1);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader-sm {
+    width: 14px;
+    height: 14px;
+    border-width: 1.5px;
+}
+
+.loader-lg {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+}
+
+/* 状态监视器 */
+.status-monitor {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 24px;
+    box-shadow: var(--shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--border, #e2e8f0);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @STABLE: 延迟动画 ========== */
+/* 说明: 用于序列化动画效果，可根据需要调整延迟值 */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+.delay-600 {
+    animation-delay: 0.6s;
+}
+
+.delay-700 {
+    animation-delay: 0.7s;
+}
+
+.delay-800 {
+    animation-delay: 0.8s;
+}
+
+.delay-900 {
+    animation-delay: 0.9s;
+}
+
+.delay-1000 {
+    animation-delay: 1s;
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 高级动画 (来源: Google AI Studio) ========== */
+/* 滑入淡出 - 从底部 */
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 缩放淡入 */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 缩放淡出 */
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* 进度条条纹动画 */
+@keyframes progressBarStripes {
+    from {
+        background-position: 24px 0;
+    }
+
+    to {
+        background-position: 0 0;
+    }
+}
+
+/* 脉冲指示器 */
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* 打字光标闪烁 */
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 滑动上升 */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 组合动画工具类 ========== */
+/* animate-in 系列 - 参考 Tailwind animate-in */
+.animate-in {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: forwards;
+}
+
+.animate-in.fade-in {
+    animation-name: fadeIn;
+}
+
+.animate-in.zoom-in {
+    animation-name: zoomIn;
+}
+
+.animate-in.slide-in-from-bottom {
+    animation-name: slideInFromBottom;
+}
+
+.animate-in.slide-in-from-top {
+    animation-name: slideInFromBottom;
+    animation-direction: reverse;
+}
+
+/* 脉冲指示器 */
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* 呼吸脉冲 */
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 慢速旋转 */
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+/* 打字光标 */
+.cursor-blink {
+    animation: cursorBlink 1s step-end infinite;
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 进度条组件 ========== */
+.progress-bar {
+    height: 24px;
+    background: white;
+    border-radius: var(--radius-full, 9999px);
+    padding: 4px;
+    border: 1px solid var(--border, #e2e8f0);
+    box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent, #6366f1);
+    border-radius: var(--radius-full, 9999px);
+    transition: width 0.5s ease-out;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    position: relative;
+}
+
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+            rgba(255, 255, 255, 0.15) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.15) 75%,
+            transparent 75%,
+            transparent);
+    background-size: 24px 24px;
+    animation: progressBarStripes 1s linear infinite;
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 状态指示器 ========== */
+.status-dot {
+    position: relative;
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+}
+
+.status-dot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    opacity: 0.75;
+}
+
+.status-dot::after {
+    content: '';
+    position: relative;
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status-dot.success {
+    color: var(--success, #10b981);
+}
+
+.status-dot.warning {
+    color: var(--warning, #f59e0b);
+}
+
+.status-dot.danger {
+    color: var(--danger, #ef4444);
+}
+
+.status-dot.accent {
+    color: var(--accent, #6366f1);
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 终端日志样式 ========== */
+.terminal {
+    background: #0f172a;
+    border-radius: var(--radius-2xl, 32px);
+    padding: 32px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    color: #e2e8f0;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25));
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.terminal-dots span:nth-child(1) {
+    background: rgba(239, 68, 68, 0.5);
+}
+
+.terminal-dots span:nth-child(2) {
+    background: rgba(245, 158, 11, 0.5);
+}
+
+.terminal-dots span:nth-child(3) {
+    background: rgba(16, 185, 129, 0.5);
+}
+
+.terminal-log {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    animation: slideInFromBottom 0.3s ease forwards;
+}
+
+.terminal-log-num {
+    color: rgba(255, 255, 255, 0.2);
+    user-select: none;
+}
+
+.terminal-log-success {
+    color: #818cf8;
+    font-weight: 700;
+}
+
+/* ========== @END-STABLE ========== */
+
+</style>
+    <style>
+        /* ========== 设计系统变量 ========== */
+        :root {
+            /* 主色 */
+            --eva-primary: #6366F1;
+            --eva-primary-light: #818CF8;
+            --eva-primary-dark: #4F46E5;
+            --eva-primary-bg: rgba(99, 102, 241, 0.08);
+
+            /* 功能色 */
+            --eva-success: #10B981;
+            --eva-success-bg: rgba(16, 185, 129, 0.08);
+            --eva-warning: #F59E0B;
+            --eva-warning-bg: rgba(245, 158, 11, 0.08);
+            --eva-error: #EF4444;
+            --eva-error-bg: rgba(239, 68, 68, 0.08);
+            --eva-info: #3B82F6;
+            --eva-info-bg: rgba(59, 130, 246, 0.08);
+
+            /* 中性色 */
+            --eva-bg: #FAFAFA;
+            --eva-surface: #FFFFFF;
+            --eva-border: #E5E7EB;
+            --eva-border-light: #F3F4F6;
+            --eva-text-primary: #111827;
+            --eva-text-secondary: #6B7280;
+            --eva-text-tertiary: #9CA3AF;
+            --eva-text-disabled: #D1D5DB;
+
+            /* 阴影 */
+            --eva-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --eva-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --eva-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --eva-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+            /* 圆角 */
+            --eva-radius-sm: 4px;
+            --eva-radius-md: 8px;
+            --eva-radius-lg: 12px;
+            --eva-radius-xl: 16px;
+            --eva-radius-full: 9999px;
+
+            /* 间距 */
+            --eva-space-xs: 4px;
+            --eva-space-sm: 8px;
+            --eva-space-md: 16px;
+            --eva-space-lg: 24px;
+            --eva-space-xl: 32px;
+            --eva-space-2xl: 48px;
+
+            /* 过渡 */
+            --eva-transition-fast: 150ms ease;
+            --eva-transition-normal: 250ms ease;
+            --eva-transition-slow: 350ms ease;
+
+            /* 布局 */
+            --sidebar-width: 260px;
+            --header-height: 56px;
+        }
+
+        /* ========== 重置样式 ========== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 14px;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--eva-bg);
+            color: var(--eva-text-primary);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ========== 通用组件样式 ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--eva-space-sm);
+            padding: var(--eva-space-sm) var(--eva-space-md);
+            border: none;
+            border-radius: var(--eva-radius-md);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--eva-transition-fast);
+        }
+
+        .btn-primary {
+            background: var(--eva-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--eva-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--eva-shadow-md);
+        }
+
+        .btn-secondary {
+            background: var(--eva-surface);
+            color: var(--eva-text-primary);
+            border: 1px solid var(--eva-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--eva-border-light);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--eva-text-secondary);
+        }
+
+        .btn-ghost:hover {
+            background: var(--eva-border-light);
+            color: var(--eva-text-primary);
+        }
+
+        /* 卡片 */
+        .card {
+            background: var(--eva-surface);
+            border-radius: var(--eva-radius-lg);
+            border: 1px solid var(--eva-border);
+            padding: var(--eva-space-lg);
+            transition: all var(--eva-transition-fast);
+        }
+
+        .card:hover {
+            box-shadow: var(--eva-shadow-md);
+        }
+
+        /* 输入框 */
+        .input {
+            width: 100%;
+            padding: var(--eva-space-sm) var(--eva-space-md);
+            border: 1px solid var(--eva-border);
+            border-radius: var(--eva-radius-md);
+            font-size: 14px;
+            transition: all var(--eva-transition-fast);
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--eva-primary);
+            box-shadow: 0 0 0 3px var(--eva-primary-bg);
+        }
+
+        /* 标签 */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: var(--eva-radius-full);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag-primary {
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary);
+        }
+
+        .tag-success {
+            background: var(--eva-success-bg);
+            color: var(--eva-success);
+        }
+
+        .tag-warning {
+            background: var(--eva-warning-bg);
+            color: var(--eva-warning);
+        }
+
+        .tag-error {
+            background: var(--eva-error-bg);
+            color: var(--eva-error);
+        }
+
+        /* ========== 动画 ========== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn var(--eva-transition-normal);
+        }
+
+        .animate-slide-up {
+            animation: slideUp var(--eva-transition-normal);
+        }
+
+        .animate-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        /* ========== 加载骨架屏 ========== */
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: var(--eva-radius-sm);
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+    </style>
+    <!-- ========== @END-FROZEN: 设计系统核心样式 ========== -->
+
+	    <style>
+	        /* ========== 题库页面特有样式 ========== */
+	        /* TODO: 在此添加模块特定样式 */
+
+	        /* ========== 布局对齐：复刻控制台结构 ========== */
+	        body {
+	            display: flex;
+	            min-height: 100vh;
+	        }
+
+	        .sidebar {
+	            width: var(--sidebar-width);
+	            background: var(--eva-surface);
+	            border-right: 1px solid var(--eva-border);
+	            position: sticky;
+	            top: 0;
+	            height: 100vh;
+	            display: flex;
+	            flex-direction: column;
+	            z-index: 20;
+	            flex-shrink: 0;
+	        }
+
+	        .logo {
+	            height: 72px;
+	            display: flex;
+	            align-items: center;
+	            padding: 0 28px;
+	            font-weight: 700;
+	            font-size: 20px;
+	            border-bottom: 1px solid var(--eva-border);
+	            gap: 10px;
+	            color: var(--eva-primary);
+	        }
+
+	        .logo-icon {
+	            width: 32px;
+	            height: 32px;
+	            background: linear-gradient(135deg, var(--eva-primary) 0%, var(--eva-primary-dark) 100%);
+	            border-radius: var(--eva-radius-md);
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            color: white;
+	            font-size: 18px;
+	        }
+
+	        .nav-section {
+	            padding: 20px 16px;
+	        }
+
+	        .nav-section:not(:last-child) {
+	            border-bottom: 1px solid var(--eva-border-light);
+	        }
+
+	        .nav-label {
+	            font-size: 10px;
+	            font-weight: 700;
+	            color: var(--eva-text-tertiary);
+	            text-transform: uppercase;
+	            padding: 0 12px 10px;
+	            letter-spacing: 0.1em;
+	        }
+
+	        .nav-item {
+	            display: flex;
+	            align-items: center;
+	            gap: 12px;
+	            padding: 12px 14px;
+	            font-size: 14px;
+	            border-radius: var(--eva-radius-md);
+	            color: var(--eva-text-secondary);
+	            cursor: pointer;
+	            transition: all .2s;
+	            font-weight: 500;
+	            text-decoration: none;
+	            position: relative;
+	        }
+
+	        .nav-item:hover {
+	            background: var(--eva-border-light);
+	            color: var(--eva-text-primary);
+	        }
+
+	        .nav-item.active {
+	            background: var(--eva-primary-bg);
+	            color: var(--eva-primary);
+	            font-weight: 600;
+	        }
+
+	        .nav-item-icon {
+	            width: 20px;
+	            height: 20px;
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            font-size: 16px;
+	        }
+
+	        .user-profile {
+	            display: flex;
+	            align-items: center;
+	            gap: 12px;
+	            padding: 16px 20px;
+	            margin-top: auto;
+	            border-top: 1px solid var(--eva-border);
+	            cursor: pointer;
+	            transition: background 0.2s;
+	        }
+
+	        .user-profile:hover {
+	            background: var(--eva-border-light);
+	        }
+
+	        .user-avatar {
+	            width: 40px;
+	            height: 40px;
+	            border-radius: 50%;
+	            background: linear-gradient(135deg, #4DB6AC, #00897B);
+	            color: white;
+	            display: flex;
+	            align-items: center;
+	            justify-content: center;
+	            font-size: 16px;
+	            font-weight: 600;
+	            flex-shrink: 0;
+	        }
+
+	        .user-info {
+	            flex: 1;
+	            min-width: 0;
+	        }
+
+	        .user-name {
+	            font-size: 14px;
+	            font-weight: 600;
+	            color: var(--eva-text-primary);
+	        }
+
+	        .user-company {
+	            font-size: 12px;
+	            color: var(--eva-text-secondary);
+	        }
+
+	        .user-expand {
+	            color: var(--eva-text-tertiary);
+	            font-size: 10px;
+	        }
+
+	        .main {
+	            flex: 1;
+	            min-width: 0;
+	            display: flex;
+	            flex-direction: column;
+	        }
+
+	        .topbar {
+	            height: var(--header-height);
+	            background: var(--eva-surface);
+	            border-bottom: 1px solid var(--eva-border);
+	            display: flex;
+	            align-items: center;
+	            justify-content: space-between;
+	            padding: 0 32px;
+	            position: sticky;
+	            top: 0;
+	            z-index: 19;
+	        }
+
+	        .topbar-title {
+	            font-size: 18px;
+	            font-weight: 600;
+	            color: var(--eva-text-primary);
+	        }
+
+	        .topbar-actions {
+	            display: flex;
+	            align-items: center;
+	            gap: 12px;
+	            flex-wrap: wrap;
+	        }
+
+	        .content {
+	            padding: 32px;
+	            max-width: 1400px;
+	            margin: 0 auto;
+	            width: 100%;
+	        }
+
+		        .mode-switcher {
+		            display: none !important;
+		        }
+
+        .quiz-layout {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 16px;
+            align-items: start;
+        }
+
+        @media (max-width: 1100px) {
+            .quiz-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .toolbar .search {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            padding: 10px 12px;
+            border: 1px solid var(--eva-border);
+            border-radius: 12px;
+            background: var(--eva-surface);
+            box-shadow: var(--eva-shadow-sm);
+        }
+
+        .toolbar .search input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            color: var(--eva-text-primary);
+            background: transparent;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--eva-border);
+            border-radius: 16px;
+            overflow: hidden;
+            background: var(--eva-border-light);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--eva-text-secondary);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            user-select: none;
+            transition: all var(--eva-transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .tab:hover {
+            background: rgba(255, 255, 255, 0.6);
+            color: var(--eva-text-primary);
+        }
+
+        .tab.active {
+            background: var(--eva-surface);
+            color: var(--eva-primary);
+            border-bottom: 2px solid var(--eva-primary);
+            margin-bottom: -1px;
+        }
+
+	        .bank-type-tabs {
+	            width: fit-content;
+	            border-bottom: none;
+	            overflow: visible;
+	            border: 1px solid var(--eva-border);
+	            background: var(--eva-surface);
+	            padding: 4px;
+	            gap: 4px;
+	        }
+
+	        .bank-type-tabs .tab {
+	            flex: 0 0 auto;
+	            padding: 8px 12px;
+	            white-space: nowrap;
+	            border-radius: 10px;
+	        }
+
+	        .bank-type-tabs .tab.active {
+	            border-bottom: none;
+	            margin-bottom: 0;
+	            background: var(--eva-primary-bg);
+	            color: var(--eva-primary-dark);
+	        }
+
+        .bank-picker {
+            display: flex;
+            gap: 10px;
+            flex-wrap: nowrap;
+            margin: 12px 0 14px;
+        }
+
+        .bank-pill {
+            border: 1px solid var(--eva-border);
+            background: var(--eva-surface);
+            border-radius: 16px;
+            padding: 10px 12px;
+            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            min-width: 160px;
+            transition: all var(--eva-transition-fast);
+        }
+
+        .bank-pill:hover {
+            border-color: rgba(99, 102, 241, 0.35);
+            box-shadow: var(--eva-shadow-sm);
+            transform: translateY(-1px);
+        }
+
+        .bank-pill.selected {
+            border-color: rgba(99, 102, 241, 0.55);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+            background: rgba(99, 102, 241, 0.03);
+        }
+
+        .bank-pill .icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary-dark);
+            flex: 0 0 auto;
+        }
+
+        .bank-pill .name {
+            font-weight: 900;
+            font-size: 13px;
+            color: var(--eva-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .bank-pill .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            color: var(--eva-text-tertiary);
+            font-size: 12px;
+        }
+
+        .bank-edit-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            border-radius: 4px;
+            background: var(--eva-surface);
+            color: var(--eva-text-tertiary);
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .bank-pill:hover .bank-edit-btn {
+            opacity: 1;
+        }
+
+        .bank-edit-btn:hover {
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary);
+        }
+
+        .question-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .question-table thead th {
+            text-align: left;
+            padding: 12px 14px;
+            color: var(--eva-text-tertiary);
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-bottom: 1px solid var(--eva-border);
+        }
+
+        .question-table tbody td {
+            padding: 14px;
+            border-bottom: 1px solid var(--eva-border-light);
+            vertical-align: middle;
+            color: var(--eva-text-primary);
+        }
+        .question-table tbody td:first-child {
+            vertical-align: top;
+        }
+
+        .question-table tbody tr {
+            cursor: pointer;
+            transition: all var(--eva-transition-fast);
+            position: relative;
+            box-shadow: inset 3px 0 0 transparent;
+        }
+
+        /* 状态左边框颜色（用 inset shadow，表格里更稳定） */
+        .question-table tbody tr.status-pass {
+            box-shadow: inset 3px 0 0 #10b981;
+        }
+        .question-table tbody tr.status-fail {
+            box-shadow: inset 3px 0 0 #ef4444;
+        }
+        .question-table tbody tr.status-pending {
+            box-shadow: inset 3px 0 0 #94a3b8;
+        }
+        .question-table tbody tr.status-labeled {
+            box-shadow: inset 3px 0 0 #f59e0b;
+        }
+
+        .question-table tbody tr:hover {
+            background: rgba(99, 102, 241, 0.04);
+            transform: translateX(2px);
+        }
+
+        .question-table tbody tr.selected {
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+	        /* 固定动作：始终可见，按需禁用 */
+	        .row-actions {
+	            display: flex;
+	            gap: 6px;
+	            flex-wrap: wrap;
+	        }
+	        .row-actions .btn-ghost {
+	            font-size: 11px;
+	            padding: 4px 8px;
+	        }
+	        .btn:disabled,
+	        .btn[disabled] {
+	            opacity: 0.45;
+	            cursor: not-allowed;
+	            box-shadow: none;
+	        }
+	        .question-table td.actions {
+	            vertical-align: middle;
+	        }
+	        .question-table td.actions .row-actions {
+	            justify-content: flex-end;
+	            flex-wrap: nowrap;
+	        }
+
+        .q-title {
+            font-weight: 900;
+            color: var(--eva-text-primary);
+            margin-bottom: 6px;
+            line-height: 1.35;
+        }
+
+        .q-sub {
+            font-size: 12px;
+            color: var(--eva-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* ========== 空状态样式 ========== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 24px;
+        }
+        .empty-state-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+        .empty-state-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--eva-text-primary);
+            margin-bottom: 8px;
+        }
+        .empty-state-desc {
+            font-size: 13px;
+            color: var(--eva-text-tertiary);
+            margin-bottom: 20px;
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 9999px;
+            border: 1px solid var(--eva-border);
+            background: var(--eva-surface);
+            color: var(--eva-text-secondary);
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+	        .chip.active {
+	            border-color: rgba(99, 102, 241, 0.35);
+	            background: var(--eva-primary-bg);
+	            color: var(--eva-primary-dark);
+	        }
+
+	        /* ========== 双区英雄条 ========== */
+	        .hero-filter-strip {
+	            display: flex;
+	            align-items: center;
+	            gap: 32px;
+	            padding: 20px 24px;
+	            background: linear-gradient(135deg,
+	                rgba(239,68,68,0.08) 0%,
+	                rgba(245,158,11,0.05) 50%,
+	                rgba(255,255,255,0) 100%);
+	            border: 1px solid rgba(239,68,68,0.12);
+	            border-radius: var(--eva-radius-xl);
+	            margin-bottom: 16px;
+	        }
+
+	        /* 英雄KPI区域 */
+	        .hero-kpi {
+	            min-width: 120px;
+	            padding: 12px 20px;
+	            background: var(--eva-surface);
+	            border-radius: var(--eva-radius-lg);
+	            box-shadow: 0 2px 8px rgba(239,68,68,0.1);
+	            text-align: center;
+	        }
+	        .hero-number {
+	            font-size: 48px;
+	            font-weight: 900;
+	            background: linear-gradient(135deg, #ef4444, #f59e0b);
+	            -webkit-background-clip: text;
+	            -webkit-text-fill-color: transparent;
+	            background-clip: text;
+	            line-height: 1;
+	        }
+	        .hero-label {
+	            font-size: 13px;
+	            color: var(--eva-text-secondary);
+	            font-weight: 600;
+	            margin-top: 4px;
+	        }
+	        .hero-progress {
+	            height: 4px;
+	            background: var(--eva-border-light);
+	            border-radius: 2px;
+	            margin-top: 8px;
+	            overflow: hidden;
+	        }
+	        .hero-progress .progress-bar {
+	            height: 100%;
+	            background: linear-gradient(90deg, var(--eva-success), #34d399);
+	            border-radius: 2px;
+	            transition: width 0.3s ease;
+	        }
+	        .hero-hint {
+	            font-size: 11px;
+	            color: var(--eva-text-tertiary);
+	            margin-top: 6px;
+	        }
+
+	        /* 问题分类区域 */
+	        .problem-breakdown {
+	            display: flex;
+	            flex-direction: column;
+	            gap: 6px;
+	        }
+	        .problem-item {
+	            display: flex;
+	            align-items: center;
+	            gap: 8px;
+	            font-size: 13px;
+	            color: var(--eva-text-secondary);
+	            cursor: pointer;
+	            padding: 4px 8px;
+	            border-radius: var(--eva-radius-md);
+	            transition: background var(--eva-transition-fast);
+	        }
+	        .problem-item:hover {
+	            background: rgba(0,0,0,0.04);
+	        }
+	        .problem-icon {
+	            font-size: 14px;
+	            width: 20px;
+	            text-align: center;
+	        }
+	        .problem-label {
+	            flex: 1;
+	        }
+	        .problem-count {
+	            font-weight: 700;
+	            min-width: 24px;
+	            text-align: right;
+	        }
+	        .problem-gap .problem-count { color: var(--eva-warning); }
+	        .problem-tune .problem-count { color: var(--eva-error); }
+	        .problem-pending .problem-count { color: var(--eva-text-tertiary); }
+
+	        /* 筛选chip区域 */
+	        .filter-chips {
+	            display: flex;
+	            gap: 8px;
+	            margin-left: auto;
+	        }
+	        .filter-chip {
+	            padding: 8px 16px;
+	            border-radius: var(--eva-radius-full);
+	            border: 1px solid var(--eva-border);
+	            background: var(--eva-surface);
+	            font-size: 13px;
+	            font-weight: 600;
+	            color: var(--eva-text-secondary);
+	            cursor: pointer;
+	            transition: all var(--eva-transition-fast);
+	        }
+	        .filter-chip:hover {
+	            border-color: #cbd5e1;
+	            background: #f8fafc;
+	        }
+	        .filter-chip.active {
+	            background: var(--eva-primary);
+	            border-color: var(--eva-primary);
+	            color: white;
+	            box-shadow: 0 2px 6px rgba(99,102,241,0.3);
+	            transform: scale(1.02);
+	        }
+	        .filter-chip-danger.active {
+	            background: linear-gradient(135deg, #ef4444, #f59e0b);
+	            border-color: transparent;
+	            box-shadow: 0 2px 8px rgba(239,68,68,0.35);
+	        }
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* ========== 题库列表（表格风格，参考知识库） ========== */
+        .bank-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .bank-table thead th {
+            text-align: left;
+            padding: 12px 14px;
+            color: var(--eva-text-tertiary);
+            font-weight: 800;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            border-bottom: 1px solid var(--eva-border);
+        }
+
+        .bank-table tbody td {
+            padding: 14px;
+            border-bottom: 1px solid var(--eva-border-light);
+            vertical-align: top;
+            color: var(--eva-text-primary);
+        }
+
+        .bank-table tbody tr {
+            cursor: pointer;
+            transition: all var(--eva-transition-fast);
+        }
+
+        .bank-table tbody tr:hover {
+            background: rgba(99, 102, 241, 0.04);
+        }
+
+        .bank-table tbody tr.selected {
+            background: rgba(99, 102, 241, 0.08);
+        }
+
+        .bank-name {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            min-width: 0;
+        }
+
+        .bank-name .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary-dark);
+            flex: 0 0 auto;
+        }
+
+        .bank-name .title {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--eva-text-primary);
+            line-height: 1.3;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .bank-name .desc {
+            margin-top: 4px;
+            font-size: 12px;
+            color: var(--eva-text-secondary);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .kpi-inline {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            color: var(--eva-text-tertiary);
+            font-size: 12px;
+        }
+
+        .kpi-inline strong {
+            color: var(--eva-text-primary);
+            font-weight: 800;
+        }
+
+        /* ========== 题库详情侧边栏（遮罩 + 右侧滑入，参考知识库） ========== */
+        .detail-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 24, 39, 0.45);
+            z-index: 11000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+        }
+
+        .detail-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .detail-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 520px;
+            height: 100vh;
+            background: var(--eva-surface);
+            border-left: 1px solid var(--eva-border);
+            box-shadow: var(--eva-shadow-xl);
+            z-index: 11001;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-panel.open {
+            transform: translateX(0);
+        }
+
+        .detail-header {
+            padding: 18px 18px 14px;
+            border-bottom: 1px solid var(--eva-border);
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.08), rgba(255, 255, 255, 0));
+        }
+
+        .detail-title-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .detail-title {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--eva-text-primary);
+            line-height: 1.3;
+        }
+
+        .detail-meta {
+            margin-top: 10px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .detail-meta .badge {
+            padding: 4px 10px;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 6px;
+        }
+
+        .detail-close {
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--eva-border);
+            border-radius: 12px;
+            background: var(--eva-surface);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .detail-close:hover {
+            background: var(--eva-border-light);
+        }
+
+        .detail-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--eva-border);
+        }
+
+        .detail-tab {
+            padding: 8px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--eva-text-secondary);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .detail-tab.active {
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary-dark);
+        }
+
+        .detail-body {
+            padding: 16px 16px 18px;
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        body.artboard-mode .detail-overlay,
+        body.artboard-mode .detail-panel,
+        body.artboard-mode .modal-overlay {
+            display: none !important;
+        }
+
+        .bank-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            padding: 14px;
+            border-radius: 16px;
+            border: 1px solid var(--eva-border);
+            background: var(--eva-surface);
+            box-shadow: var(--eva-shadow-sm);
+            cursor: pointer;
+            transition: all var(--eva-transition-normal);
+        }
+
+        .bank-row:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--eva-shadow-md);
+        }
+
+        .bank-row.selected {
+            border-color: rgba(99, 102, 241, 0.45);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+        }
+
+        .bank-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary-dark);
+            flex: 0 0 auto;
+        }
+
+        .bank-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .bank-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .bank-title h3 {
+            font-size: 15px;
+            color: var(--eva-text-primary);
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--eva-text-tertiary);
+            font-size: 12px;
+        }
+
+        .kpi {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .kpi .k {
+            border: 1px solid var(--eva-border);
+            border-radius: 14px;
+            padding: 10px;
+            background: var(--eva-border-light);
+        }
+
+        .kpi .k .v {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--eva-text-primary);
+            margin-bottom: 2px;
+        }
+
+        .kpi .k .l {
+            font-size: 12px;
+            color: var(--eva-text-tertiary);
+        }
+
+        .mini-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .q-row {
+            border: 1px solid var(--eva-border);
+            border-radius: 14px;
+            padding: 10px;
+            background: var(--eva-border-light);
+        }
+
+        .q-row .q {
+            font-size: 13px;
+            color: var(--eva-text-primary);
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .q-row .a {
+            font-size: 12px;
+            color: var(--eva-text-secondary);
+            line-height: 1.5;
+        }
+
+        .accordion {
+            border-top: 1px dashed rgba(229, 231, 235, 1);
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .acc-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            border: 1px solid var(--eva-border);
+            background: var(--eva-surface);
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--eva-text-primary);
+        }
+
+        .acc-content {
+            display: none;
+            margin-top: 8px;
+            padding: 10px;
+            border-radius: 14px;
+            border: 1px solid var(--eva-border);
+            background: rgba(99, 102, 241, 0.05);
+            color: var(--eva-text-secondary);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .acc-content.active {
+            display: block;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(17, 24, 39, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 12000;
+            padding: 24px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+            max-width: 720px;
+            background: var(--eva-surface);
+            border-radius: 20px;
+            border: 1px solid var(--eva-border);
+            box-shadow: var(--eva-shadow-xl);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--eva-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .modal-title {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--eva-text-primary);
+        }
+
+        .modal-body {
+            padding: 16px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .field label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--eva-text-secondary);
+            margin-bottom: 6px;
+        }
+
+        .field input, .field textarea, .field select {
+            width: 100%;
+            border: 1px solid var(--eva-border);
+            border-radius: 12px;
+            padding: 10px 12px;
+            outline: none;
+            font-size: 13px;
+        }
+
+        .field textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .modal-footer {
+            padding: 14px 16px;
+            border-top: 1px solid var(--eva-border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+
+        /* ========== @FROZEN: 画板模式核心架构 ========== -->
+
+        /* 模式切换器 */
+        .mode-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            gap: 8px;
+            background: white;
+            padding: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            border: 1px solid #E5E7EB;
+        }
+
+        .mode-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .mode-btn:hover {
+            background: #E5E7EB;
+            color: #374151;
+        }
+
+        .mode-btn.active {
+            background: var(--eva-primary);
+            color: white;
+        }
+
+        .mode-btn-export {
+            background: linear-gradient(135deg, #10B981, #059669);
+            color: white;
+        }
+
+        .mode-btn-export:hover {
+            background: linear-gradient(135deg, #059669, #047857);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        /* 画板容器 - 默认隐藏 */
+        .artboard-container {
+            display: none;
+            padding: 40px;
+            background: #F8FAFC;
+            min-height: 100vh;
+        }
+
+        .artboard-container.active {
+            display: block;
+        }
+
+        .artboard-header {
+            text-align: center;
+            margin-bottom: 48px;
+            padding: 32px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .artboard-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+
+        .artboard-header p {
+            color: #6B7280;
+            font-size: 15px;
+        }
+
+        /* 画板网格 */
+        .artboard-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 32px;
+            justify-content: flex-start;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        /* 分类标题 */
+        .artboard-section-title {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 0;
+            margin-top: 24px;
+            border-bottom: 2px solid var(--eva-primary);
+        }
+
+        .artboard-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .artboard-section-title span {
+            font-size: 24px;
+        }
+
+        .artboard-section-title::after {
+            content: attr(data-title);
+            font-size: 18px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        /* 单个画板 */
+        .artboard {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #E5E7EB;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .artboard:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        /* 画板标签 */
+        .artboard-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, #F8FAFC, #F1F5F9);
+            border-bottom: 1px solid #E5E7EB;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .artboard-label-id {
+            background: var(--eva-primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .artboard-download-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            color: #9CA3AF;
+        }
+
+        .artboard-download-btn:hover {
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary);
+        }
+
+        /* 画板内容区域 */
+        .artboard-content {
+            background: #F8FAFC;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 三种预览模式尺寸 */
+        /* 页面预览 - 完整页面 */
+        .artboard-page-preview {
+            width: 520px;
+            height: 700px;
+            transform: scale(0.85);
+            transform-origin: top left;
+            overflow: hidden;
+        }
+
+        .artboard-content.tall .artboard-page-preview {
+            height: 800px;
+        }
+
+        /* 组件预览 - 中等尺寸 */
+        .artboard-component-preview {
+            width: 400px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        /* 侧边栏预览 */
+        .artboard-sidebar-preview {
+            width: 380px;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        /* 弹窗预览 */
+        .artboard-modal-preview {
+            width: 500px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Toast预览 */
+        .artboard-toast-preview {
+            width: 350px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 1400px) {
+            .artboard-page-preview {
+                transform: scale(0.7);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .artboard-grid {
+                justify-content: center;
+            }
+
+            .artboard-page-preview {
+                transform: scale(0.6);
+            }
+        }
+
+        /* 打印模式 */
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .mode-switcher {
+                display: none !important;
+            }
+
+            .sidebar,
+            .main {
+                display: none !important;
+            }
+
+            .artboard-container {
+                display: block !important;
+                padding: 20px;
+                background: white;
+            }
+
+            .artboard-grid {
+                display: block;
+            }
+
+            .artboard {
+                break-inside: avoid;
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+                box-shadow: none;
+                border: 2px solid #E5E7EB;
+            }
+
+            .artboard-download-btn {
+                display: none;
+            }
+
+            .artboard-page-preview {
+                transform: scale(0.5);
+            }
+        }
+
+        /* ========== @END-FROZEN: 画板模式核心架构 ========== */
+
+        /* ========== 布局结构 ========== */
+        /* 侧边栏 - 交互模式 */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            background: var(--eva-surface);
+            border-right: 1px solid var(--eva-border);
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+            transition: transform var(--eva-transition-normal);
+        }
+
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-header {
+            padding: var(--eva-space-lg);
+            border-bottom: 1px solid var(--eva-border);
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--eva-space-sm);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--eva-primary);
+        }
+
+        .sidebar-nav {
+            flex: 1;
+            padding: var(--eva-space-md);
+            overflow-y: auto;
+        }
+
+        .nav-section {
+            margin-bottom: var(--eva-space-lg);
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--eva-text-tertiary);
+            padding: var(--eva-space-sm) var(--eva-space-md);
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--eva-space-sm);
+            padding: var(--eva-space-sm) var(--eva-space-md);
+            border-radius: var(--eva-radius-md);
+            cursor: pointer;
+            transition: all var(--eva-transition-fast);
+            color: var(--eva-text-secondary);
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background: var(--eva-border-light);
+            color: var(--eva-text-primary);
+        }
+
+        .nav-item.active {
+            background: var(--eva-primary-bg);
+            color: var(--eva-primary);
+            font-weight: 500;
+        }
+
+        .nav-item-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 主内容区域 */
+        .main {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: margin var(--eva-transition-normal);
+        }
+
+        .main.full-width {
+            margin-left: 0;
+        }
+
+        /* 头部 */
+        .header {
+            height: var(--header-height);
+            background: var(--eva-surface);
+            border-bottom: 1px solid var(--eva-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--eva-space-lg);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .header-title {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--eva-space-md);
+        }
+
+        /* 内容区域 */
+        .content {
+            padding: var(--eva-space-xl);
+        }
+
+        /* 画板模式激活时隐藏交互模式 */
+        body.artboard-mode .sidebar,
+        body.artboard-mode .main {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========== 模式切换器 ========== -->
+    <div class="mode-switcher">
+        <button class="mode-btn active" onclick="switchMode('interactive')">
+            <span style="margin-right: 4px;">&#128421;</span> 交互模式
+        </button>
+        <button class="mode-btn" onclick="switchMode('artboard')">
+            <span style="margin-right: 4px;">&#128203;</span> 画板模式
+        </button>
+        <button class="mode-btn mode-btn-export" onclick="printArtboards()">
+            <span style="margin-right: 4px;">&#128424;</span> 打印导出
+        </button>
+    </div>
+
+    <!-- ========== 画板容器 ========== -->
+    <div class="artboard-container" id="artboardContainer">
+        <div class="artboard-header">
+            <h1>📝 题库 原型画板</h1>
+            <p>共 {{N}} 个画板 {{描述}}</p>
+        </div>
+
+        <div class="artboard-grid">
+
+            <!-- ==================== 分类1：页面状态 ==================== -->
+            <div class="artboard-section-title" data-title="页面状态">
+                <span>&#128196;</span>
+            </div>
+
+            <!-- 画板#1: 默认状态 -->
+            <div class="artboard" id="artboard-1">
+                <div class="artboard-label">
+                    <span>题库 默认状态</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-1', '01-{{模块}}-默认状态')">&#11015;</button>
+                    <span class="artboard-label-id">#1</span>
+                </div>
+                <div class="artboard-content tall">
+                    <div class="artboard-page-preview">
+                        <!-- TODO: 主页面内容 - 通过JS克隆交互模式内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#2: 空状态 -->
+            <div class="artboard" id="artboard-2">
+                <div class="artboard-label">
+                    <span>题库 空状态</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-2', '02-{{模块}}-空状态')">&#11015;</button>
+                    <span class="artboard-label-id">#2</span>
+                </div>
+                <div class="artboard-content tall">
+                    <div class="artboard-page-preview">
+                        <!-- TODO: 空状态页面内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#3: 加载中状态 -->
+            <div class="artboard" id="artboard-3">
+                <div class="artboard-label">
+                    <span>题库 加载中</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-3', '03-{{模块}}-加载中')">&#11015;</button>
+                    <span class="artboard-label-id">#3</span>
+                </div>
+                <div class="artboard-content tall">
+                    <div class="artboard-page-preview">
+                        <!-- TODO: 加载状态页面内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 分类2：组件状态 ==================== -->
+            <div class="artboard-section-title" data-title="组件状态">
+                <span>&#128736;</span>
+            </div>
+
+            <!-- 画板#4: 组件默认状态 -->
+            <div class="artboard" id="artboard-4">
+                <div class="artboard-label">
+                    <span>{{组件名称}} 默认</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-4', '04-{{组件}}-默认')">&#11015;</button>
+                    <span class="artboard-label-id">#4</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-component-preview">
+                        <!-- TODO: 组件内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#5: 组件悬停状态 -->
+            <div class="artboard" id="artboard-5">
+                <div class="artboard-label">
+                    <span>{{组件名称}} Hover</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-5', '05-{{组件}}-hover')">&#11015;</button>
+                    <span class="artboard-label-id">#5</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-component-preview">
+                        <!-- TODO: Hover状态组件内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 分类3：弹窗状态 ==================== -->
+            <div class="artboard-section-title" data-title="弹窗状态">
+                <span>&#128448;</span>
+            </div>
+
+            <!-- 画板#6: 操作弹窗 -->
+            <div class="artboard" id="artboard-6">
+                <div class="artboard-label">
+                    <span>操作弹窗 默认</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-6', '06-弹窗-默认')">&#11015;</button>
+                    <span class="artboard-label-id">#6</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-modal-preview">
+                        <!-- TODO: 弹窗内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#7: 操作进行中 -->
+            <div class="artboard" id="artboard-7">
+                <div class="artboard-label">
+                    <span>操作弹窗 进行中</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-7', '07-弹窗-进行中')">&#11015;</button>
+                    <span class="artboard-label-id">#7</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-modal-preview">
+                        <!-- TODO: 进行中状态弹窗内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#8: 操作成功 -->
+            <div class="artboard" id="artboard-8">
+                <div class="artboard-label">
+                    <span>操作弹窗 成功</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-8', '08-弹窗-成功')">&#11015;</button>
+                    <span class="artboard-label-id">#8</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-modal-preview">
+                        <!-- TODO: 成功状态弹窗内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== 分类4：Toast提示 ==================== -->
+            <div class="artboard-section-title" data-title="Toast提示">
+                <span>&#128172;</span>
+            </div>
+
+            <!-- 画板#9: Toast成功 -->
+            <div class="artboard" id="artboard-9">
+                <div class="artboard-label">
+                    <span>Toast 成功提示</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-9', '09-toast-成功')">&#11015;</button>
+                    <span class="artboard-label-id">#9</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-toast-preview">
+                        <!-- TODO: 成功Toast内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#10: Toast错误 -->
+            <div class="artboard" id="artboard-10">
+                <div class="artboard-label">
+                    <span>Toast 错误提示</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-10', '10-toast-错误')">&#11015;</button>
+                    <span class="artboard-label-id">#10</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-toast-preview">
+                        <!-- TODO: 错误Toast内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板#11: Toast警告 -->
+            <div class="artboard" id="artboard-11">
+                <div class="artboard-label">
+                    <span>Toast 警告提示</span>
+                    <button class="artboard-download-btn" onclick="captureArtboard('artboard-11', '11-toast-警告')">&#11015;</button>
+                    <span class="artboard-label-id">#11</span>
+                </div>
+                <div class="artboard-content">
+                    <div class="artboard-toast-preview">
+                        <!-- TODO: 警告Toast内容 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- TODO: 根据artboard-planning-guide.md添加更多分类和画板 -->
+
+        </div>
+    </div>
+
+    <!-- ========== 侧边栏导航 ========== -->
+    <div class="sidebar" id="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4C4 4 8 6 12 6C16 6 20 4 20 4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 9C4 9 8 11 12 11C16 11 20 9 20 9" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M4 14C4 14 8 12 12 12C16 12 20 14 20 14" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M4 19C4 19 8 17 12 17C16 17 20 19 20 19" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="4" cy="4" r="1.5" fill="white"/>
+                    <circle cx="20" cy="4" r="1.5" fill="white"/>
+                    <circle cx="4" cy="19" r="1.5" fill="white"/>
+                    <circle cx="20" cy="19" r="1.5" fill="white"/>
+                </svg>
+            </div>
+            <span>EVA</span>
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-label">主导航</div>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">&#127968;</span>
+                <span>控制台</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">&#128172;</span>
+                <span>Agent效果体验</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">&#128218;</span>
+                <span>知识库</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">&#10024;</span>
+                <span>Agent进化</span>
+            </a>
+            <a href="#" class="nav-item active">
+                <span class="nav-item-icon">&#128221;</span>
+                <span>题库</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">📋</span>
+                <span>会话记录</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">&#128640;</span>
+                <span>部署</span>
+            </a>
+            <a href="#" class="nav-item">
+                <span class="nav-item-icon">&#128274;</span>
+                <span>安全合规</span>
+            </a>
+        </nav>
+
+        <div class="user-profile">
+            <div class="user-avatar">硯</div>
+            <div class="user-info">
+                <div class="user-name">硯寒清</div>
+                <div class="user-company">深圳语境天择</div>
+            </div>
+            <span class="user-expand">&#9660;</span>
+        </div>
+    </div>
+
+	    <!-- ========== 主内容区域 ========== -->
+		    <div class="main" id="main">
+		        <header class="topbar">
+		            <h1 class="topbar-title">题库</h1>
+		        </header>
+
+	        <div class="content" id="mainContent">
+            <!-- ========== 交互模式内容 ========== -->
+
+	            <!-- 英雄筛选条 -->
+	            <div class="hero-filter-strip">
+	                <!-- 左：核心指标 -->
+	                <div class="hero-kpi">
+	                    <div class="hero-number" id="ovFailedCount">47</div>
+	                    <div class="hero-label">待处理</div>
+	                    <div class="hero-progress">
+	                        <div class="progress-bar" id="ovProgressBar" style="width: 87%;"></div>
+	                    </div>
+	                    <div class="hero-hint" id="ovProgressHint" title="累计数据，每日 00:00 更新" style="cursor:help;">已解决 312 / 共 359</div>
+	                </div>
+
+	                <!-- 右：筛选chip -->
+	                <div class="filter-chips">
+	                    <button class="filter-chip active" id="filter-all" onclick="Quiz.setQuestionFilter('all')">全部</button>
+	                    <button class="filter-chip filter-chip-danger" id="filter-failed" onclick="Quiz.setQuestionFilter('failed')">待处理 · <span id="ovFailedChip">47</span></button>
+	                </div>
+	            </div>
+
+	            <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; margin-bottom: 12px;">
+	                <div class="tabs bank-type-tabs" aria-label="题库类型" style="font-size: 15px;">
+	                    <button class="tab active" id="tab-official" onclick="Quiz.setBankTab('official')" style="padding: 10px 20px; font-weight: 700;">官方题库</button>
+	                    <button class="tab" id="tab-custom" onclick="Quiz.setBankTab('custom')" style="padding: 10px 20px; font-weight: 700;">自建题库</button>
+	                </div>
+
+	                <div style="display:flex; align-items:center; gap:12px; margin-left:auto;">
+	                    <div class="search-box" style="display:flex; align-items:center; gap:8px; padding:8px 14px; border:1px solid var(--eva-border); border-radius:var(--eva-radius-md); background:var(--eva-surface); width:240px; transition:all 0.2s;">
+	                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--eva-text-tertiary); flex-shrink:0;">
+	                            <circle cx="11" cy="11" r="8"></circle>
+	                            <path d="m21 21-4.35-4.35"></path>
+	                        </svg>
+	                        <input placeholder="搜索题目..." style="border:none; outline:none; background:transparent; font-size:13px; width:100%; color:var(--eva-text-primary);" />
+	                    </div>
+	                    <button class="btn btn-primary" onclick="Quiz.openModal('modal-create')">新建题库</button>
+	                </div>
+	            </div>
+
+	            <!-- 题库选择器（卡片+横向滚动，支持多题库） -->
+	            <div class="bank-picker-wrapper" style="margin-bottom:16px; position:relative;">
+	                <div class="bank-picker" id="bankPickerOfficial" style="display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; scroll-behavior:smooth;">
+	                    <div class="bank-pill" data-bank="o-all" onclick="Quiz.selectBank('o-all')" style="flex-shrink:0;">
+	                        <div class="icon" style="background:var(--eva-primary-bg); color:var(--eva-primary);">📊</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">全部</div>
+	                            <div class="meta"><span>400题</span><span>通过率 77%</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="bank-pill selected" data-bank="o1" onclick="Quiz.selectBank('o1')" style="flex-shrink:0;">
+	                        <div class="icon">💬</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">智能客服</div>
+	                            <div class="meta"><span>100题</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="bank-pill" data-bank="o2" onclick="Quiz.selectBank('o2')" style="flex-shrink:0;">
+	                        <div class="icon">📝</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">内容营销</div>
+	                            <div class="meta"><span>100题</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="bank-pill" data-bank="o3" onclick="Quiz.selectBank('o3')" style="flex-shrink:0;">
+	                        <div class="icon">💼</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">销售推广</div>
+	                            <div class="meta"><span>100题</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="bank-pill" data-bank="o4" onclick="Quiz.selectBank('o4')" style="flex-shrink:0;">
+	                        <div class="icon">📈</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">商业情报</div>
+	                            <div class="meta"><span>100题</span></div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="bank-picker-wrapper" style="margin-bottom:16px; position:relative; display:none;" id="bankPickerCustomWrapper">
+	                <div class="bank-picker" id="bankPickerCustom" style="display:flex; gap:12px; overflow-x:auto; padding-bottom:8px; scroll-behavior:smooth;">
+	                    <div class="bank-pill" data-bank="c-all" onclick="Quiz.selectBank('c-all')" style="flex-shrink:0;">
+	                        <div class="icon" style="background:var(--eva-primary-bg); color:var(--eva-primary);">📊</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">全部</div>
+	                            <div class="meta"><span>57题</span><span>通过率 68%</span></div>
+	                        </div>
+	                    </div>
+	                    <div class="bank-pill selected" data-bank="c1" onclick="Quiz.selectBank('c1')" style="flex-shrink:0; position:relative;">
+	                        <div class="icon" style="background:rgba(16,185,129,0.10); color:var(--eva-success);">📋</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">售后政策回访</div>
+	                            <div class="meta"><span>32题</span><span>自建</span></div>
+	                        </div>
+	                        <button class="bank-edit-btn" onclick="event.stopPropagation(); Quiz.openEditBankModal('c1');" title="编辑题库">✎</button>
+	                    </div>
+	                    <div class="bank-pill" data-bank="c2" onclick="Quiz.selectBank('c2')" style="flex-shrink:0; position:relative;">
+	                        <div class="icon" style="background:rgba(59,130,246,0.10); color:var(--eva-info);">📋</div>
+	                        <div style="min-width:0;">
+	                            <div class="name">产品FAQ覆盖</div>
+	                            <div class="meta"><span>25题</span><span>自建</span></div>
+	                        </div>
+	                        <button class="bank-edit-btn" onclick="event.stopPropagation(); Quiz.openEditBankModal('c2');" title="编辑题库">✎</button>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="card">
+	                <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom: 12px;">
+	                    <div>
+	                        <div style="font-weight:900; color:var(--eva-text-primary);" id="currentBankTitle">官方题库 · 智能客服</div>
+	                        <div style="margin-top:6px; font-size:12px; color:var(--eva-text-secondary);" id="currentBankDesc">按"题目"为单位展示。点击题目行，在侧边栏查看评测结果。</div>
+	                    </div>
+	                    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+	                        <button class="btn btn-secondary" id="btnAddQuestion" onclick="Quiz.showReadOnlyHint('新增题目')">新增题目</button>
+	                    </div>
+	                </div>
+
+	                <table class="question-table" aria-label="题目列表">
+	                    <thead>
+	                        <tr>
+	                            <th style="width:46%;">题目</th>
+	                            <th style="width:12%;">能力</th>
+	                            <th style="width:12%;">来源</th>
+	                            <th style="width:12%;">状态</th>
+	                            <th style="width:18%; text-align:center;">操作</th>
+	                        </tr>
+	                    </thead>
+	                    <!-- 全部官方题库视图 -->
+	                    <tbody id="questions-o-all" style="display:none;">
+	                        <tr class="status-pass" data-question="q1" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">退换货政策是什么？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-fail" data-question="q2" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">跨境订单的退换货时效如何计算？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-pass" data-question="q5" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">请给出一段新品发布的社媒文案（50字以内）</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: #3B82F6;">内容营销</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-pass" data-question="q6" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">当客户询价时，如何引导留资并推进下一步？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(139,92,246,0.10); color: #8B5CF6;">销售推广</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-fail" data-question="q7" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">请用三点总结本周竞品动态与风险</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(245,158,11,0.10); color: #F59E0B;">商业情报</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                    <tbody id="questions-o1">
+	                        <tr class="status-pass" data-question="q1" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">退换货政策是什么？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-fail" data-question="q2" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">跨境订单的退换货时效如何计算？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-fail" data-question="q3" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">是否可以承诺"100%当天退款"？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-pass" data-question="q4" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">如何处理发票开具与补开？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <tbody id="questions-o2" style="display:none;">
+	                        <tr class="status-pass" data-question="q5" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">请给出一段新品发布的社媒文案（50字以内）</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: #3B82F6;">内容营销</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <tbody id="questions-o3" style="display:none;">
+	                        <tr class="status-pass" data-question="q6" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">当客户询价时，如何引导留资并推进下一步？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(139,92,246,0.10); color: #8B5CF6;">销售推广</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <tbody id="questions-o4" style="display:none;">
+	                        <tr class="status-fail" data-question="q7" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">请用三点总结本周竞品动态与风险</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(245,158,11,0.10); color: #F59E0B;">商业情报</span></td>
+	                            <td><span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);">官方</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <!-- 全部自建题库视图 -->
+	                    <tbody id="questions-c-all" style="display:none;">
+	                        <tr class="status-fail" data-question="q8" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">用户说"我不满意"，你要怎么安抚并推进处理？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: var(--eva-info);">自建</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-pass" data-question="q9" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">请解释我们产品的计费方式（对外话术）</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: var(--eva-info);">自建</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-pass" data-question="q10" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">新用户首次咨询时，如何快速建立信任感？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: var(--eva-info);">自建</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <tbody id="questions-c1" style="display:none;">
+	                        <tr class="status-fail" data-question="q8" data-issue="gap" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">用户说"我不满意"，你要怎么安抚并推进处理？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: var(--eva-info);">自建</span></td>
+	                            <td><span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                        <tr class="status-pass" data-question="q10" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">新用户首次咨询时，如何快速建立信任感？</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: var(--eva-info);">自建</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <tbody id="questions-c2" style="display:none;">
+	                        <tr class="status-pass" data-question="q9" onclick="Quiz.openQuestion(this)">
+	                            <td>
+	                                <div class="q-title">请解释我们产品的计费方式（对外话术）</div>
+	                            </td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;">智能客服</span></td>
+	                            <td><span class="badge" style="background: rgba(59,130,246,0.10); color: var(--eva-info);">自建</span></td>
+	                            <td><span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span></td>
+	                            <td class="actions" style="text-align:center;">
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openQuestion(this.closest('tr'));" title="查看详情" style="font-size:12px; padding:4px 10px; color:var(--eva-primary);">查看</button>
+	                                <button class="btn btn-ghost" onclick="event.stopPropagation(); Quiz.openEditQuestionModal();" title="编辑题目" style="font-size:12px; padding:4px 10px; color:var(--eva-text-secondary);">编辑</button>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <!-- 空状态：自建题库为空 -->
+	                    <tbody id="questions-empty-custom" style="display:none;">
+	                        <tr>
+	                            <td colspan="6">
+	                                <div class="empty-state">
+	                                    <div class="empty-state-icon">&#128221;</div>
+	                                    <div class="empty-state-title">暂无题目</div>
+	                                    <div class="empty-state-desc">该题库还没有题目。可以通过手动添加或批量导入来创建题目。</div>
+	                                    <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+	                                        <button class="btn btn-primary" onclick="Quiz.openModal('modal-add-question')">添加题目</button>
+	                                    </div>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <!-- 空状态：搜索无结果 -->
+	                    <tbody id="questions-empty-search" style="display:none;">
+	                        <tr>
+	                            <td colspan="6">
+	                                <div class="empty-state">
+	                                    <div class="empty-state-icon">&#128269;</div>
+	                                    <div class="empty-state-title">未找到匹配题目</div>
+	                                    <div class="empty-state-desc">当前筛选条件下没有题目。尝试调整筛选条件或清除搜索词。</div>
+	                                    <button class="btn btn-secondary" onclick="Quiz.clearFilter()">清除筛选</button>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+
+	                    <!-- 空状态：无评测记录 -->
+	                    <tbody id="questions-empty-eval" style="display:none;">
+	                        <tr>
+	                            <td colspan="6">
+	                                <div class="empty-state">
+	                                    <div class="empty-state-icon">&#128202;</div>
+	                                    <div class="empty-state-title">该题库暂无题目</div>
+	                                    <div class="empty-state-desc">新建题目后，系统会自动评测。</div>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+
+	                <!-- 分页组件 -->
+	                <div class="pagination" style="display:flex; align-items:center; justify-content:space-between; padding:16px 0; border-top:1px solid var(--eva-border-light); margin-top:16px;">
+	                    <div style="font-size:13px; color:var(--eva-text-secondary);">
+	                        共 <strong style="color:var(--eva-text-primary);">100</strong> 题，每页显示
+	                        <select style="padding:4px 8px; border:1px solid var(--eva-border); border-radius:4px; font-size:13px;">
+	                            <option value="20" selected>20</option>
+	                            <option value="50">50</option>
+	                            <option value="100">100</option>
+	                        </select>
+	                        条
+	                    </div>
+	                    <div style="display:flex; align-items:center; gap:4px;">
+	                        <button class="btn btn-ghost" style="padding:6px 10px; font-size:13px;" disabled>上一页</button>
+	                        <button class="btn btn-ghost" style="padding:6px 12px; font-size:13px; background:var(--eva-primary); color:white;">1</button>
+	                        <button class="btn btn-ghost" style="padding:6px 12px; font-size:13px;">2</button>
+	                        <button class="btn btn-ghost" style="padding:6px 12px; font-size:13px;">3</button>
+	                        <button class="btn btn-ghost" style="padding:6px 12px; font-size:13px;">4</button>
+	                        <button class="btn btn-ghost" style="padding:6px 12px; font-size:13px;">5</button>
+	                        <button class="btn btn-ghost" style="padding:6px 10px; font-size:13px;">下一页</button>
+	                    </div>
+	                </div>
+	            </div>
+
+	            <!-- 题目详情侧边栏（遮罩 + 右侧滑入） -->
+	            <div class="detail-overlay" id="detailOverlay" onclick="Quiz.closeDetail()"></div>
+	            <div class="detail-panel" id="detailPanel" aria-label="题目详情">
+	                <div class="detail-header">
+	                    <div class="detail-title-row">
+	                        <div>
+	                            <div class="detail-title" id="detailQuestionTitle">跨境订单的退换货时效如何计算？</div>
+	                            <div class="detail-meta" id="detailQuestionMeta">
+	                                <span class="badge" style="background: rgba(16,185,129,0.10); color: #10B981;" id="detailAbilityBadge">智能客服</span>
+	                                <span class="badge" style="background: var(--eva-primary-bg); color: var(--eva-primary-dark);" id="detailSourceBadge">官方</span>
+	                            </div>
+	                        </div>
+	                        <button class="detail-close" onclick="Quiz.closeDetail()">✕</button>
+	                    </div>
+	                </div>
+
+	                <div class="detail-body" style="display:block;">
+	                    <!-- 状态卡片：知识缺口 -->
+	                    <div class="card" id="detailStateGap" style="box-shadow:none; border:1px solid var(--eva-border); margin-bottom:12px;">
+	                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+	                            <span style="font-size:16px;">🔴</span>
+	                            <span style="font-weight:900; color:var(--eva-error);">知识缺口</span>
+	                        </div>
+	                        <div style="font-size:13px; color:var(--eva-text-secondary); margin-bottom:12px; line-height:1.6;">
+	                            缺少必要知识支撑，建议补充资料后重新评测。
+	                        </div>
+	                        <div style="margin-bottom:12px;">
+	                            <div style="font-size:11px; color:var(--eva-text-tertiary); margin-bottom:4px;">Agent回复：</div>
+	                            <div id="detailAgentAnswerGap" style="font-size:12px; color:var(--eva-text-secondary); line-height:1.7; white-space:pre-line; padding:10px 12px; border-left:3px solid var(--eva-border); background:var(--eva-bg);">跨境订单退换货时效根据不同情况有所不同...</div>
+	                        </div>
+	                        <div style="font-size:11px; color:var(--eva-text-tertiary);">
+	                            最近评测：<span id="detailEvalTimeGap">01/20 14:32</span>
+	                        </div>
+	                    </div>
+
+	                    <!-- 状态卡片：已通过 -->
+	                    <div class="card" id="detailStatePass" style="display:none; box-shadow:none; border:1px solid var(--eva-border); margin-bottom:12px;">
+	                        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+	                            <span style="font-size:16px;">🟢</span>
+	                            <span style="font-weight:900; color:var(--eva-success);">已通过</span>
+	                        </div>
+	                        <div style="font-size:13px; color:var(--eva-text-secondary); margin-bottom:12px; line-height:1.6;">
+	                            Agent 能够正确回答此问题。
+	                        </div>
+	                        <div style="margin-bottom:12px;">
+	                            <div style="font-size:11px; color:var(--eva-text-tertiary); margin-bottom:4px;">Agent回复：</div>
+	                            <div id="detailAgentAnswerPass" style="font-size:12px; color:var(--eva-text-secondary); line-height:1.7; white-space:pre-line; padding:10px 12px; border-left:3px solid var(--eva-border); background:var(--eva-bg);">根据我们的退换货政策，您可以在收到商品后7天内申请退换货...</div>
+	                        </div>
+	                        <div style="font-size:11px; color:var(--eva-text-tertiary);">
+	                            最近评测：<span id="detailEvalTimePass">01/20 14:32</span>
+	                        </div>
+	                    </div>
+
+	                    <!-- 历史评测记录（占位区域） -->
+	                    <div class="card" id="detailHistoryCard" style="box-shadow:none; border:1px solid var(--eva-border); margin-bottom:12px;">
+	                        <div style="font-weight:900; display:flex; align-items:center; gap:6px; margin-bottom:10px;">
+	                            <span>📜</span> 历史评测记录
+	                        </div>
+	                        <div id="detailHistoryContent" style="font-size:12px; color:var(--eva-text-tertiary);">
+	                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--eva-border-light);">
+	                                <span>2026-01-20 14:32</span>
+	                                <span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span>
+	                            </div>
+	                            <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--eva-border-light);">
+	                                <span>2026-01-18 09:15</span>
+	                                <span class="badge" style="background: rgba(239,68,68,0.10); color: var(--eva-error);">✗</span>
+	                            </div>
+	                            <div style="display:flex; justify-content:space-between; padding:8px 0;">
+	                                <span>2026-01-15 16:48</span>
+	                                <span class="badge" style="background: rgba(16,185,129,0.10); color: var(--eva-success);">✓</span>
+	                            </div>
+	                        </div>
+	                        <div id="detailHistoryEmpty" style="display:none; font-size:12px; color:var(--eva-text-tertiary); text-align:center; padding:16px 0;">
+	                            题目新建时已自动评测。
+	                        </div>
+	                    </div>
+	                </div>
+
+	                <!-- 底部固定操作 -->
+	                <div id="detailFooter" style="padding:16px 20px; border-top:1px solid var(--eva-border); background:var(--eva-surface);">
+	                    <!-- 统一CTA区域：从左到右 = 导航 | 主CTA | 辅CTA | 编辑 -->
+	                    <div id="ctaArea" style="display:flex; gap:10px; align-items:center;">
+	                        <button class="btn btn-ghost" onclick="Quiz.prevQuestion()" title="上一题" style="padding:6px 10px;">▲</button>
+	                        <button class="btn btn-ghost" onclick="Quiz.nextQuestion()" title="下一题" style="padding:6px 10px;">▼</button>
+	                        <div style="flex:1;"></div>
+	                        <!-- 主CTA（根据状态切换） -->
+	                        <button id="ctaKnowledge" class="btn btn-primary" onclick="Quiz.toast('跳转到知识库（演示）')" style="display:none;">去知识库补充 →</button>
+	                        <button id="ctaEvaluate" class="btn btn-primary" onclick="Quiz.toast('开始评测（演示）')" style="display:none;">立即评测</button>
+	                        <button id="ctaPush" class="btn btn-ghost" onclick="Quiz.openPushToEvolutionModal()" style="display:none; color:var(--eva-text-secondary);">推送到Agent进化</button>
+	                        <!-- 编辑始终最右 -->
+	                        <button id="ctaEdit" class="btn btn-ghost" onclick="Quiz.openEditQuestionModal()" style="color:var(--eva-text-secondary);">编辑题目</button>
+	                    </div>
+	                </div>
+	            </div>
+
+            <!-- 新建题库弹窗 -->
+            <div class="modal-overlay" id="modal-create" onclick="Quiz.closeOnOverlay(event, 'modal-create')">
+                <div class="modal" role="dialog" aria-modal="true" aria-label="新建自建题库">
+                    <div class="modal-header">
+                        <div class="modal-title">新建自建题库</div>
+                        <button class="btn btn-ghost" onclick="Quiz.closeModal('modal-create')" style="font-size:18px; padding:4px 8px;">✕</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="padding:10px 12px; background:rgba(59,130,246,0.06); border-radius:8px; border-left:3px solid var(--eva-info); font-size:12px; color:var(--eva-text-secondary); margin-bottom:16px;">
+                            新建的题库将添加到「自建题库」中，支持编辑和导入题目。
+                        </div>
+                        <div class="field">
+                            <label>题库名称</label>
+                            <input id="createBankName" placeholder="例如：售后政策回访" oninput="Quiz.validateCreateBank()" />
+                        </div>
+                        <div class="field">
+                            <label>描述</label>
+                            <textarea placeholder="用于什么评测？覆盖哪些业务场景？"></textarea>
+                        </div>
+                        <div class="field">
+                            <label>覆盖能力 <span style="color:var(--eva-error);">*</span></label>
+                            <div style="font-size:12px; color:var(--eva-text-tertiary); margin-bottom:8px;">至少选择一个能力，支持多选</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:8px;" id="createBankAbilities">
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="ability" value="智能客服" onchange="Quiz.validateCreateBank()" style="width:16px; height:16px;" />
+                                    <span>💬 智能客服</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="ability" value="内容营销" onchange="Quiz.validateCreateBank()" style="width:16px; height:16px;" />
+                                    <span>📝 内容营销</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="ability" value="销售推广" onchange="Quiz.validateCreateBank()" style="width:16px; height:16px;" />
+                                    <span>💼 销售推广</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="ability" value="商业情报" onchange="Quiz.validateCreateBank()" style="width:16px; height:16px;" />
+                                    <span>📈 商业情报</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-create')">取消</button>
+                        <button class="btn btn-primary" id="btnCreateBank" disabled onclick="Quiz.toast('题库已创建'); Quiz.closeModal('modal-create');">创建</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 新建题目弹窗（融合导入功能） -->
+            <div class="modal-overlay" id="modal-add-question" onclick="Quiz.closeOnOverlay(event, 'modal-add-question')">
+                <div class="modal" role="dialog" aria-modal="true" aria-label="新建题目" style="max-width:560px;">
+                    <div class="modal-header">
+                        <div class="modal-title">新建题目</div>
+                        <button class="btn btn-ghost" onclick="Quiz.closeModal('modal-add-question')" style="font-size:18px; padding:4px 8px;">✕</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="tabs" aria-label="添加方式" style="margin-bottom:16px;">
+                            <button class="tab active" id="aq-manual" onclick="Quiz.setAddQuestionTab('manual')">手动添加</button>
+                            <button class="tab" id="aq-import" onclick="Quiz.setAddQuestionTab('import')">批量导入</button>
+                        </div>
+
+                        <!-- 手动添加面板 -->
+                        <div id="addQuestionManualPanel" style="display:flex; flex-direction:column; gap:16px;">
+                            <div class="field" style="margin-bottom:0;">
+                                <label style="margin-bottom:8px; display:block;">添加到题库</label>
+                                <select id="addQuestionBank" style="width:100%; padding:10px 12px;">
+                                    <option value="c1" selected>售后政策回访（当前）</option>
+                                    <option value="c2">产品FAQ覆盖</option>
+                                </select>
+                            </div>
+                            <div class="field" style="margin-bottom:0;">
+                                <label style="margin-bottom:8px; display:block;">题目内容 <span style="color:var(--eva-error);">*</span></label>
+                                <textarea id="addQuestionContent" placeholder="输入题目内容" style="min-height:120px; width:100%; padding:12px;" oninput="Quiz.validateAddQuestion()"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- 批量导入面板 -->
+                        <div id="addQuestionImportPanel" style="display:none;">
+                            <div class="field">
+                                <label>导入到题库</label>
+                                <select id="importQuestionBank">
+                                    <option value="c1" selected>售后政策回访（当前）</option>
+                                    <option value="c2">产品FAQ覆盖</option>
+                                </select>
+                            </div>
+                            <div class="tabs" aria-label="导入方式" style="margin-bottom:12px;">
+                                <button class="tab active" id="aq-file" onclick="Quiz.setImportTab('file')">上传 Excel/CSV</button>
+                                <button class="tab" id="aq-paste" onclick="Quiz.setImportTab('paste')">粘贴 JSON/文本</button>
+                            </div>
+                            <div id="importFilePanel">
+                                <div style="border:2px dashed var(--eva-border); border-radius:12px; padding:32px; text-align:center; background:var(--eva-bg); cursor:pointer;" onclick="document.getElementById('importFileInput').click()">
+                                    <div style="font-size:32px; margin-bottom:8px;">📁</div>
+                                    <div style="font-weight:600; margin-bottom:4px;">点击或拖拽文件到此处</div>
+                                    <div style="font-size:12px; color:var(--eva-text-tertiary);">支持 .xlsx / .csv，每行一个题目</div>
+                                    <input type="file" id="importFileInput" accept=".xlsx,.csv" style="display:none;" />
+                                </div>
+                                <div style="margin-top:12px; font-size:12px; color:var(--eva-text-tertiary);">
+                                    📥 <a href="#" style="color:var(--eva-primary);">下载导入模板</a>
+                                </div>
+                            </div>
+                            <div id="importPastePanel" style="display:none;">
+                                <textarea placeholder="粘贴 JSON 数组或每行一个题目的文本" style="min-height:150px; width:100%; font-family:monospace; font-size:13px; padding:12px; box-sizing:border-box;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-add-question')">取消</button>
+                        <button class="btn btn-primary" id="btnAddQuestionSubmit" disabled onclick="Quiz.toast('题目已添加'); Quiz.closeModal('modal-add-question');">添加题目</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 编辑题库弹窗（P1：自建题库支持编辑） -->
+            <div class="modal-overlay" id="modal-edit-bank" onclick="Quiz.closeOnOverlay(event, 'modal-edit-bank')">
+                <div class="modal" role="dialog" aria-modal="true" aria-label="编辑题库">
+                    <div class="modal-header">
+                        <div class="modal-title">编辑题库</div>
+                        <button class="btn btn-ghost" onclick="Quiz.closeModal('modal-edit-bank')" style="font-size:18px; padding:4px 8px;">✕</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="field">
+                            <label>题库名称</label>
+                            <input id="editBankName" value="售后政策回访" />
+                        </div>
+                        <div class="field">
+                            <label>描述</label>
+                            <textarea id="editBankDesc">用于评测售后政策相关问题的回答质量。</textarea>
+                        </div>
+                        <div class="field">
+                            <label>覆盖能力 <span style="color:var(--eva-error);">*</span></label>
+                            <div style="font-size:12px; color:var(--eva-text-tertiary); margin-bottom:8px;">至少选择一个能力，支持多选</div>
+                            <div style="display:flex; flex-wrap:wrap; gap:8px;" id="editBankAbilities">
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="editAbility" value="智能客服" checked style="width:16px; height:16px;" />
+                                    <span>💬 智能客服</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="editAbility" value="内容营销" style="width:16px; height:16px;" />
+                                    <span>📝 内容营销</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="editAbility" value="销售推广" style="width:16px; height:16px;" />
+                                    <span>💼 销售推广</span>
+                                </label>
+                                <label style="display:flex; align-items:center; gap:6px; padding:8px 12px; border:1px solid var(--eva-border); border-radius:8px; cursor:pointer; font-size:13px; transition:all 0.15s;" class="ability-checkbox">
+                                    <input type="checkbox" name="editAbility" value="商业情报" style="width:16px; height:16px;" />
+                                    <span>📈 商业情报</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="justify-content:space-between;">
+                        <button class="btn btn-ghost" style="color:var(--eva-error);" onclick="Quiz.toast('题库已删除'); Quiz.closeModal('modal-edit-bank');">删除题库</button>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-edit-bank')">取消</button>
+                            <button class="btn btn-primary" onclick="Quiz.toast('题库已保存'); Quiz.closeModal('modal-edit-bank');">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推送到Agent进化弹窗 -->
+            <div class="modal-overlay" id="modal-push-evolution" onclick="Quiz.closeOnOverlay(event, 'modal-push-evolution')">
+                <div class="modal" role="dialog" aria-modal="true" aria-label="推送到Agent进化" style="max-width:420px;">
+                    <div class="modal-header">
+                        <div class="modal-title">推送到Agent进化</div>
+                        <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-push-evolution')">关闭</button>
+                    </div>
+                    <div class="modal-body">
+                        <div style="font-size:13px; color:var(--eva-text-secondary); margin-bottom:16px;">
+                            将此题推送到指定能力的进化队列，等待调优处理。
+                        </div>
+                        <div class="field">
+                            <label>选择目标能力</label>
+                            <select id="pushEvolutionAbility" style="width:100%;">
+                                <option value="智能客服">智能客服</option>
+                                <option value="内容营销">内容营销</option>
+                                <option value="销售推广">销售推广</option>
+                                <option value="商业情报">商业情报</option>
+                            </select>
+                        </div>
+                        <div style="padding:12px; background:rgba(99,102,241,0.06); border-radius:8px; border-left:3px solid var(--eva-primary); font-size:12px; color:var(--eva-text-secondary); margin-top:12px;">
+                            推送后，此题将出现在「Agent进化」模块的待调优队列中。
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-push-evolution')">取消</button>
+                        <button class="btn btn-primary" onclick="Quiz.toast('已推送到智能客服进化队列'); Quiz.closeModal('modal-push-evolution');">确认推送</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 编辑题目弹窗（仅自建题可用） -->
+            <div class="modal-overlay" id="modal-edit-question" onclick="Quiz.closeOnOverlay(event, 'modal-edit-question')">
+                <div class="modal" role="dialog" aria-modal="true" aria-label="编辑题目" style="max-width:560px;">
+                    <div class="modal-header">
+                        <div class="modal-title">编辑题目</div>
+                        <button class="btn btn-ghost" onclick="Quiz.closeModal('modal-edit-question')" style="font-size:18px; padding:4px 8px;">✕</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="field">
+                            <label>题目内容 <span style="color:var(--eva-error);">*</span></label>
+                            <textarea id="editQuestionTitle" rows="3" placeholder="输入题目内容">用户说"我不满意"，你要怎么安抚并推进处理？</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="justify-content:space-between;">
+                        <button class="btn btn-ghost" style="color:var(--eva-error);" onclick="Quiz.confirmDeleteQuestion()">删除题目</button>
+                        <div style="display:flex; gap:10px;">
+                            <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-edit-question')">取消</button>
+                            <button class="btn btn-primary" onclick="Quiz.toast('题目已保存'); Quiz.closeModal('modal-edit-question');">保存</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 删除确认弹窗 -->
+            <div class="modal-overlay" id="modal-delete-confirm" onclick="Quiz.closeOnOverlay(event, 'modal-delete-confirm')">
+                <div class="modal" role="dialog" aria-modal="true" aria-label="确认删除" style="max-width:360px;">
+                    <div class="modal-header">
+                        <div class="modal-title">确认删除</div>
+                        <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-delete-confirm')">关闭</button>
+                    </div>
+                    <div class="modal-body" style="text-align:center; padding:24px;">
+                        <div style="font-size:32px; margin-bottom:12px;">⚠️</div>
+                        <div style="font-size:14px; color:var(--eva-text-primary); font-weight:600; margin-bottom:8px;">确定要删除这道题目吗？</div>
+                        <div style="font-size:13px; color:var(--eva-text-secondary);">删除后无法恢复，相关的评测记录也会一并删除。</div>
+                    </div>
+                    <div class="modal-footer" style="justify-content:center;">
+                        <button class="btn btn-secondary" onclick="Quiz.closeModal('modal-delete-confirm')">取消</button>
+                        <button class="btn btn-primary" style="background:var(--eva-error);" onclick="Quiz.toast('题目已删除'); Quiz.closeModal('modal-delete-confirm'); Quiz.closeModal('modal-edit-question'); Quiz.closeDetailPanel();">确认删除</button>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const Quiz = {
+                    state: {
+                        bankTab: 'official',
+                        bankId: 'o1',
+                        filter: 'all',
+                        currentQuestionSource: 'official', // 当前题目来源
+                    },
+                    // 打开推送到Agent进化弹窗
+                    openPushToEvolutionModal() {
+                        Quiz.openModal('modal-push-evolution');
+                    },
+                    // 打开编辑题目弹窗
+                    openEditQuestionModal() {
+                        Quiz.openModal('modal-edit-question');
+                    },
+                    // 确认删除题目
+                    confirmDeleteQuestion() {
+                        Quiz.openModal('modal-delete-confirm');
+                    },
+                    // 验证新建题库表单
+                    validateCreateBank() {
+                        const nameInput = document.getElementById('createBankName');
+                        const checkboxes = document.querySelectorAll('#createBankAbilities input[type="checkbox"]');
+                        const submitBtn = document.getElementById('btnCreateBank');
+                        const hasName = nameInput && nameInput.value.trim().length > 0;
+                        const hasAbility = Array.from(checkboxes).some(cb => cb.checked);
+                        if (submitBtn) submitBtn.disabled = !(hasName && hasAbility);
+                    },
+                    // 验证新建题目表单
+                    validateAddQuestion() {
+                        const contentInput = document.getElementById('addQuestionContent');
+                        const submitBtn = document.getElementById('btnAddQuestionSubmit');
+                        const hasContent = contentInput && contentInput.value.trim().length > 0;
+                        if (submitBtn) submitBtn.disabled = !hasContent;
+                    },
+                    // AI 生成评测要点（演示）
+                    generateCriteria() {
+                        const contentInput = document.getElementById('addQuestionContent');
+                        const criteriaInput = document.getElementById('addQuestionCriteria');
+                        if (!contentInput || !contentInput.value.trim()) {
+                            Quiz.toast('请先输入题目内容');
+                            return;
+                        }
+                        // 演示：模拟 AI 生成的评测要点
+                        const demoCriteria = `✓ 回答需准确覆盖核心要点
+✓ 语言表达清晰、专业
+✓ 给出可操作的指引或建议
+✗ 不应编造不存在的政策或信息
+✗ 不应使用模糊或推诿的措辞`;
+                        if (criteriaInput) {
+                            criteriaInput.value = demoCriteria;
+                            Quiz.toast('AI 已生成评测要点，可继续编辑');
+                        }
+                    },
+                    // 打开编辑题库弹窗
+                    openEditBankModal(bankId) {
+                        Quiz.openModal('modal-edit-bank');
+                    },
+                    // 关闭详情面板
+                    closeDetailPanel() {
+                        const overlay = document.getElementById('detailOverlay');
+                        const panel = document.getElementById('detailPanel');
+                        if (overlay) overlay.classList.remove('open');
+                        if (panel) panel.classList.remove('open');
+                    },
+                    // 更新底部CTA显示（根据题目状态）
+                    updateFooterCTA(source, statusTone) {
+                        const ctaKnowledge = document.getElementById('ctaKnowledge');
+                        const ctaEvaluate = document.getElementById('ctaEvaluate');
+                        const ctaEdit = document.getElementById('ctaEdit');
+                        const ctaPush = document.getElementById('ctaPush');
+
+                        Quiz.state.currentQuestionSource = source === '自建' ? 'custom' : 'official';
+
+                        // 隐藏所有主CTA，重置样式
+                        if (ctaKnowledge) ctaKnowledge.style.display = 'none';
+                        if (ctaEvaluate) ctaEvaluate.style.display = 'none';
+                        if (ctaPush) {
+                            ctaPush.style.display = 'none';
+                            ctaPush.className = 'btn btn-ghost';
+                            ctaPush.style.color = 'var(--eva-text-secondary)';
+                        }
+
+                        // 官方题库只读：隐藏编辑按钮
+                        if (ctaEdit) ctaEdit.style.display = source === '官方' ? 'none' : '';
+
+                        // 根据状态显示对应CTA
+                        if (statusTone === 'error') {
+                            // 知识缺口：主CTA"去知识库补充"，显示"推送到Agent进化"（弱化）
+                            if (ctaKnowledge) ctaKnowledge.style.display = '';
+                            if (ctaPush) ctaPush.style.display = '';
+                        } else if (statusTone === 'pending') {
+                            // 待评测：主CTA"立即评测"，显示"推送到Agent进化"（弱化）
+                            if (ctaEvaluate) ctaEvaluate.style.display = '';
+                            if (ctaPush) ctaPush.style.display = '';
+                        } else if (statusTone === 'success') {
+                            // 已通过：主CTA"推送到Agent进化"（强调）
+                            if (ctaPush) {
+                                ctaPush.style.display = '';
+                                ctaPush.className = 'btn btn-primary';
+                                ctaPush.style.color = '';
+                            }
+                        }
+                    },
+                    setBankTab(tab) {
+                        Quiz.state.bankTab = tab;
+                        const isOfficial = tab === 'official';
+                        document.getElementById('tab-official').classList.toggle('active', isOfficial);
+                        document.getElementById('tab-custom').classList.toggle('active', !isOfficial);
+
+                        // 切换卡片选择器显示
+                        const officialPicker = document.getElementById('bankPickerOfficial');
+                        const customWrapper = document.getElementById('bankPickerCustomWrapper');
+                        if (officialPicker) officialPicker.parentElement.style.display = isOfficial ? 'block' : 'none';
+                        if (customWrapper) customWrapper.style.display = isOfficial ? 'none' : 'block';
+
+                        // 官方题库Tab隐藏"新增题目"按钮，自建题库Tab显示
+                        const addBtn = document.getElementById('btnAddQuestion');
+                        if (addBtn) addBtn.style.display = isOfficial ? 'none' : '';
+
+                        // 官方题库只读：隐藏列表行的编辑按钮
+                        document.querySelectorAll('.question-table tbody[id^="questions-o"] .actions button[title="编辑题目"]').forEach(btn => {
+                            btn.style.display = 'none';
+                        });
+                        document.querySelectorAll('.question-table tbody[id^="questions-c"] .actions button[title="编辑题目"]').forEach(btn => {
+                            btn.style.display = '';
+                        });
+
+                        const defaultBank = isOfficial ? 'o1' : 'c1';
+                        Quiz.selectBank(defaultBank);
+                    },
+		                    setQuestionFilter(filter, subtype) {
+		                        // 如果传入subtype（如gap），用subtype作为实际筛选条件
+		                        const actualFilter = subtype || filter;
+		                        Quiz.state.filter = actualFilter;
+
+		                        document.getElementById('filter-all').classList.toggle('active', actualFilter === 'all');
+		                        document.getElementById('filter-failed').classList.toggle('active', actualFilter === 'failed' || actualFilter === 'gap');
+		                        document.getElementById('filter-pending').classList.toggle('active', actualFilter === 'pending');
+
+		                        Quiz.applyQuestionFilter();
+		                        Quiz.refreshOverview();
+		                    },
+	                    getCurrentTableRows() {
+	                        const tbody = document.getElementById('questions-' + Quiz.state.bankId);
+	                        if (!tbody) return [];
+	                        return Array.from(tbody.querySelectorAll('tr[data-question]'));
+	                    },
+	                    applyQuestionFilter() {
+	                        const filter = Quiz.state.filter;
+	                        const rows = Quiz.getCurrentTableRows();
+	                        rows.forEach((tr) => {
+	                            const isFail = tr.classList.contains('status-fail');
+	                            const isPending = tr.classList.contains('status-pending');
+	                            const issue = tr.getAttribute('data-issue'); // gap
+
+	                            let visible = true;
+	                            if (filter === 'failed') visible = isFail;
+	                            if (filter === 'pending') visible = isPending;
+	                            if (filter === 'gap') visible = isFail && issue === 'gap';
+
+	                            tr.style.display = visible ? '' : 'none';
+	                        });
+	                    },
+		                    refreshOverview() {
+		                        // 使用固定的演示数据（原型展示用）
+		                        const demoData = {
+		                            failed: 47,      // 待处理
+		                            passed: 312,     // 已解决
+		                            total: 359       // 共计
+		                        };
+
+		                        // 英雄数字
+		                        const failedCountEl = document.getElementById('ovFailedCount');
+		                        if (failedCountEl) failedCountEl.textContent = demoData.failed;
+
+		                        // 筛选chip数字
+		                        const failedChipEl = document.getElementById('ovFailedChip');
+		                        if (failedChipEl) failedChipEl.textContent = demoData.failed;
+
+		                        // 进度条（已解决 / 总问题）
+		                        const progressBar = document.getElementById('ovProgressBar');
+		                        const progressHint = document.getElementById('ovProgressHint');
+		                        const progressPct = Math.round((demoData.passed / demoData.total) * 100);
+		                        if (progressBar) progressBar.style.width = progressPct + '%';
+		                        if (progressHint) progressHint.textContent = `已解决 ${demoData.passed} / 共 ${demoData.total}`;
+		                    },
+	                    selectBank(bankId) {
+	                        Quiz.state.bankId = bankId;
+	                        const isOfficial = bankId.startsWith('o');
+	                        const isAllView = bankId === 'o-all' || bankId === 'c-all';
+
+                        const picker = document.getElementById(isOfficial ? 'bankPickerOfficial' : 'bankPickerCustom');
+                        picker?.querySelectorAll('.bank-pill').forEach((pill) => {
+                            pill.classList.toggle('selected', pill.getAttribute('data-bank') === bankId);
+                        });
+
+                        document.querySelectorAll('tbody[id^="questions-"]').forEach((tb) => {
+                            tb.style.display = tb.id === ('questions-' + bankId) ? '' : 'none';
+                        });
+
+                        const banks = {
+                            'o-all': { title: '官方题库 · 全部', desc: '查看所有官方题库的题目汇总，覆盖四大能力维度。', canEdit: false },
+                            o1: { title: '官方题库 · 智能客服', desc: '涵盖退换货、投诉处理、情绪安抚等典型客服场景。', canEdit: false },
+                            o2: { title: '官方题库 · 内容营销', desc: '涵盖社媒文案、营销话术、创意表达等内容创作场景。', canEdit: false },
+                            o3: { title: '官方题库 · 销售推广', desc: '涵盖询价应对、留资引导、异议处理等销售转化场景。', canEdit: false },
+                            o4: { title: '官方题库 · 商业情报', desc: '涵盖竞品分析、市场洞察、风险识别等情报分析场景。', canEdit: false },
+                            'c-all': { title: '自建题库 · 全部', desc: '查看所有自建题库的题目汇总。', canEdit: true },
+                            c1: { title: '自建题库 · 售后政策回访', desc: '用于评测售后政策相关问题的回答质量。', canEdit: true },
+                            c2: { title: '自建题库 · 产品FAQ覆盖', desc: '覆盖产品常见问题的标准回答。', canEdit: true },
+                        };
+
+                        const data = banks[bankId] || banks.o1;
+                        document.getElementById('currentBankTitle').textContent = data.title;
+                        document.getElementById('currentBankDesc').textContent = data.desc;
+
+                        // 自建题库时显示新增按钮，官方题库时隐藏
+                        const addBtn = document.getElementById('btnAddQuestion');
+	                        if (data.canEdit) {
+	                            addBtn.style.display = '';
+	                            addBtn.onclick = () => Quiz.openModal('modal-add-question');
+	                        } else {
+	                            addBtn.style.display = 'none';
+	                        }
+
+	                        Quiz.applyQuestionFilter();
+	                        Quiz.refreshOverview();
+
+	                        Quiz.closeDetail();
+	                    },
+                    setAddQuestionTab(tab) {
+                        const isManual = tab === 'manual';
+                        document.getElementById('aq-manual').classList.toggle('active', isManual);
+                        document.getElementById('aq-import').classList.toggle('active', !isManual);
+                        document.getElementById('addQuestionManualPanel').style.display = isManual ? '' : 'none';
+                        document.getElementById('addQuestionImportPanel').style.display = isManual ? 'none' : '';
+                        // 更新按钮文本
+                        const btn = document.getElementById('btnAddQuestionSubmit');
+                        if (btn) btn.textContent = isManual ? '添加题目' : '开始导入';
+                    },
+                    setImportTab(tab) {
+                        const isFile = tab === 'file';
+                        document.getElementById('aq-file').classList.toggle('active', isFile);
+                        document.getElementById('aq-paste').classList.toggle('active', !isFile);
+                        document.getElementById('importFilePanel').style.display = isFile ? '' : 'none';
+                        document.getElementById('importPastePanel').style.display = isFile ? 'none' : '';
+                    },
+                    openQuestion(row) {
+                        const questionId = row.getAttribute('data-question');
+                        document.querySelectorAll('.question-table tbody tr').forEach((tr) => tr.classList.remove('selected'));
+                        row.classList.add('selected');
+
+                        document.getElementById('detailOverlay').classList.add('open');
+                        document.getElementById('detailPanel').classList.add('open');
+
+                        const bankId = Quiz.state.bankId;
+                        const isOfficial = bankId.startsWith('o');
+
+                        const questions = {
+                            q1: { title: '退换货政策是什么？', ability: '智能客服', source: '官方', status: '通过', statusTone: 'success', issueType: null, agentAnswer: '根据我们的退换货政策，您可以在收到商品后7天内申请退换货。商品需保持原包装完好...', criteria: ['✓ 明确说明退换范围和时限', '✓ 提及退换条件和流程', '✓ 给出操作指引'] },
+                            q2: { title: '跨境订单的退换货时效如何计算？', ability: '智能客服', source: '官方', status: '不通过', statusTone: 'error', issueType: '知识缺口', agentAnswer: '跨境订单退换货时效根据不同情况有所不同。一般来说，从签收之日起7天内可以申请退换货...', criteria: ['✓ 明确说明时效口径（从签收/支付开始计算）', '✓ 说明跨境不同地区/仓配方式的差异', '✓ 提及特殊商品/促销活动的例外情况', '✗ 不应编造不存在的政策条款'] },
+                            q3: { title: '是否可以承诺"100%当天退款"？', ability: '智能客服', source: '官方', status: '不通过', statusTone: 'error', issueType: '知识缺口', agentAnswer: '是的，我们可以承诺当天退款...（错误示例）', criteria: ['✓ 应拒绝做不智能客服承诺', '✓ 说明正常退款流程与预计时长', '✓ 必要时引导人工核验', '✗ 不应随意承诺无法保证的时效'] },
+                            q4: { title: '如何处理发票开具与补开？', ability: '智能客服', source: '官方', status: '通过', statusTone: 'success', issueType: null, agentAnswer: '发票开具需要您提供公司名称、税号等开票信息。普通发票一般在3个工作日内开具，增值税专用发票需5个工作日。如需补开，请在订单完成后30天内提交申请...', criteria: ['✓ 说明开票信息要求', '✓ 提及开票周期', '✓ 解释补开条件与流程'] },
+                            q5: { title: '请给出一段新品发布的社媒文案（50字以内）', ability: '内容营销', source: '官方', status: '通过', statusTone: 'success', issueType: null, agentAnswer: '【新品震撼登场】全新AI助手，让你的工作效率翻倍！智能对话+文档处理，48字精准呈现核心价值。', criteria: ['✓ 控制字数在50字以内', '✓ 突出产品卖点', '✗ 不应夸大承诺'] },
+                            q6: { title: '当客户询价时，如何引导留资并推进下一步？', ability: '销售推广', source: '官方', status: '通过', statusTone: 'success', issueType: null, agentAnswer: '感谢您的咨询！我们这款产品的价格区间是...您方便留下联系方式吗？', criteria: ['✓ 确认客户需求', '✓ 给出价值点', '✓ 提出下一步行动并引导留资'] },
+                            q7: { title: '请用三点总结本周竞品动态与风险', ability: '商业情报', source: '官方', status: '不通过', statusTone: 'error', issueType: '知识缺口', agentAnswer: '本周竞品有一些新动态，我来给您总结一下...（未按三点结构输出）', criteria: ['✓ 按三点结构化呈现', '✓ 标注风险等级', '✓ 给出建议动作'] },
+                            q8: { title: '用户说"我不满意"，你要怎么安抚并推进处理？', ability: '智能客服', source: '自建', status: '不通过', statusTone: 'error', issueType: '知识缺口', agentAnswer: '好的，我帮您查一下订单情况。请问您的订单号是多少？', criteria: ['✓ 先共情与致歉', '✓ 确认诉求与订单信息', '✓ 给出处理路径与时限'] },
+                            q9: { title: '请解释我们产品的计费方式（对外话术）', ability: '智能客服', source: '自建', status: '通过', statusTone: 'success', issueType: null, agentAnswer: '我们的计费方式很简单，主要分为三个套餐...', criteria: ['✓ 用非技术语言解释', '✓ 说明计费项和套餐差异', '✓ 覆盖常见问题'] },
+                            q10: { title: '新用户首次咨询时，如何快速建立信任感？', ability: '智能客服', source: '自建', status: '通过', statusTone: 'success', issueType: null, agentAnswer: '您好！感谢选择我们的服务。我是您的专属客服助手，已为5000+企业客户提供服务。请问您今天遇到了什么问题？我会第一时间为您解决。', criteria: ['✓ 礼貌问候并表达感谢', '✓ 展示专业性和服务量', '✓ 主动询问需求'] },
+                        };
+
+                        const data = questions[questionId] || questions.q2;
+
+                        // 更新标题
+                        document.getElementById('detailQuestionTitle').textContent = data.title;
+
+                        // 更新状态徽章
+                        const abilityBadge = document.getElementById('detailAbilityBadge');
+                        abilityBadge.textContent = data.ability;
+                        abilityBadge.style.cssText = data.ability === '智能客服'
+                            ? 'background: rgba(245,158,11,0.10); color: var(--eva-warning);'
+                            : 'background: rgba(16,185,129,0.10); color: var(--eva-success);';
+
+                        const sourceBadge = document.getElementById('detailSourceBadge');
+                        sourceBadge.textContent = data.source;
+                        sourceBadge.style.cssText = data.source === '官方'
+                            ? 'background: var(--eva-primary-bg); color: var(--eva-primary-dark);'
+                            : 'background: rgba(59,130,246,0.10); color: var(--eva-info);';
+
+                        const statusStyles = {
+                            success: 'background: rgba(16,185,129,0.10); color: var(--eva-success);',
+                            error: 'background: rgba(239,68,68,0.10); color: var(--eva-error);',
+                        };
+
+                        // 更新评测结果
+                        const resultBadge = document.getElementById('detailResultBadge');
+                        if (resultBadge) {
+                            resultBadge.textContent = data.status;
+                            resultBadge.style.cssText = statusStyles[data.statusTone] || statusStyles.success;
+                        }
+
+                        // 更新状态卡片显示（根据statusTone切换）
+                        const stateGap = document.getElementById('detailStateGap');
+                        const statePass = document.getElementById('detailStatePass');
+
+                        // 隐藏所有状态卡片
+                        if (stateGap) stateGap.style.display = 'none';
+                        if (statePass) statePass.style.display = 'none';
+
+                        // 根据状态显示对应卡片并填充内容
+                        if (data.statusTone === 'error') {
+                            if (stateGap) {
+                                stateGap.style.display = '';
+                                document.getElementById('detailAgentAnswerGap').textContent = data.agentAnswer;
+                                document.getElementById('detailEvalTimeGap').textContent = '01/20 14:32';
+                            }
+                        } else if (data.statusTone === 'success') {
+                            if (statePass) {
+                                statePass.style.display = '';
+                                document.getElementById('detailAgentAnswerPass').textContent = data.agentAnswer;
+                                document.getElementById('detailEvalTimePass').textContent = '01/20 14:32';
+                            }
+                        }
+
+                        // 更新历史评测记录显示
+                        const historyContent = document.getElementById('detailHistoryContent');
+                        const historyEmpty = document.getElementById('detailHistoryEmpty');
+                        if (historyContent && historyEmpty) {
+                            if (data.noHistory) {
+                                historyContent.style.display = 'none';
+                                historyEmpty.style.display = '';
+                            } else {
+                                historyContent.style.display = '';
+                                historyEmpty.style.display = 'none';
+                            }
+                        }
+
+                        // 更新底部CTA显示（根据题目来源）
+                        Quiz.updateFooterCTA(data.source, data.statusTone);
+                    },
+                    closeDetail() {
+                        document.getElementById('detailOverlay').classList.remove('open');
+                        document.getElementById('detailPanel').classList.remove('open');
+                        document.querySelectorAll('.question-table tbody tr').forEach((tr) => tr.classList.remove('selected'));
+                    },
+                    // 获取当前可见的题目列表
+                    getVisibleRows() {
+                        const activeTbody = document.querySelector('.question-table tbody[style*="display: table"]') ||
+                                           document.querySelector('.question-table tbody:not([style*="display:none"]):not([style*="display: none"])');
+                        if (!activeTbody) return [];
+                        return Array.from(activeTbody.querySelectorAll('tr'));
+                    },
+                    // 上一题
+                    prevQuestion() {
+                        const rows = Quiz.getVisibleRows();
+                        if (rows.length === 0) return;
+                        const selectedRow = document.querySelector('.question-table tbody tr.selected');
+                        let currentIndex = selectedRow ? rows.indexOf(selectedRow) : 0;
+                        const prevIndex = Math.max(0, currentIndex - 1);
+                        if (rows[prevIndex]) {
+                            Quiz.openQuestion(rows[prevIndex]);
+                        }
+                    },
+                    // 下一题
+                    nextQuestion() {
+                        const rows = Quiz.getVisibleRows();
+                        if (rows.length === 0) return;
+                        const selectedRow = document.querySelector('.question-table tbody tr.selected');
+                        let currentIndex = selectedRow ? rows.indexOf(selectedRow) : -1;
+                        const nextIndex = Math.min(rows.length - 1, currentIndex + 1);
+                        if (rows[nextIndex]) {
+                            Quiz.openQuestion(rows[nextIndex]);
+                        }
+                    },
+                    toggleAcc(id) {
+                        const el = document.getElementById(id);
+                        if (!el) return;
+                        el.classList.toggle('active');
+                    },
+                    openModal(id) {
+                        document.getElementById(id)?.classList.add('active');
+                    },
+                    closeModal(id) {
+                        document.getElementById(id)?.classList.remove('active');
+                    },
+                    closeOnOverlay(event, id) {
+                        if (event.target?.id === id) {
+                            Quiz.closeModal(id);
+                        }
+                    },
+                    toast(type) {
+                        const mapping = {
+                            success: '保存成功',
+                            error: '操作失败，请重试',
+                            warning: '该操作不可撤销',
+                        };
+                        alert(mapping[type] || '已完成');
+                    },
+                    toggleErrorAnalysis() {
+                        const panel = document.getElementById('errorAnalysisPanel');
+                        const icon = document.getElementById('errorAnalysisIcon');
+                        if (!panel) return;
+                        const isOpen = panel.style.display !== 'none';
+                        panel.style.display = isOpen ? 'none' : 'flex';
+                        if (icon) icon.innerHTML = isOpen ? '展开 &#9660;' : '收起 &#9650;';
+                    },
+                    showReadOnlyHint(action) {
+                        const isOfficial = Quiz.state.bankId.startsWith('o');
+                        if (isOfficial) {
+                            alert(`官方题库不可直接${action}。\n\n如需修改，请先将题目「复制到自建题库」。`);
+                        }
+                    },
+                    // ========== 评测流程 3 步控制 ==========
+                    evalTimer: null,
+                    startEvaluation() {
+                        // Step 1 → Step 2
+                        document.getElementById('eval-step-1').style.display = 'none';
+                        document.getElementById('eval-step-2').style.display = '';
+
+                        // 模拟进度动画
+                        let progress = 0;
+                        const total = 100;
+                        const ring = document.getElementById('evalProgressRing');
+                        const percentEl = document.getElementById('evalProgressPercent');
+                        const statusEl = document.getElementById('evalProgressStatus');
+                        const circumference = 339.3; // 2 * PI * 54
+
+                        Quiz.evalTimer = setInterval(() => {
+                            progress += Math.floor(Math.random() * 8) + 3; // 随机增加 3-10
+                            if (progress >= total) {
+                                progress = total;
+                                clearInterval(Quiz.evalTimer);
+                                Quiz.evalTimer = null;
+                                // 延迟后进入 Step 3
+                                setTimeout(() => {
+                                    document.getElementById('eval-step-2').style.display = 'none';
+                                    document.getElementById('eval-step-3').style.display = '';
+                                }, 500);
+                            }
+
+                            // 更新圆环
+                            const offset = circumference - (progress / total) * circumference;
+                            ring.style.strokeDashoffset = offset;
+
+                            // 更新文字
+                            percentEl.textContent = progress;
+                            statusEl.textContent = `正在评测 ${progress}/${total}...`;
+                        }, 150);
+                    },
+                    resetEvalModal() {
+                        // 清理定时器
+                        if (Quiz.evalTimer) {
+                            clearInterval(Quiz.evalTimer);
+                            Quiz.evalTimer = null;
+                        }
+                        // 重置为 Step 1
+                        document.getElementById('eval-step-1').style.display = '';
+                        document.getElementById('eval-step-2').style.display = 'none';
+                        document.getElementById('eval-step-3').style.display = 'none';
+                        // 重置进度
+                        const ring = document.getElementById('evalProgressRing');
+                        const percentEl = document.getElementById('evalProgressPercent');
+                        const statusEl = document.getElementById('evalProgressStatus');
+                        if (ring) ring.style.strokeDashoffset = 339.3;
+                        if (percentEl) percentEl.textContent = '0';
+                        if (statusEl) statusEl.textContent = '正在评测 0/100...';
+                    },
+	                    clearFilter() {
+	                        Quiz.setQuestionFilter('all');
+	                        // 清除搜索框（如果有）
+	                        const searchInput = document.querySelector('input[type="text"]');
+	                        if (searchInput) searchInput.value = '';
+	                    },
+	                };
+	
+	                // 初始化：首屏同步概览与筛选状态
+	                Quiz.applyQuestionFilter();
+	                Quiz.refreshOverview();
+	            </script>
+<!-- ========== END: 交互模式内容 ========== -->
+        </div>
+    </div>
+
+    <!-- ========== @FROZEN: 核心JavaScript ========== -->
+    <script>
+        // ========== 模式切换 ==========
+        let currentMode = 'interactive';
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const container = document.getElementById('artboardContainer');
+            const buttons = document.querySelectorAll('.mode-btn');
+
+            buttons.forEach((btn, index) => {
+                btn.classList.remove('active');
+                if ((mode === 'interactive' && index === 0) ||
+                    (mode === 'artboard' && index === 1)) {
+                    btn.classList.add('active');
+                }
+            });
+
+            if (mode === 'artboard') {
+                document.body.classList.add('artboard-mode');
+                container.classList.add('active');
+                initArtboardContent();
+            } else {
+                document.body.classList.remove('artboard-mode');
+                container.classList.remove('active');
+            }
+        }
+
+        // ========== 画板内容初始化（克隆机制） ==========
+        function initArtboardContent() {
+            // 克隆主内容到页面预览画板
+            const mainContent = document.getElementById('mainContent');
+            const pagePreview = document.querySelector('#artboard-1 .artboard-page-preview');
+
+            if (mainContent && pagePreview && !pagePreview.hasChildNodes()) {
+                const clone = mainContent.cloneNode(true);
+                clone.style.cssText = 'pointer-events: none; user-select: none;';
+                pagePreview.appendChild(clone);
+            }
+
+            // TODO: 根据需要初始化其他画板的内容
+        }
+
+        // ========== 单个画板截图 ==========
+        async function captureArtboard(artboardId, filename) {
+            const artboard = document.getElementById(artboardId);
+            if (!artboard) {
+                console.error('Artboard not found:', artboardId);
+                return;
+            }
+
+            // 检查是否加载了html2canvas
+            if (typeof html2canvas === 'undefined') {
+                alert('截图功能需要html2canvas库。\n请添加：<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"><\/script>');
+                return;
+            }
+
+            try {
+                const canvas = await html2canvas(artboard, {
+                    scale: 2,
+                    useCORS: true,
+                    backgroundColor: '#ffffff'
+                });
+
+                const link = document.createElement('a');
+                link.download = filename + '.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            } catch (error) {
+                console.error('截图失败:', error);
+                alert('截图失败，请查看控制台了解详情');
+            }
+        }
+
+        // ========== 批量导出 ==========
+        async function batchExport() {
+            const artboards = document.querySelectorAll('.artboard');
+
+            if (typeof html2canvas === 'undefined') {
+                alert('批量导出需要html2canvas库。');
+                return;
+            }
+
+            for (let i = 0; i < artboards.length; i++) {
+                const artboard = artboards[i];
+                const label = artboard.querySelector('.artboard-label span:first-child');
+                const filename = String(i + 1).padStart(2, '0') + '-' +
+                    (label ? label.textContent.replace(/\s+/g, '-') : 'artboard-' + (i + 1));
+
+                await captureArtboard(artboard.id, filename);
+
+                // 延迟以避免浏览器过载
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            alert('批量导出完成！');
+        }
+
+        // ========== 打印导出PDF ==========
+        function printArtboards() {
+            // 先切换到画板模式
+            switchMode('artboard');
+
+            // 延迟后打印
+            setTimeout(() => {
+                window.print();
+            }, 300);
+        }
+
+        // ========== 页面加载完成 ==========
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('EVA Prototype Template loaded successfully');
+
+            // 官方题库只读：初始化时隐藏官方题库的编辑按钮
+            document.querySelectorAll('.question-table tbody[id^="questions-o"] .actions button[title="编辑题目"]').forEach(btn => {
+                btn.style.display = 'none';
+            });
+
+            // 检查URL参数，支持直接打开画板模式
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('mode') === 'artboard') {
+                switchMode('artboard');
+            }
+        });
+    </script>
+    <!-- ========== @END-FROZEN: 核心JavaScript ========== -->
+
+    <!-- 可选：html2canvas库（用于截图功能） -->
+    <!-- <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script> -->
+
+</body>
+</html>
