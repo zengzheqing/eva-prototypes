@@ -10,7 +10,7 @@
     
     
     <!-- ========== @END-FROZEN ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-01 18:44) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-03 16:28) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -39,6 +39,7 @@
 
     /* 主色调 */
     --accent: #6366f1;
+    --accent-dark: #4f46e5;
     --accent-light: #e0e7ff;
     --accent-glow: rgba(99, 102, 241, 0.15);
     --accent-hover: #4f46e5;
@@ -3186,6 +3187,14 @@ textarea.input {
             50% { width: 80%; }
             100% { width: 20%; }
         }
+        @keyframes toastIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        @keyframes toastOut {
+            from { opacity: 1; transform: translateX(-50%) translateY(0); }
+            to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+        }
     </style>
     <!-- html2canvas for screenshot export -->
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
@@ -4015,8 +4024,8 @@ textarea.input {
                                         <div style="font-size:11px;color:#64748b">完整度</div>
                                     </div>
                                 </div>
-                                <button style="padding:10px 20px;background:white;color:#334155;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">运行评测</button>
-                                <div style="font-size:12px;color:#64748b;text-align:center">🕐 最近评测：01/25 10:32</div>
+                                <button style="padding:10px 20px;background:white;color:#334155;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">刷新评分</button>
+                                <div style="font-size:12px;color:#64748b;text-align:center">上次评测：01/25 10:32</div>
                             </div>
 
                             <!-- 右侧：文字内容 -->
@@ -4077,8 +4086,8 @@ textarea.input {
                                         <div style="font-size:11px;color:#64748b">完整度</div>
                                     </div>
                                 </div>
-                                <button style="padding:10px 20px;background:white;color:#334155;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">运行评测</button>
-                                <div style="font-size:12px;color:#64748b;text-align:center">🕐 最近评测：01/26 16:04</div>
+                                <button style="padding:10px 20px;background:white;color:#334155;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">刷新评分</button>
+                                <div style="font-size:12px;color:#64748b;text-align:center">上次评测：01/26 16:04</div>
                             </div>
 
                             <!-- 右侧：文字内容 -->
@@ -4139,8 +4148,8 @@ textarea.input {
                                         <div style="font-size:11px;color:#64748b">完整度</div>
                                     </div>
                                 </div>
-                                <button style="padding:10px 20px;background:white;color:#334155;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">运行评测</button>
-                                <div style="font-size:12px;color:#64748b;text-align:center">🕐 最近评测：01/26 17:20</div>
+                                <button style="padding:10px 20px;background:white;color:#334155;border:1px solid #e2e8f0;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">刷新评分</button>
+                                <div style="font-size:12px;color:#64748b;text-align:center">上次评测：01/26 17:20</div>
                             </div>
 
                             <!-- 右侧：文字内容 -->
@@ -4228,7 +4237,18 @@ textarea.input {
     <!-- ========== 侧边栏导航 ========== -->
     <div class="sidebar">
         <div class="logo">
-            <div class="logo-icon">E</div>
+            <div class="logo-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4C4 4 8 6 12 6C16 6 20 4 20 4" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M4 9C4 9 8 11 12 11C16 11 20 9 20 9" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M4 14C4 14 8 12 12 12C16 12 20 14 20 14" stroke="white" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                    <path d="M4 19C4 19 8 17 12 17C16 17 20 19 20 19" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <circle cx="4" cy="4" r="1.5" fill="white"/>
+                    <circle cx="20" cy="4" r="1.5" fill="white"/>
+                    <circle cx="4" cy="19" r="1.5" fill="white"/>
+                    <circle cx="20" cy="19" r="1.5" fill="white"/>
+                </svg>
+            </div>
             <span>EVA</span>
         </div>
 
@@ -4251,11 +4271,7 @@ textarea.input {
                 <span>Agent进化</span>
             </a>
             <a href="#" class="nav-item">
-                <span class="nav-item-icon">&#128221;</span>
-                <span>题库</span>
-            </a>
-            <a href="#" class="nav-item">
-                <span class="nav-item-icon">&#128490;</span>
+                <span class="nav-item-icon">📋</span>
                 <span>会话记录</span>
             </a>
             <a href="#" class="nav-item">
@@ -4291,7 +4307,7 @@ textarea.input {
             <!-- 1. Agent 完整性面板 -->
             <div class="completeness-panel">
                 <!-- 左侧：进度环+评测按钮（垂直排列） -->
-                <div style="display:flex; flex-direction:column; align-items:center; gap:20px;">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
                     <div class="progress-ring">
                         <svg width="140" height="140">
                             <circle class="progress-ring-bg" cx="70" cy="70" r="60"></circle>
@@ -4303,10 +4319,13 @@ textarea.input {
                         </div>
                     </div>
 
-                    <!-- 评测控制区（在进度环下方） -->
-                    <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
-                        <button id="kb-evalTriggerBtn" class="btn btn-secondary" onclick="openEvalSidebar()">运行评测</button>
-                        <div style="font-size:12px; color:var(--text-secondary);">🕐 最近评测：01/26 16:04</div>
+                    <!-- 评测通过数（圆环下方独立显示） -->
+                    <div style="font-size:12px; color:var(--text-secondary);">评测通过 312/400</div>
+
+                    <!-- 评测控制区 -->
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+                        <button id="kb-evalTriggerBtn" style="padding:6px 14px; font-size:13px; background:white; color:var(--text); border:1px solid var(--border); border-radius:6px; cursor:pointer;" onclick="refreshScore()">刷新评分</button>
+                        <div style="font-size:11px; color:var(--text-tertiary);">上次评测：01/26 16:04</div>
                     </div>
                 </div>
 
@@ -4403,7 +4422,7 @@ textarea.input {
                     <div class="upload-section" id="uploadArea" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
                         <div class="upload-icon">📤</div>
                         <div class="upload-title">拖拽文件到此处，或点击上传</div>
-                        <div class="upload-desc">上传成功后，建议运行评测以更新完整度</div>
+                        <div class="upload-desc">上传成功后，建议刷新评分以更新完整度</div>
                         <div class="upload-types">
                             <div class="upload-type"><span class="upload-type-icon">📕</span> PDF</div>
                             <div class="upload-type"><span class="upload-type-icon">📘</span> Word</div>
@@ -4771,7 +4790,7 @@ textarea.input {
                                 <span class="node-item-id">#node-004</span>
                             </div>
                             <div class="node-item-content">
-                                新用户首次登录后，建议先上传企业官网资料和产品文档，系统会自动爬取并构建初始知识库，然后运行评测以更新完整度。
+                                新用户首次登录后，建议先上传企业官网资料和产品文档，系统会自动爬取并构建初始知识库，然后刷新评分以更新完整度。
                             </div>
                         </div>
                         <div class="node-item">
@@ -5009,9 +5028,91 @@ textarea.input {
         }
 
         // 评测侧边栏控制（知识库专用）
+        // 注意：openEvalSidebar 保留供后续版本启用完整评测流程
         function openEvalSidebar() {
             document.getElementById('evalOverlay').classList.add('open');
             document.getElementById('evalPanel').classList.add('open');
+        }
+
+        // Toast 提示函数
+        function showToast(message, type = 'success') {
+            // 移除已有的 toast
+            const existingToast = document.querySelector('.eva-toast');
+            if (existingToast) existingToast.remove();
+
+            // 创建 toast 元素
+            const toast = document.createElement('div');
+            toast.className = 'eva-toast';
+            toast.style.cssText = `
+                position: fixed;
+                top: 24px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-size: 14px;
+                font-weight: 500;
+                z-index: 10000;
+                animation: toastIn 0.3s ease;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            `;
+
+            // 根据类型设置样式
+            if (type === 'success') {
+                toast.style.background = '#10b981';
+                toast.style.color = 'white';
+                toast.innerHTML = '✓ ' + message;
+            } else if (type === 'error') {
+                toast.style.background = '#ef4444';
+                toast.style.color = 'white';
+                toast.innerHTML = '✕ ' + message;
+            } else {
+                toast.style.background = '#f59e0b';
+                toast.style.color = 'white';
+                toast.innerHTML = '⚠ ' + message;
+            }
+
+            document.body.appendChild(toast);
+
+            // 2秒后自动消失
+            setTimeout(() => {
+                toast.style.animation = 'toastOut 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 2000);
+        }
+
+        // MVP版本：直接刷新评分（不打开侧边栏）
+        function refreshScore() {
+            const triggerBtn = document.getElementById('kb-evalTriggerBtn');
+            if (triggerBtn) {
+                // 显示加载态
+                triggerBtn.disabled = true;
+                triggerBtn.textContent = '刷新中...';
+                triggerBtn.style.cursor = 'not-allowed';
+                triggerBtn.style.opacity = '0.6';
+
+                // 模拟刷新（实际调用后端API，可能需要较长时间）
+                setTimeout(() => {
+                    // 恢复按钮状态
+                    triggerBtn.disabled = false;
+                    triggerBtn.textContent = '刷新评分';
+                    triggerBtn.style.cursor = 'pointer';
+                    triggerBtn.style.opacity = '1';
+
+                    // 更新最近评测时间
+                    const now = new Date();
+                    const timeStr = `${String(now.getMonth()+1).padStart(2,'0')}/${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+                    const timeEl = triggerBtn.parentElement.querySelector('div:last-child');
+                    if (timeEl) {
+                        timeEl.textContent = `上次评测：${timeStr}`;
+                    }
+
+                    // 显示成功 Toast
+                    showToast('评分已刷新');
+                }, 2000);
+            }
         }
 
         function closeEvalSidebar() {
@@ -5021,7 +5122,7 @@ textarea.input {
             const triggerBtn = document.getElementById('kb-evalTriggerBtn');
             if (triggerBtn) {
                 triggerBtn.disabled = false;
-                triggerBtn.textContent = '运行评测';
+                triggerBtn.textContent = '刷新评分';
                 triggerBtn.style.cursor = 'pointer';
                 triggerBtn.style.opacity = '1';
             }
@@ -5260,7 +5361,7 @@ textarea.input {
         }
     </script>
 
-    <!-- 运行评测侧边栏 -->
+    <!-- 刷新评分侧边栏 -->
     <div class="detail-overlay" id="evalOverlay" onclick="closeEvalSidebar()"></div>
     <div class="detail-panel" id="evalPanel">
         <!-- Step 1: 配置 -->
@@ -5284,10 +5385,8 @@ textarea.input {
 
                 <div class="detail-section">
                     <div class="detail-section-title">评测范围</div>
-                    <select id="kb-evalRange" style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; margin-bottom:16px;">
-                        <option value="all">全部题库（推荐）</option>
-                        <option value="official">所有官方题库</option>
-                        <option value="custom">所有自建题库</option>
+                    <select id="kb-evalRange" style="width:100%; padding:10px 12px; border:1px solid var(--border); border-radius:8px; font-size:14px; margin-bottom:16px;" disabled>
+                        <option value="official">官方题库（400道）</option>
                     </select>
                 </div>
 
