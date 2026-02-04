@@ -10,7 +10,7 @@
     
     
     <!-- ========== @END-FROZEN ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-04 13:18) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-04 13:37) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -2715,135 +2715,6 @@ textarea.input {
             padding: 14px 20px;
         }
 
-        /* ========== 上传进度弹窗 ========== */
-        .upload-modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            background: white;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-xl);
-            padding: 32px;
-            width: 420px;
-            z-index: 102;
-            opacity: 0;
-            visibility: hidden;
-            transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .upload-modal.open {
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .upload-modal-title {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .upload-modal-desc {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 24px;
-        }
-
-        .upload-file-list {
-            margin-bottom: 24px;
-        }
-
-        .upload-file-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .upload-file-item:last-child {
-            border-bottom: none;
-        }
-
-        .upload-file-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--bg-subtle);
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-        }
-
-        .upload-file-info {
-            flex: 1;
-        }
-
-        .upload-file-name {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .upload-file-progress {
-            height: 4px;
-            background: var(--bg-subtle);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .upload-file-progress-bar {
-            height: 100%;
-            background: var(--accent);
-            border-radius: 2px;
-            transition: width .3s;
-        }
-
-        .upload-file-status {
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 4px;
-        }
-
-        .upload-file-status.success {
-            color: var(--success);
-        }
-
-        .upload-result {
-            background: var(--success-light);
-            border: 1px solid var(--success);
-            border-radius: var(--radius);
-            padding: 16px;
-            text-align: center;
-        }
-
-        .upload-result-icon {
-            font-size: 32px;
-            margin-bottom: 8px;
-        }
-
-        .upload-result-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--success);
-            margin-bottom: 4px;
-        }
-
-        .upload-result-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .upload-result-highlight {
-            color: var(--success);
-            font-weight: 700;
-        }
-
         /* ========== 空状态 ========== */
         .empty-state {
             padding: 60px 40px;
@@ -3134,8 +3005,7 @@ textarea.input {
 
         /* 画板模式下隐藏遮罩层 */
         body.artboard-mode .detail-overlay,
-        body.artboard-mode .detail-panel,
-        body.artboard-mode .upload-modal {
+        body.artboard-mode .detail-panel {
             display: none !important;
         }
 
@@ -4415,7 +4285,8 @@ textarea.input {
 
                 <!-- 上传文件 Tab -->
                 <div class="upload-tab-content active" id="uploadContentFile">
-                    <div class="upload-section" id="uploadArea" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+                    <!-- 默认状态：拖拽/点击上传 -->
+                    <div class="upload-section" id="fileDefaultState" onclick="triggerFileInput()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
                         <div class="upload-icon">📤</div>
                         <div class="upload-title">拖拽文件到此处，或点击上传</div>
                         <div class="upload-types">
@@ -4427,6 +4298,64 @@ textarea.input {
                             <div class="upload-type"><span class="upload-type-icon">🖼️</span> 图片</div>
                         </div>
                         <input type="file" id="fileInput" style="display:none" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.text,.md,.markdown,.png,.jpg,.jpeg">
+                    </div>
+                    <!-- 上传中状态 -->
+                    <div class="upload-section" id="fileUploadingState" style="display:none">
+                        <div style="font-size:48px;margin-bottom:16px;animation:pulse 1.5s ease-in-out infinite">📤</div>
+                        <div class="upload-title">正在上传文件...</div>
+                        <div class="upload-desc" style="margin-bottom:20px">文件上传完成后将自动解析并更新知识库</div>
+                        <div style="background:var(--bg-subtle);border-radius:12px;padding:16px;max-width:400px;margin:0 auto">
+                            <!-- 文件1：已完成 -->
+                            <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--border-subtle)">
+                                <span style="font-size:20px">📕</span>
+                                <div style="flex:1;text-align:left">
+                                    <div style="font-size:13px;font-weight:600;margin-bottom:2px">退换货政策说明.pdf</div>
+                                    <div style="font-size:11px;color:var(--success)">✓ 上传完成，正在解析...</div>
+                                </div>
+                                <span style="color:var(--success);font-size:16px">✓</span>
+                            </div>
+                            <!-- 文件2：上传中 -->
+                            <div style="display:flex;align-items:center;gap:12px;padding-top:12px">
+                                <span style="font-size:20px">🖼️</span>
+                                <div style="flex:1;text-align:left">
+                                    <div style="font-size:13px;font-weight:600;margin-bottom:6px">产品宣传图.png</div>
+                                    <div style="background:var(--border);border-radius:4px;height:6px;overflow:hidden">
+                                        <div style="background:var(--accent);height:100%;width:65%;animation:progress 2s ease-in-out infinite"></div>
+                                    </div>
+                                </div>
+                                <span style="font-size:11px;color:var(--text-muted);white-space:nowrap">65%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 上传成功状态 -->
+                    <div class="upload-section" id="fileSuccessState" style="display:none">
+                        <div style="font-size:48px;margin-bottom:16px">🎉</div>
+                        <div class="upload-title" style="color:#22c55e">上传成功！</div>
+                        <div class="upload-desc" style="margin-bottom:20px">文件已成功解析并添加到知识库</div>
+                        <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:12px;padding:16px;max-width:400px;margin:0 auto 20px">
+                            <!-- 文件1 -->
+                            <div style="display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid #bbf7d0">
+                                <span style="font-size:20px">📕</span>
+                                <div style="flex:1;text-align:left">
+                                    <div style="font-size:13px;font-weight:600;color:#166534;margin-bottom:2px">退换货政策说明.pdf</div>
+                                    <div style="font-size:11px;color:#15803d">已提取 56 个知识节点</div>
+                                </div>
+                                <span style="color:#22c55e;font-size:16px">✓</span>
+                            </div>
+                            <!-- 文件2 -->
+                            <div style="display:flex;align-items:center;gap:12px;padding-top:12px">
+                                <span style="font-size:20px">🖼️</span>
+                                <div style="flex:1;text-align:left">
+                                    <div style="font-size:13px;font-weight:600;color:#166534;margin-bottom:2px">产品宣传图.png</div>
+                                    <div style="font-size:11px;color:#15803d">已提取 33 个知识节点</div>
+                                </div>
+                                <span style="color:#22c55e;font-size:16px">✓</span>
+                            </div>
+                        </div>
+                        <div style="font-size:13px;color:var(--text-secondary);margin-bottom:16px">
+                            共新增 <span style="font-weight:600;color:var(--success)">89</span> 个知识节点，Agent 完整性提升至 <span style="font-weight:600;color:var(--success)">85%</span>
+                        </div>
+                        <button onclick="resetFileState()" style="padding:10px 24px;background:var(--accent);color:white;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer">继续上传</button>
                     </div>
                 </div>
 
@@ -4870,55 +4799,6 @@ textarea.input {
         </div>
     </div>
 
-    <!-- ========== 上传进度弹窗 ========== -->
-    <div class="upload-modal" id="uploadModal">
-        <!-- 状态1：上传中 -->
-        <div id="uploadProgressState">
-            <div class="upload-modal-title">📤 正在上传文件</div>
-            <div class="upload-modal-desc">文件上传完成后将自动解析并更新知识库</div>
-
-            <div class="upload-file-list">
-                <div class="upload-file-item">
-                    <div class="upload-file-icon">📕</div>
-                    <div class="upload-file-info">
-                        <div class="upload-file-name">退换货政策说明.pdf</div>
-                        <div class="upload-file-progress">
-                            <div class="upload-file-progress-bar" style="width: 100%"></div>
-                        </div>
-                        <div class="upload-file-status success">✓ 上传完成，正在解析...</div>
-                    </div>
-                </div>
-                <div class="upload-file-item">
-                    <div class="upload-file-icon">🖼️</div>
-                    <div class="upload-file-info">
-                        <div class="upload-file-name">产品宣传图.png</div>
-                        <div class="upload-file-progress">
-                            <div class="upload-file-progress-bar" style="width: 65%"></div>
-                        </div>
-                        <div class="upload-file-status">上传中 65%</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 状态2：上传完成 -->
-        <div id="uploadResultState" style="display:none">
-            <div class="upload-result">
-                <div class="upload-result-icon">🎉</div>
-                <div class="upload-result-title">上传成功！</div>
-                <div class="upload-result-desc">
-                    新增 <span class="upload-result-highlight">2</span> 份文档，
-                    <span class="upload-result-highlight">89</span> 个知识节点<br>
-                    Agent 完整性提升至 <span class="upload-result-highlight">85%</span>
-                </div>
-            </div>
-        </div>
-
-        <div style="margin-top:20px;display:flex;gap:12px">
-            <button class="btn btn-secondary btn-full" onclick="closeUploadModal()">关闭</button>
-        </div>
-    </div>
-
     <script>
         // 详情面板控制
         function openDetail(row) {
@@ -5198,51 +5078,49 @@ textarea.input {
 
         function handleDragOver(e) {
             e.preventDefault();
-            document.getElementById('uploadArea').classList.add('dragover');
+            document.getElementById('fileDefaultState').classList.add('dragover');
         }
 
         function handleDragLeave(e) {
             e.preventDefault();
-            document.getElementById('uploadArea').classList.remove('dragover');
+            document.getElementById('fileDefaultState').classList.remove('dragover');
         }
 
         function handleDrop(e) {
             e.preventDefault();
-            document.getElementById('uploadArea').classList.remove('dragover');
+            document.getElementById('fileDefaultState').classList.remove('dragover');
 
             const files = e.dataTransfer.files;
             if (files.length > 0) {
-                showUploadModal();
+                startFileUpload();
             }
         }
 
-        // 上传弹窗控制
-        function showUploadModal() {
-            document.getElementById('uploadModal').classList.add('open');
-            document.getElementById('detailOverlay').classList.add('open');
-            // 初始显示上传中状态
-            document.getElementById('uploadProgressState').style.display = 'block';
-            document.getElementById('uploadResultState').style.display = 'none';
+        // 文件上传状态控制（组件内3状态切换）
+        function startFileUpload() {
+            // 切换到上传中状态
+            document.getElementById('fileDefaultState').style.display = 'none';
+            document.getElementById('fileUploadingState').style.display = 'block';
+            document.getElementById('fileSuccessState').style.display = 'none';
 
-            // 模拟上传完成：切换到完成状态
+            // 模拟上传完成：切换到成功状态
             setTimeout(() => {
-                document.getElementById('uploadProgressState').style.display = 'none';
-                document.getElementById('uploadResultState').style.display = 'block';
+                document.getElementById('fileUploadingState').style.display = 'none';
+                document.getElementById('fileSuccessState').style.display = 'block';
             }, 2000);
         }
 
-        function closeUploadModal() {
-            document.getElementById('uploadModal').classList.remove('open');
-            document.getElementById('detailOverlay').classList.remove('open');
-            // 重置为上传中状态，准备下次使用
-            document.getElementById('uploadProgressState').style.display = 'block';
-            document.getElementById('uploadResultState').style.display = 'none';
+        function resetFileState() {
+            // 重置为默认状态，准备下次上传
+            document.getElementById('fileDefaultState').style.display = 'block';
+            document.getElementById('fileUploadingState').style.display = 'none';
+            document.getElementById('fileSuccessState').style.display = 'none';
         }
 
         // 文件输入变化时
         document.getElementById('fileInput').addEventListener('change', function(e) {
             if (e.target.files.length > 0) {
-                showUploadModal();
+                startFileUpload();
             }
         });
 
@@ -5250,7 +5128,6 @@ textarea.input {
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeDetail();
-                closeUploadModal();
                 // 画板模式下按ESC返回交互模式
                 if (document.body.classList.contains('artboard-mode')) {
                     switchMode('interactive');
