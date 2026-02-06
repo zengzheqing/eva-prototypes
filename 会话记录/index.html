@@ -1,0 +1,2673 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVA Agent · 会话记录</title>
+    <!-- ========== @FROZEN: 字体和公共样式引用 ========== -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    
+    <!-- ========== @END-FROZEN ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-06 17:39) ========== -->
+<style>
+/* ========== eva-base.css ========== */
+/**
+ * EVA Design System - Base Styles
+ * Version: 2.0
+ *
+ * 使用说明: 在 HTML 的 <head> 中引用
+ * <link rel="stylesheet" href="eva-base.css">
+ *
+ * 规范文档: EVA-Design-System.md
+ * 视觉参考: eva-enterprise-onboarding (Google AI Studio)
+ */
+
+/* ========== @FROZEN: 色彩系统 ========== */
+/* 说明: 所有颜色值遵循 EVA-Design-System.md */
+:root {
+    /* 背景色 */
+    --bg: #f8fafc;
+    --bg-elevated: #ffffff;
+    --bg-subtle: #f1f5f9;
+
+    /* 文字色 */
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+
+    /* 主色调 */
+    --accent: #6366f1;
+    --accent-dark: #4f46e5;
+    --accent-light: #e0e7ff;
+    --accent-glow: rgba(99, 102, 241, 0.15);
+    --accent-hover: #4f46e5;
+
+    /* 功能色 */
+    --success: #10b981;
+    --success-light: #ecfdf5;
+    --warning: #f59e0b;
+    --warning-light: #fffbeb;
+    --danger: #ef4444;
+    --danger-light: #fef2f2;
+
+    /* 边框色 */
+    --border: #e2e8f0;
+    --border-subtle: #f1f5f9;
+
+    /* 阴影 - 升级版 */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    --shadow-accent: 0 10px 40px -10px rgba(99, 102, 241, 0.3);
+    --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+
+    /* 圆角 - 升级版（更大更现代） */
+    --radius-sm: 12px;
+    --radius: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-2xl: 40px;
+    --radius-3xl: 48px;
+    --radius-full: 9999px;
+
+    /* 间距系统 */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* 过渡时间 */
+    --duration-fast: 0.15s;
+    --duration: 0.3s;
+    --duration-slow: 0.5s;
+    --duration-slower: 0.7s;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 全局重置 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 排版系统 ========== */
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.025em;
+}
+
+.title-xl {
+    font-size: 40px;
+    font-weight: 900;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+}
+
+.subtitle {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* 字体工具类 */
+.font-black {
+    font-weight: 900;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.tracking-tighter {
+    letter-spacing: -0.05em;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+.tracking-normal {
+    letter-spacing: 0;
+}
+
+.tracking-wide {
+    letter-spacing: 0.025em;
+}
+
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+.tracking-widest {
+    letter-spacing: 0.1em;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 按钮系统 ========== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 40px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: var(--radius-xl);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 16px;
+    letter-spacing: -0.01em;
+    transition: all var(--duration);
+    text-decoration: none;
+}
+
+.btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-accent);
+}
+
+.btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.btn-lg {
+    padding: 22px 48px;
+    font-size: 18px;
+    font-weight: 900;
+    border-radius: var(--radius-2xl);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 2px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-subtle);
+    border-color: var(--accent);
+    box-shadow: none;
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    padding: 10px 20px;
+}
+
+.btn-ghost:hover {
+    color: var(--accent);
+    background: var(--accent-light);
+    box-shadow: none;
+    transform: none;
+}
+
+.btn-sm {
+    padding: 12px 24px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.btn-dark {
+    background: var(--text);
+    color: white;
+}
+
+.btn-dark:hover {
+    background: #1e293b;
+    box-shadow: var(--shadow-lg);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 输入框系统 ========== */
+.input-box {
+    margin-bottom: 28px;
+}
+
+.input {
+    width: 100%;
+    padding: 18px 20px;
+    border: 2px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    font-size: 16px;
+    outline: none;
+    transition: all var(--duration);
+    background: var(--bg);
+    color: var(--text);
+}
+
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.input:focus {
+    background: white;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-light);
+}
+
+.input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+textarea.input {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.input-lg {
+    padding: 20px 24px;
+    font-size: 18px;
+    border-radius: var(--radius-xl);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 卡片系统 ========== */
+.card {
+    background: var(--bg-elevated);
+    padding: 32px;
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-card);
+    border: 2px solid transparent;
+    transition: all var(--duration-slow);
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card.active {
+    border-color: var(--success);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-lg);
+}
+
+.card.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--success);
+}
+
+.card.dim {
+    opacity: 0.5;
+    transform: scale(0.98);
+    filter: grayscale(0.3);
+}
+
+.card-lg {
+    padding: 40px;
+    border-radius: var(--radius-3xl);
+}
+
+.card-interactive {
+    cursor: pointer;
+}
+
+.card-interactive:hover {
+    border-color: var(--accent);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 标签/徽章系统 ========== */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--bg-subtle);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+}
+
+.tag.core {
+    background: #eef2ff;
+    color: var(--accent);
+    border-color: #c7d2fe;
+    font-weight: 600;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.badge.success {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+}
+
+.badge.warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+}
+
+.badge.danger {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
+
+.badge.info {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 进度指示器 ========== */
+.stepper {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+
+.step-dot {
+    width: 32px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    transition: all var(--duration);
+}
+
+.step-dot.active {
+    background: var(--accent);
+    width: 48px;
+}
+
+.step-dot.done {
+    background: var(--success);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 图标容器 ========== */
+.icon-box {
+    width: 48px;
+    height: 48px;
+    background: var(--bg-subtle);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: all var(--duration);
+}
+
+.icon-box.active {
+    background: var(--success-light);
+    color: var(--success);
+}
+
+.icon-box.accent {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 网格系统 ========== */
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-12 {
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.col-2 {
+    grid-column: span 2;
+}
+
+.col-3 {
+    grid-column: span 3;
+}
+
+.col-4 {
+    grid-column: span 4;
+}
+
+.col-6 {
+    grid-column: span 6;
+}
+
+.col-8 {
+    grid-column: span 8;
+}
+
+.col-12 {
+    grid-column: span 12;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 工具类 ========== */
+/* Flex */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-sm {
+    gap: 8px;
+}
+
+.gap-md {
+    gap: 16px;
+}
+
+.gap-lg {
+    gap: 24px;
+}
+
+/* Spacing */
+.mt-sm {
+    margin-top: 8px;
+}
+
+.mt-md {
+    margin-top: 16px;
+}
+
+.mt-lg {
+    margin-top: 24px;
+}
+
+.mt-xl {
+    margin-top: 32px;
+}
+
+.mb-sm {
+    margin-bottom: 8px;
+}
+
+.mb-md {
+    margin-bottom: 16px;
+}
+
+.mb-lg {
+    margin-bottom: 24px;
+}
+
+.mb-xl {
+    margin-bottom: 32px;
+}
+
+/* Text */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-secondary {
+    color: var(--text-secondary);
+}
+
+.text-accent {
+    color: var(--accent);
+}
+
+.text-success {
+    color: var(--success);
+}
+
+.font-bold {
+    font-weight: 600;
+}
+
+/* Display */
+.hidden {
+    display: none;
+}
+
+.block {
+    display: block;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @STABLE: 页面切换 ========== */
+/* 说明: 可以调整动画参数，但不要删除 */
+.page {
+    display: none;
+}
+
+.page.active {
+    display: flex;
+}
+
+/* ========== @END-STABLE ========== */
+
+/* ========== eva-animations.css ========== */
+/**
+ * EVA Design System - Animations
+ * Version: 2.0
+ *
+ * 使用说明: 在 HTML 的 <head> 中引用（在 eva-base.css 之后）
+ * <link rel="stylesheet" href="eva-animations.css">
+ *
+ * 来源: 深色版的优秀视觉效果 + 白色版的轨道动画 + Google AI Studio 版本动效
+ */
+
+/* ========== @FROZEN: 环境动画背景 (来源: 深色版) ========== */
+/* 说明: 已适配浅色主题，创造柔和的动态背景效果 */
+.ambient {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ambient::before {
+    content: '';
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.08), transparent 65%);
+    top: -20%;
+    left: -15%;
+    animation: drift1 40s ease-in-out infinite;
+}
+
+.ambient::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.05), transparent 65%);
+    bottom: -15%;
+    right: -10%;
+    animation: drift2 35s ease-in-out infinite;
+}
+
+/* 环境圆（白色版原有的，保留兼容） */
+.ambient-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    z-index: 0;
+}
+
+.ac-1 {
+    width: 600px;
+    height: 600px;
+    background: rgba(99, 102, 241, 0.08);
+    top: -10%;
+    right: 10%;
+}
+
+.ac-2 {
+    width: 500px;
+    height: 500px;
+    background: rgba(236, 72, 153, 0.05);
+    bottom: -10%;
+    left: 20%;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 漂移动画关键帧 ========== */
+@keyframes drift1 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(50px, 50px);
+    }
+}
+
+@keyframes drift2 {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-30px, -30px);
+    }
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 轨道动画 (来源: 白色版) ========== */
+/* 说明: 用于 Hero 区域的装饰性动画 */
+.hero-illustration {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbit {
+    position: absolute;
+    border: 1px dashed #cbd5e1;
+    border-radius: 50%;
+}
+
+.o1 {
+    width: 280px;
+    height: 280px;
+    animation: spin 20s linear infinite;
+}
+
+.o2 {
+    width: 460px;
+    height: 460px;
+    animation: spin 30s linear infinite reverse;
+}
+
+.agent-center {
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    box-shadow: 0 20px 60px rgba(99, 102, 241, 0.15);
+    z-index: 2;
+}
+
+.orbit-item {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: var(--shadow-card, 0 4px 6px -1px rgba(0, 0, 0, 0.05));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 通用动画关键帧 ========== */
+/* 旋转 */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 淡入 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 淡入（无位移） */
+@keyframes fadeInSimple {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* 脉冲 */
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* 弹跳 */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 缩放脉冲 */
+@keyframes scalePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* 闪烁 */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 滑入（从右） */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 滑入（从左） */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 动画工具类 ========== */
+/* 基础淡入 */
+.fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.fade-in-fast {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.fade-in-slow {
+    animation: fadeIn 1s ease forwards;
+}
+
+/* 脉冲 */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* 旋转 */
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+.spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+/* 弹跳 */
+.bounce {
+    animation: bounce 2s ease-in-out infinite;
+}
+
+/* 滑入 */
+.slide-in-right {
+    animation: slideInRight 0.4s ease forwards;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.4s ease forwards;
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @FROZEN: 加载指示器 ========== */
+.loader {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--accent, #6366f1);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader-sm {
+    width: 14px;
+    height: 14px;
+    border-width: 1.5px;
+}
+
+.loader-lg {
+    width: 32px;
+    height: 32px;
+    border-width: 3px;
+}
+
+/* 状态监视器 */
+.status-monitor {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 24px;
+    box-shadow: var(--shadow-lg, 0 20px 25px -5px rgba(0, 0, 0, 0.1));
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--border, #e2e8f0);
+}
+
+/* ========== @END-FROZEN ========== */
+
+
+/* ========== @STABLE: 延迟动画 ========== */
+/* 说明: 用于序列化动画效果，可根据需要调整延迟值 */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+.delay-600 {
+    animation-delay: 0.6s;
+}
+
+.delay-700 {
+    animation-delay: 0.7s;
+}
+
+.delay-800 {
+    animation-delay: 0.8s;
+}
+
+.delay-900 {
+    animation-delay: 0.9s;
+}
+
+.delay-1000 {
+    animation-delay: 1s;
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 高级动画 (来源: Google AI Studio) ========== */
+/* 滑入淡出 - 从底部 */
+@keyframes slideInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 缩放淡入 */
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 缩放淡出 */
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+/* 进度条条纹动画 */
+@keyframes progressBarStripes {
+    from {
+        background-position: 24px 0;
+    }
+
+    to {
+        background-position: 0 0;
+    }
+}
+
+/* 脉冲指示器 */
+@keyframes ping {
+
+    75%,
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* 打字光标闪烁 */
+@keyframes cursorBlink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 滑动上升 */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 组合动画工具类 ========== */
+/* animate-in 系列 - 参考 Tailwind animate-in */
+.animate-in {
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    animation-fill-mode: forwards;
+}
+
+.animate-in.fade-in {
+    animation-name: fadeIn;
+}
+
+.animate-in.zoom-in {
+    animation-name: zoomIn;
+}
+
+.animate-in.slide-in-from-bottom {
+    animation-name: slideInFromBottom;
+}
+
+.animate-in.slide-in-from-top {
+    animation-name: slideInFromBottom;
+    animation-direction: reverse;
+}
+
+/* 脉冲指示器 */
+.animate-ping {
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* 呼吸脉冲 */
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* 慢速旋转 */
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}
+
+/* 打字光标 */
+.cursor-blink {
+    animation: cursorBlink 1s step-end infinite;
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 进度条组件 ========== */
+.progress-bar {
+    height: 24px;
+    background: white;
+    border-radius: var(--radius-full, 9999px);
+    padding: 4px;
+    border: 1px solid var(--border, #e2e8f0);
+    box-shadow: var(--shadow-sm, 0 1px 2px 0 rgba(0, 0, 0, 0.05));
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent, #6366f1);
+    border-radius: var(--radius-full, 9999px);
+    transition: width 0.5s ease-out;
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    position: relative;
+}
+
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg,
+            rgba(255, 255, 255, 0.15) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.15) 50%,
+            rgba(255, 255, 255, 0.15) 75%,
+            transparent 75%,
+            transparent);
+    background-size: 24px 24px;
+    animation: progressBarStripes 1s linear infinite;
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 状态指示器 ========== */
+.status-dot {
+    position: relative;
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+}
+
+.status-dot::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: currentColor;
+    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    opacity: 0.75;
+}
+
+.status-dot::after {
+    content: '';
+    position: relative;
+    display: inline-flex;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.status-dot.success {
+    color: var(--success, #10b981);
+}
+
+.status-dot.warning {
+    color: var(--warning, #f59e0b);
+}
+
+.status-dot.danger {
+    color: var(--danger, #ef4444);
+}
+
+.status-dot.accent {
+    color: var(--accent, #6366f1);
+}
+
+/* ========== @END-STABLE ========== */
+
+
+/* ========== @STABLE: 终端日志样式 ========== */
+.terminal {
+    background: #0f172a;
+    border-radius: var(--radius-2xl, 32px);
+    padding: 32px;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    color: #e2e8f0;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl, 0 25px 50px -12px rgba(0, 0, 0, 0.25));
+}
+
+.terminal-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.terminal-dots {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-dots span {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.terminal-dots span:nth-child(1) {
+    background: rgba(239, 68, 68, 0.5);
+}
+
+.terminal-dots span:nth-child(2) {
+    background: rgba(245, 158, 11, 0.5);
+}
+
+.terminal-dots span:nth-child(3) {
+    background: rgba(16, 185, 129, 0.5);
+}
+
+.terminal-log {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    animation: slideInFromBottom 0.3s ease forwards;
+}
+
+.terminal-log-num {
+    color: rgba(255, 255, 255, 0.2);
+    user-select: none;
+}
+
+.terminal-log-success {
+    color: #818cf8;
+    font-weight: 700;
+}
+
+/* ========== @END-STABLE ========== */
+
+</style>
+    <style>
+        /* ========== 会话记录页面特有样式 ========== */
+
+        body {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ========== @FROZEN: 侧边栏导航 ========== */
+        .sidebar {
+            width: 280px;
+            background: white;
+            border-right: 1px solid var(--border-subtle);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            z-index: 20;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            padding: 0 28px;
+            font-weight: 700;
+            font-size: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            gap: 10px;
+            color: var(--accent);
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .nav-section {
+            padding: 20px 16px;
+            border-bottom: 1px solid var(--border-subtle)
+        }
+
+        .nav-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            padding: 0 12px 10px;
+            letter-spacing: 0.1em
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            font-size: 14px;
+            border-radius: var(--radius);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all .2s;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-subtle);
+            color: var(--text)
+        }
+
+        .nav-item.active {
+            background: var(--accent-light);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .nav-item-icon {
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        /* ========== @END-FROZEN ========== */
+
+        /* ========== 个人中心 ========== */
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            margin-top: auto;
+            border-top: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .user-profile:hover {
+            background: var(--bg-subtle);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4DB6AC, #00897B);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .user-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .user-company {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ========== @FROZEN: 主布局区域 ========== */
+        .main {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+        }
+
+        .topbar {
+            height: 64px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            position: sticky;
+            top: 0;
+            z-index: 19
+        }
+
+        .topbar-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        /* ========== @END-FROZEN ========== */
+
+        /* ========== 时间筛选 ========== */
+        .time-filter {
+            display: flex;
+            gap: 8px;
+        }
+
+        .time-filter-btn {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .time-filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .time-filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        /* ========== 内容区域 ========== */
+        .content {
+            flex: 1;
+            display: flex;
+            padding: 24px;
+            gap: 24px;
+            overflow: hidden;
+        }
+
+        /* ========== 会话列表 ========== */
+        .session-list-panel {
+            width: 300px;
+            flex-shrink: 0;
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .session-list-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .session-list-header-icon {
+            font-size: 16px;
+        }
+
+        .session-list-header-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .session-list-header-count {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        .session-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .session-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .session-item:hover {
+            background: var(--bg-subtle);
+        }
+
+        .session-item.active {
+            background: var(--accent-light);
+            border-left-color: var(--accent);
+        }
+
+        .session-item-user {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .session-item-preview {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.4;
+        }
+
+        .session-item-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .session-item-meta-dot {
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: var(--text-muted);
+        }
+
+        /* ========== 会话详情 ========== */
+        .session-detail-panel {
+            flex: 1;
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .session-detail-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .session-detail-user {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .session-detail-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .session-detail-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        /* ========== 消息气泡 ========== */
+        .message {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message.user {
+            align-items: flex-start;
+        }
+
+        .message.assistant {
+            align-items: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 14px 18px;
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .message.user .message-bubble {
+            background: var(--bg-subtle);
+            border-bottom-left-radius: 4px;
+        }
+
+        .message.assistant .message-bubble {
+            background: var(--accent-light);
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 12px;
+        }
+
+        .message-role {
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .message-role-icon {
+            font-size: 14px;
+        }
+
+        .message-time {
+            color: var(--text-muted);
+            margin-left: auto;
+        }
+
+        /* ========== 点踩标识 ========== */
+        .dislike-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #dc2626;
+            margin-left: 8px;
+        }
+
+        .dislike-badge-icon {
+            font-size: 10px;
+        }
+
+        .message-content {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ========== 执行过程 ========== */
+        .execution-toggle {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .execution-toggle:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .execution-toggle-icon {
+            transition: transform 0.2s;
+        }
+
+        .execution-toggle.expanded .execution-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .execution-steps {
+            margin-top: 12px;
+            padding: 12px 16px;
+            background: var(--bg-subtle);
+            border-radius: var(--radius);
+            display: none;
+        }
+
+        .execution-steps.show {
+            display: block;
+        }
+
+        .execution-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .execution-step:not(:last-child) {
+            border-bottom: 1px dashed var(--border-subtle);
+        }
+
+        .execution-step-time {
+            font-family: 'SF Mono', Monaco, monospace;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .execution-step-icon {
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .execution-step-desc {
+            flex: 1;
+            color: var(--text);
+        }
+
+        /* ========== 知识引用 ========== */
+        .knowledge-ref {
+            margin-top: 12px;
+        }
+
+        .knowledge-ref-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .knowledge-ref-file {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            background: #fefce8;
+            border: 1px solid #fde047;
+            border-radius: var(--radius);
+            font-size: 12px;
+            color: var(--text);
+            margin-left: 4px;
+        }
+
+        /* ========== 空状态 ========== */
+        .empty-state {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .empty-state-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .empty-state-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            max-width: 300px;
+        }
+
+        /* ========== 骨架屏 ========== */
+        .skeleton {
+            background: linear-gradient(90deg, var(--bg-subtle) 25%, var(--bg) 50%, var(--bg-subtle) 75%);
+            background-size: 200% 100%;
+            animation: skeleton-loading 1.5s infinite;
+            border-radius: var(--radius);
+        }
+
+        @keyframes skeleton-loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .skeleton-line {
+            height: 14px;
+            margin-bottom: 8px;
+        }
+
+        .skeleton-line.short {
+            width: 60%;
+        }
+
+        .skeleton-line.medium {
+            width: 80%;
+        }
+
+        .skeleton-line.full {
+            width: 100%;
+        }
+
+        /* ========== 加载更多 ========== */
+        .load-more {
+            padding: 16px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .load-more-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ========== 画板模式 ========== */
+        .artboard-mode .content {
+            flex-direction: column;
+            gap: 40px;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .artboard {
+            display: none;
+            background: white;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .artboard-mode .artboard {
+            display: block;
+        }
+
+        .artboard-label {
+            display: none;
+            padding: 12px 20px;
+            background: var(--text);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .artboard-mode .artboard-label {
+            display: block;
+        }
+
+        /* ========== 模式切换器 ========== */
+        .mode-switcher {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 8px;
+            padding: 8px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+        }
+
+        .mode-btn {
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: white;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .mode-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========== 侧边栏 ========== -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="5" cy="8" r="3" fill="var(--accent)"/>
+                    <circle cx="27" cy="8" r="3" fill="var(--accent)"/>
+                    <circle cx="5" cy="24" r="3" fill="var(--accent)"/>
+                    <circle cx="27" cy="24" r="3" fill="var(--accent)"/>
+                    <path d="M5 8 L27 24" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M27 8 L5 24" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M8 16 L24 16" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                    <path d="M16 10 L16 22" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+                </svg>
+            </div>
+            EVA
+        </div>
+
+        <nav class="nav-section">
+            <div class="nav-label">主功能</div>
+            <a class="nav-item" href="#">
+                <span class="nav-item-icon">📊</span>
+                控制台
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-item-icon">💬</span>
+                Agent演练
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-item-icon">📚</span>
+                知识库
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-item-icon">⚡</span>
+                Agent进化
+            </a>
+            <a class="nav-item active" href="#">
+                <span class="nav-item-icon">📋</span>
+                会话记录
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-item-icon">🚀</span>
+                部署管理
+            </a>
+            <a class="nav-item" href="#">
+                <span class="nav-item-icon">🔒</span>
+                安全合规
+            </a>
+        </nav>
+
+        <div class="user-profile">
+            <div class="user-avatar">硯</div>
+            <div class="user-info">
+                <div class="user-name">硯寒清</div>
+                <div class="user-company">深圳语境天择</div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ========== 主内容区 ========== -->
+    <main class="main">
+        <header class="topbar">
+            <h1 class="topbar-title">会话记录</h1>
+            <div class="time-filter">
+                <button class="time-filter-btn active" onclick="setTimeFilter(this, 'today')">今天</button>
+                <button class="time-filter-btn" onclick="setTimeFilter(this, '7days')">最近7天</button>
+                <button class="time-filter-btn" onclick="setTimeFilter(this, '30days')">最近30天</button>
+                <button class="time-filter-btn" onclick="setTimeFilter(this, 'all')">全部</button>
+            </div>
+        </header>
+
+        <div class="content" id="content">
+            <!-- 画板01: 骨架屏 -->
+            <div class="artboard" id="artboard-01">
+                <div class="artboard-label">01 骨架屏</div>
+                <div style="display: flex; gap: 24px; padding: 24px; height: 100%;">
+                    <div class="session-list-panel" style="width: 300px;">
+                        <div class="session-list-header">
+                            <span class="session-list-header-icon">📋</span>
+                            <span class="session-list-header-title">会话列表</span>
+                        </div>
+                        <div class="session-list">
+                            <div class="skeleton-item">
+                                <div class="skeleton skeleton-line short"></div>
+                                <div class="skeleton skeleton-line medium"></div>
+                                <div class="skeleton skeleton-line short" style="width: 40%;"></div>
+                            </div>
+                            <div class="skeleton-item">
+                                <div class="skeleton skeleton-line short"></div>
+                                <div class="skeleton skeleton-line medium"></div>
+                                <div class="skeleton skeleton-line short" style="width: 40%;"></div>
+                            </div>
+                            <div class="skeleton-item">
+                                <div class="skeleton skeleton-line short"></div>
+                                <div class="skeleton skeleton-line medium"></div>
+                                <div class="skeleton skeleton-line short" style="width: 40%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="session-detail-panel" style="flex: 1;">
+                        <div class="session-detail-header">
+                            <div class="skeleton skeleton-line" style="width: 120px; height: 20px;"></div>
+                            <div class="skeleton skeleton-line" style="width: 200px; height: 14px; margin-top: 8px;"></div>
+                        </div>
+                        <div style="padding: 24px;">
+                            <div style="margin-bottom: 20px;">
+                                <div class="skeleton" style="width: 60%; height: 80px; border-radius: 16px;"></div>
+                            </div>
+                            <div style="margin-bottom: 20px; display: flex; justify-content: flex-end;">
+                                <div class="skeleton" style="width: 70%; height: 120px; border-radius: 16px;"></div>
+                            </div>
+                            <div style="margin-bottom: 20px;">
+                                <div class="skeleton" style="width: 50%; height: 60px; border-radius: 16px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板02: 默认状态 -->
+            <div class="artboard" id="artboard-02">
+                <div class="artboard-label">02 默认状态</div>
+                <div style="display: flex; gap: 24px; padding: 24px; height: 100%;">
+                    <!-- 会话列表 -->
+                    <div class="session-list-panel">
+                        <div class="session-list-header">
+                            <span class="session-list-header-icon">📋</span>
+                            <span class="session-list-header-title">会话列表</span>
+                            <span class="session-list-header-count">共 12 条</span>
+                        </div>
+                        <div class="session-list">
+                            <div class="session-item active" onclick="selectSession(this)">
+                                <div class="session-item-user">微信用户小王</div>
+                                <div class="session-item-preview">你们的退货政策是什么？</div>
+                                <div class="session-item-meta">
+                                    <span>今天 14:32</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>5条</span>
+                                </div>
+                            </div>
+                            <div class="session-item" onclick="selectSession(this)">
+                                <div class="session-item-user">a1b2c3d4</div>
+                                <div class="session-item-preview">有什么优惠活动吗？</div>
+                                <div class="session-item-meta">
+                                    <span>今天 13:15</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>3条</span>
+                                </div>
+                            </div>
+                            <div class="session-item" onclick="selectSession(this)">
+                                <div class="session-item-user">官网访客123</div>
+                                <div class="session-item-preview">我想了解一下你们的产品</div>
+                                <div class="session-item-meta">
+                                    <span>昨天 16:45</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>8条</span>
+                                </div>
+                            </div>
+                            <div class="session-item" onclick="selectSession(this)">
+                                <div class="session-item-user">小红书用户甜甜</div>
+                                <div class="session-item-preview">这个颜色还有其他款式吗？</div>
+                                <div class="session-item-meta">
+                                    <span>昨天 10:22</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>12条</span>
+                                </div>
+                            </div>
+                            <div class="session-item" onclick="selectSession(this)">
+                                <div class="session-item-user">b2c3d4e5</div>
+                                <div class="session-item-preview">发货需要几天？</div>
+                                <div class="session-item-meta">
+                                    <span>02/03 09:15</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>4条</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 会话详情 -->
+                    <div class="session-detail-panel">
+                        <div class="session-detail-header">
+                            <div class="session-detail-user">微信用户小王</div>
+                            <div class="session-detail-meta">开始时间：今天 14:30 · 共 5 条消息</div>
+                        </div>
+                        <div class="session-detail-content">
+                            <!-- 用户消息 -->
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <div class="message-header">
+                                        <span class="message-role-icon">👤</span>
+                                        <span class="message-role">用户</span>
+                                        <span class="message-time">14:32:15</span>
+                                    </div>
+                                    <div class="message-content">你们的退货政策是什么？</div>
+                                </div>
+                            </div>
+
+                            <!-- Agent回复 -->
+                            <div class="message assistant">
+                                <div class="message-bubble">
+                                    <div class="message-header">
+                                        <span class="message-role-icon">🤖</span>
+                                        <span class="message-role">Agent</span>
+                                        <span class="message-time">14:32:18</span>
+                                    </div>
+                                    <div class="message-content">我们支持7天无理由退货，您只需要保持商品原包装完好，在收货后7天内申请退货即可。如需退货，可以在订单详情页点击"申请退货"。</div>
+
+                                    <!-- 执行过程（收起状态） -->
+                                    <div class="execution-toggle" onclick="toggleExecution(this)">
+                                        <span class="execution-toggle-icon">▼</span>
+                                        <span>查看执行过程</span>
+                                    </div>
+                                    <div class="execution-steps">
+                                        <div class="execution-step">
+                                            <span class="execution-step-time">14:32:16</span>
+                                            <span class="execution-step-icon">🔍</span>
+                                            <span class="execution-step-desc">知识库检索 "退货政策"</span>
+                                        </div>
+                                        <div class="execution-step">
+                                            <span class="execution-step-time">14:32:17</span>
+                                            <span class="execution-step-icon">📄</span>
+                                            <span class="execution-step-desc">匹配文档：退换货政策.pdf (相似度 0.89)</span>
+                                        </div>
+                                        <div class="execution-step">
+                                            <span class="execution-step-time">14:32:18</span>
+                                            <span class="execution-step-icon">✅</span>
+                                            <span class="execution-step-desc">生成回复</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- 知识引用 -->
+                                    <div class="knowledge-ref">
+                                        <div class="knowledge-ref-header">
+                                            <span>📎</span>
+                                            <span>知识引用</span>
+                                            <span class="knowledge-ref-file">退换货政策.pdf</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 用户消息 -->
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <div class="message-header">
+                                        <span class="message-role-icon">👤</span>
+                                        <span class="message-role">用户</span>
+                                        <span class="message-time">14:33:02</span>
+                                    </div>
+                                    <div class="message-content">运费谁承担？</div>
+                                </div>
+                            </div>
+
+                            <!-- Agent回复 -->
+                            <div class="message assistant">
+                                <div class="message-bubble">
+                                    <div class="message-header">
+                                        <span class="message-role-icon">🤖</span>
+                                        <span class="message-role">Agent</span>
+                                        <span class="message-time">14:33:05</span>
+                                        <span class="dislike-badge"><span class="dislike-badge-icon">👎</span>用户点踩</span>
+                                    </div>
+                                    <div class="message-content">一般情况下，7天无理由退货的运费由您承担。但如果是商品存在质量问题，运费由我们承担。</div>
+                                </div>
+                            </div>
+
+                            <!-- 用户消息 -->
+                            <div class="message user">
+                                <div class="message-bubble">
+                                    <div class="message-header">
+                                        <span class="message-role-icon">👤</span>
+                                        <span class="message-role">用户</span>
+                                        <span class="message-time">14:33:30</span>
+                                    </div>
+                                    <div class="message-content">好的，谢谢</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板03: 空状态 -->
+            <div class="artboard" id="artboard-03">
+                <div class="artboard-label">03 空状态</div>
+                <div style="display: flex; gap: 24px; padding: 24px; height: 100%;">
+                    <div class="session-list-panel">
+                        <div class="session-list-header">
+                            <span class="session-list-header-icon">📋</span>
+                            <span class="session-list-header-title">会话列表</span>
+                            <span class="session-list-header-count">共 0 条</span>
+                        </div>
+                        <div class="empty-state">
+                            <div class="empty-state-icon">📭</div>
+                            <div class="empty-state-title">暂无会话记录</div>
+                            <div class="empty-state-desc">Agent 部署后，真实用户的对话将在此显示。</div>
+                        </div>
+                    </div>
+                    <div class="session-detail-panel">
+                        <div class="empty-state">
+                            <div class="empty-state-icon">💬</div>
+                            <div class="empty-state-title">选择会话查看详情</div>
+                            <div class="empty-state-desc">从左侧列表中选择一个会话，这里将显示完整的对话内容。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板04: 列表选中态 -->
+            <div class="artboard" id="artboard-04">
+                <div class="artboard-label">04 列表选中态（hover + active）</div>
+                <div style="padding: 24px;">
+                    <div class="session-list-panel" style="width: 300px;">
+                        <div class="session-list-header">
+                            <span class="session-list-header-icon">📋</span>
+                            <span class="session-list-header-title">会话列表</span>
+                        </div>
+                        <div class="session-list">
+                            <div class="session-item active">
+                                <div class="session-item-user">微信用户小王</div>
+                                <div class="session-item-preview">你们的退货政策是什么？</div>
+                                <div class="session-item-meta">
+                                    <span>今天 14:32</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>5条</span>
+                                </div>
+                            </div>
+                            <div class="session-item" style="background: var(--bg-subtle);">
+                                <div class="session-item-user">a1b2c3d4 <span style="font-size: 11px; color: var(--text-muted); font-weight: 400;">← hover态</span></div>
+                                <div class="session-item-preview">有什么优惠活动吗？</div>
+                                <div class="session-item-meta">
+                                    <span>今天 13:15</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>3条</span>
+                                </div>
+                            </div>
+                            <div class="session-item">
+                                <div class="session-item-user">官网访客123 <span style="font-size: 11px; color: var(--text-muted); font-weight: 400;">← 默认态</span></div>
+                                <div class="session-item-preview">我想了解一下你们的产品</div>
+                                <div class="session-item-meta">
+                                    <span>昨天 16:45</span>
+                                    <span class="session-item-meta-dot"></span>
+                                    <span>8条</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); font-size: 13px; color: var(--text-secondary);">
+                        <strong>状态说明：</strong><br>
+                        • 默认态：白色背景<br>
+                        • Hover态：#f3f4f6 背景<br>
+                        • 选中态：#eff6ff 背景 + 左侧 3px 主色边框
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板05: 执行过程收起 -->
+            <div class="artboard" id="artboard-05">
+                <div class="artboard-label">05 执行过程收起</div>
+                <div style="padding: 24px; max-width: 600px;">
+                    <div class="message assistant">
+                        <div class="message-bubble">
+                            <div class="message-header">
+                                <span class="message-role-icon">🤖</span>
+                                <span class="message-role">Agent</span>
+                                <span class="message-time">14:32:18</span>
+                            </div>
+                            <div class="message-content">我们支持7天无理由退货，您只需要保持商品原包装完好，在收货后7天内申请退货即可。</div>
+
+                            <div class="execution-toggle">
+                                <span class="execution-toggle-icon">▼</span>
+                                <span>查看执行过程</span>
+                            </div>
+                            <!-- 执行过程默认收起，不显示 -->
+
+                            <div class="knowledge-ref">
+                                <div class="knowledge-ref-header">
+                                    <span>📎</span>
+                                    <span>知识引用</span>
+                                    <span class="knowledge-ref-file">退换货政策.pdf</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); font-size: 13px; color: var(--text-secondary);">
+                        <strong>说明：</strong>执行过程默认收起，点击「查看执行过程」展开
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板06: 执行过程展开 -->
+            <div class="artboard" id="artboard-06">
+                <div class="artboard-label">06 执行过程展开</div>
+                <div style="padding: 24px; max-width: 600px;">
+                    <div class="message assistant">
+                        <div class="message-bubble">
+                            <div class="message-header">
+                                <span class="message-role-icon">🤖</span>
+                                <span class="message-role">Agent</span>
+                                <span class="message-time">14:32:18</span>
+                            </div>
+                            <div class="message-content">我们支持7天无理由退货，您只需要保持商品原包装完好，在收货后7天内申请退货即可。</div>
+
+                            <div class="execution-toggle expanded">
+                                <span class="execution-toggle-icon">▼</span>
+                                <span>收起执行过程</span>
+                            </div>
+                            <div class="execution-steps show">
+                                <div class="execution-step">
+                                    <span class="execution-step-time">14:32:16</span>
+                                    <span class="execution-step-icon">🔍</span>
+                                    <span class="execution-step-desc">知识库检索 "退货政策"</span>
+                                </div>
+                                <div class="execution-step">
+                                    <span class="execution-step-time">14:32:17</span>
+                                    <span class="execution-step-icon">📄</span>
+                                    <span class="execution-step-desc">匹配文档：退换货政策.pdf (相似度 0.89)</span>
+                                </div>
+                                <div class="execution-step">
+                                    <span class="execution-step-time">14:32:18</span>
+                                    <span class="execution-step-icon">✅</span>
+                                    <span class="execution-step-desc">生成回复</span>
+                                </div>
+                            </div>
+
+                            <div class="knowledge-ref">
+                                <div class="knowledge-ref-header">
+                                    <span>📎</span>
+                                    <span>知识引用</span>
+                                    <span class="knowledge-ref-file">退换货政策.pdf</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 20px; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); font-size: 13px; color: var(--text-secondary);">
+                        <strong>说明：</strong>点击后展开执行过程时间轴，显示知识检索、文档匹配、生成回复等步骤
+                    </div>
+                </div>
+            </div>
+
+            <!-- 交互模式的默认内容 -->
+            <div id="interactive-content" style="display: flex; gap: 24px; height: 100%;">
+                <!-- 会话列表 -->
+                <div class="session-list-panel">
+                    <div class="session-list-header">
+                        <span class="session-list-header-icon">📋</span>
+                        <span class="session-list-header-title">会话列表</span>
+                        <span class="session-list-header-count">共 12 条</span>
+                    </div>
+                    <div class="session-list">
+                        <div class="session-item active" onclick="selectSession(this)">
+                            <div class="session-item-user">微信用户小王</div>
+                            <div class="session-item-preview">你们的退货政策是什么？</div>
+                            <div class="session-item-meta">
+                                <span>今天 14:32</span>
+                                <span class="session-item-meta-dot"></span>
+                                <span>5条</span>
+                            </div>
+                        </div>
+                        <div class="session-item" onclick="selectSession(this)">
+                            <div class="session-item-user">a1b2c3d4</div>
+                            <div class="session-item-preview">有什么优惠活动吗？</div>
+                            <div class="session-item-meta">
+                                <span>今天 13:15</span>
+                                <span class="session-item-meta-dot"></span>
+                                <span>3条</span>
+                            </div>
+                        </div>
+                        <div class="session-item" onclick="selectSession(this)">
+                            <div class="session-item-user">官网访客123</div>
+                            <div class="session-item-preview">我想了解一下你们的产品</div>
+                            <div class="session-item-meta">
+                                <span>昨天 16:45</span>
+                                <span class="session-item-meta-dot"></span>
+                                <span>8条</span>
+                            </div>
+                        </div>
+                        <div class="session-item" onclick="selectSession(this)">
+                            <div class="session-item-user">小红书用户甜甜</div>
+                            <div class="session-item-preview">这个颜色还有其他款式吗？</div>
+                            <div class="session-item-meta">
+                                <span>昨天 10:22</span>
+                                <span class="session-item-meta-dot"></span>
+                                <span>12条</span>
+                            </div>
+                        </div>
+                        <div class="session-item" onclick="selectSession(this)">
+                            <div class="session-item-user">b2c3d4e5</div>
+                            <div class="session-item-preview">发货需要几天？</div>
+                            <div class="session-item-meta">
+                                <span>02/03 09:15</span>
+                                <span class="session-item-meta-dot"></span>
+                                <span>4条</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 会话详情 -->
+                <div class="session-detail-panel">
+                    <div class="session-detail-header">
+                        <div class="session-detail-user">微信用户小王</div>
+                        <div class="session-detail-meta">开始时间：今天 14:30 · 共 5 条消息</div>
+                    </div>
+                    <div class="session-detail-content">
+                        <div class="message user">
+                            <div class="message-bubble">
+                                <div class="message-header">
+                                    <span class="message-role-icon">👤</span>
+                                    <span class="message-role">用户</span>
+                                    <span class="message-time">14:32:15</span>
+                                </div>
+                                <div class="message-content">你们的退货政策是什么？</div>
+                            </div>
+                        </div>
+                        <div class="message assistant">
+                            <div class="message-bubble">
+                                <div class="message-header">
+                                    <span class="message-role-icon">🤖</span>
+                                    <span class="message-role">Agent</span>
+                                    <span class="message-time">14:32:18</span>
+                                </div>
+                                <div class="message-content">我们支持7天无理由退货，您只需要保持商品原包装完好，在收货后7天内申请退货即可。如需退货，可以在订单详情页点击"申请退货"。</div>
+                                <div class="execution-toggle" onclick="toggleExecution(this)">
+                                    <span class="execution-toggle-icon">▼</span>
+                                    <span>查看执行过程</span>
+                                </div>
+                                <div class="execution-steps">
+                                    <div class="execution-step">
+                                        <span class="execution-step-time">14:32:16</span>
+                                        <span class="execution-step-icon">🔍</span>
+                                        <span class="execution-step-desc">知识库检索 "退货政策"</span>
+                                    </div>
+                                    <div class="execution-step">
+                                        <span class="execution-step-time">14:32:17</span>
+                                        <span class="execution-step-icon">📄</span>
+                                        <span class="execution-step-desc">匹配文档：退换货政策.pdf (相似度 0.89)</span>
+                                    </div>
+                                    <div class="execution-step">
+                                        <span class="execution-step-time">14:32:18</span>
+                                        <span class="execution-step-icon">✅</span>
+                                        <span class="execution-step-desc">生成回复</span>
+                                    </div>
+                                </div>
+                                <div class="knowledge-ref">
+                                    <div class="knowledge-ref-header">
+                                        <span>📎</span>
+                                        <span>知识引用</span>
+                                        <span class="knowledge-ref-file">退换货政策.pdf</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="message user">
+                            <div class="message-bubble">
+                                <div class="message-header">
+                                    <span class="message-role-icon">👤</span>
+                                    <span class="message-role">用户</span>
+                                    <span class="message-time">14:33:02</span>
+                                </div>
+                                <div class="message-content">运费谁承担？</div>
+                            </div>
+                        </div>
+                        <div class="message assistant">
+                            <div class="message-bubble">
+                                <div class="message-header">
+                                    <span class="message-role-icon">🤖</span>
+                                    <span class="message-role">Agent</span>
+                                    <span class="message-time">14:33:05</span>
+                                    <span class="dislike-badge"><span class="dislike-badge-icon">👎</span>用户点踩</span>
+                                </div>
+                                <div class="message-content">一般情况下，7天无理由退货的运费由您承担。但如果是商品存在质量问题，运费由我们承担。</div>
+                            </div>
+                        </div>
+                        <div class="message user">
+                            <div class="message-bubble">
+                                <div class="message-header">
+                                    <span class="message-role-icon">👤</span>
+                                    <span class="message-role">用户</span>
+                                    <span class="message-time">14:33:30</span>
+                                </div>
+                                <div class="message-content">好的，谢谢</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 模式切换器 -->
+    <div class="mode-switcher">
+        <button class="mode-btn active" onclick="setMode('interactive')">交互模式</button>
+        <button class="mode-btn" onclick="setMode('artboard')">画板模式</button>
+    </div>
+
+    <script>
+        // 模式切换
+        function setMode(mode) {
+            const body = document.body;
+            const btns = document.querySelectorAll('.mode-btn');
+            const interactiveContent = document.getElementById('interactive-content');
+            const artboards = document.querySelectorAll('.artboard');
+
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (mode === 'artboard') {
+                body.classList.add('artboard-mode');
+                interactiveContent.style.display = 'none';
+            } else {
+                body.classList.remove('artboard-mode');
+                interactiveContent.style.display = 'flex';
+            }
+        }
+
+        // 时间筛选
+        function setTimeFilter(btn, filter) {
+            document.querySelectorAll('.time-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // 实际应用中这里会触发数据刷新
+            console.log('Filter:', filter);
+        }
+
+        // 会话选中
+        function selectSession(item) {
+            document.querySelectorAll('.session-item').forEach(i => i.classList.remove('active'));
+            item.classList.add('active');
+        }
+
+        // 执行过程展开/收起
+        function toggleExecution(toggle) {
+            toggle.classList.toggle('expanded');
+            const steps = toggle.nextElementSibling;
+            steps.classList.toggle('show');
+
+            const text = toggle.querySelector('span:last-child');
+            if (toggle.classList.contains('expanded')) {
+                text.textContent = '收起执行过程';
+            } else {
+                text.textContent = '查看执行过程';
+            }
+        }
+    </script>
+</body>
+
+</html>
