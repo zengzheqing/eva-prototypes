@@ -22,7 +22,7 @@
     -->
 
     <!-- ========== @FROZEN: 设计系统核心样式 ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-04 18:54) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-07 12:03) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -3181,7 +3181,7 @@ textarea.input {
         .gap-blocking-desc { font-size: 12px; color: var(--eva-text-secondary); line-height: 1.5; }
         .gap-blocking-actions { display: flex; gap: 8px; margin-top: 4px; }
 
-        /* 题目模块 meta 信息排版 */
+        /* 意图/问题模块 meta 信息排版 */
         .meta-row { display: flex; align-items: flex-start; gap: 10px; margin-top: 8px; font-size: 12px; line-height: 1.5; }
         .meta-label { color: var(--eva-text-tertiary); min-width: 56px; flex-shrink: 0; }
         .meta-value { color: var(--eva-text-primary); }
@@ -3696,13 +3696,13 @@ textarea.input {
                             </div>
                             <div style="border-top:1px dashed #e5e7eb;padding-top:12px;display:grid;grid-template-columns:1.2fr .8fr;gap:10px;">
                                 <div style="background:white;border:1px solid #e5e7eb;border-radius:14px;padding:10px;">
-                                    <div style="font-size:12px;font-weight:900;margin-bottom:8px;">&#128203; 待处理题目</div>
-                                    <div style="font-size:12px;color:#6b7280;line-height:1.6;">暂无待处理题目。可从题库补充题目，或等待新的点踩进入队列。</div>
+                                    <div style="font-size:12px;font-weight:900;margin-bottom:8px;">&#128203; 待处理</div>
+                                    <div style="font-size:12px;color:#6b7280;line-height:1.6;">暂无待处理。可补充更多，或等待新的点踩进入队列。</div>
                                 </div>
                                 <div style="background:white;border:1px solid #e5e7eb;border-radius:14px;padding:10px;">
                                     <div style="font-size:12px;font-weight:900;margin-bottom:8px;">&#10024; 操作</div>
                                     <div style="display:flex;justify-content:flex-end;gap:8px;">
-                                        <div style="padding:8px 10px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;font-size:12px;font-weight:800;color:#374151;">补充题目</div>
+                                        <div style="padding:8px 10px;border-radius:12px;border:1px solid #e5e7eb;background:#fff;font-size:12px;font-weight:800;color:#374151;">➕</div>
                                         <div style="padding:8px 10px;border-radius:12px;background:#8b5cf6;font-size:12px;font-weight:900;color:#fff;">升级</div>
                                     </div>
                                 </div>
@@ -3735,7 +3735,7 @@ textarea.input {
                                 </div>
                             </div>
                             <div style="padding:12px 14px;border-top:1px solid #e5e7eb;display:flex;justify-content:flex-end;gap:10px;">
-                                <div style="padding:8px 10px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;font-size:12px;font-weight:800;">移除此题</div>
+                                <div style="padding:8px 10px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;font-size:12px;font-weight:800;">移除</div>
                                 <div style="padding:8px 10px;border-radius:10px;background:#6366f1;color:#fff;font-size:12px;font-weight:900;">提交</div>
                             </div>
                         </div>
@@ -3785,7 +3785,7 @@ textarea.input {
                                         <div style="padding:8px 10px;border-radius:10px;background:#3b82f6;color:#fff;font-size:12px;font-weight:900;">去补充</div>
                                     </div>
                                 </div>
-                                <div style="font-size:12px;color:#9ca3af;">（示意：Banner显示时，推荐答案/移除此题/提交按钮禁用）</div>
+                                <div style="font-size:12px;color:#9ca3af;">（示意：Banner显示时，推荐答案/移除/提交按钮禁用）</div>
                             </div>
                         </div>
                     </div>
@@ -3875,7 +3875,7 @@ textarea.input {
 
                     <div class="summary-pills" aria-label="汇总指标">
                         <div class="pill"><span class="k">可升级</span><span class="v success" id="metricEvolvable">-</span></div>
-                        <div class="pill"><span class="k">待处理题目</span><span class="v info" id="metricPending">-</span></div>
+                        <div class="pill"><span class="k">待处理</span><span class="v info" id="metricPending">-</span></div>
                         <div class="pill" title="今日已完成的进化次数"><span class="k">今日已升级</span><span class="v warning" id="metricToday">-</span></div>
                     </div>
                 </div>
@@ -4680,7 +4680,7 @@ textarea.input {
 	            const gapBarHtml = gapCount > 0 ? `
 	                <div class="detail-gap-bar">
 	                    <span class="detail-gap-bar-icon">⚠️</span>
-	                    <span class="detail-gap-bar-text">「${escapeHtml(a.name)}」有 <strong>${gapCount}</strong> 道题目因知识缺口受阻，建议先补充知识库再继续进化</span>
+	                    <span class="detail-gap-bar-text">「${escapeHtml(a.name)}」有 <strong>${gapCount}</strong> 项因知识缺口受阻，建议先补充知识库再继续进化</span>
 	                    <span class="detail-gap-bar-actions">
 	                        <button class="btn btn-xs btn-ghost" type="button" onclick="this.closest('.detail-gap-bar').style.display='none'">忽略提示</button>
 	                        <button class="btn btn-xs btn-secondary" type="button" onclick="toast('info','跳转','正在打开知识库…')">去补充</button>
@@ -4693,7 +4693,7 @@ textarea.input {
 	            // 队列内容：根据状态区分
 	            let queueHtml = '';
 	            if (a.queue && a.queue.length) {
-	                // 有题目（MVP移除来源标签，只保留题目内容和知识缺口标签）
+	                // 有待处理项（MVP移除来源标签，只保留内容和知识缺口标签）
 	                queueHtml = a.queue.slice(0, 10).map((q) => {
 	                    const titleHtml = renderQueueTitleInline(q, 'queue-q-title');
 	                    return `
@@ -4721,10 +4721,10 @@ textarea.input {
 	                queueHtml = `
 	                    <div class="queue-empty-guide">
 	                        <div class="queue-empty-icon">📚</div>
-	                        <div class="queue-empty-title">进化题目已用完</div>
-	                        <div class="queue-empty-desc">补充更多题目，推动能力进化</div>
+	                        <div class="queue-empty-title">暂无待处理</div>
+	                        <div class="queue-empty-desc">点击 ➕ 添加更多</div>
 	                        <button class="queue-empty-btn" type="button" data-action="open-qbank-overview" data-ability-id="${escapeHtml(a.id)}">
-	                            <span>➕</span> 从题库补充
+	                            <span>➕</span>
 	                        </button>
 	                    </div>
 	                `;
@@ -4767,7 +4767,7 @@ textarea.input {
                     ${gapBarHtml}
                     <div class="detail-grid">
                         <div class="detail-section">
-                            <h4>&#128203; 待处理题目</h4>
+                            <h4>&#128203; 待处理</h4>
                             <div class="queue-list">${queueHtml}</div>
                         </div>
 
@@ -4802,7 +4802,7 @@ textarea.input {
                     <div class="dot"></div>
                     <div>
                         <div class="t">${escapeHtml(h.from)} &#8594; ${escapeHtml(h.to)} <span style="margin-left:8px;color:var(--eva-text-tertiary);font-weight:700;">${escapeHtml(h.at)}</span></div>
-                        <div class="d">进化题目 ${h.stats.total} · 采纳回答 ${h.stats.chosen} · 自答 ${h.stats.custom} · 移除 ${h.stats.removed}</div>
+                        <div class="d">已处理 ${h.stats.total} · 采纳 ${h.stats.chosen} · 自答 ${h.stats.custom} · 移除 ${h.stats.removed}</div>
                     </div>
                 </div>
             `).join('');
@@ -5344,7 +5344,7 @@ textarea.input {
 	                },
 	                // cancelCallback：点撤销，取消移除，停留当前题
 	                () => {
-	                    toast('info', '已取消', '继续当前题目');
+	                    toast('info', '已取消', '继续处理');
 	                },
 	                2500
 	            );
@@ -5421,10 +5421,10 @@ textarea.input {
 	                return `
 	                    <div class="wb-empty-guide">
 	                        <div class="wb-empty-guide-icon">📚</div>
-	                        <div class="wb-empty-guide-title">进化题目已用完</div>
-	                        <div class="wb-empty-guide-desc">补充更多题目，推动能力进化</div>
+	                        <div class="wb-empty-guide-title">暂无待处理</div>
+	                        <div class="wb-empty-guide-desc">点击 ➕ 添加更多</div>
 	                        <button class="wb-empty-guide-btn" type="button" data-tune-action="open-qbank">
-	                            <span>➕</span><span class="text"> 从题库补充</span>
+	                            <span>➕</span>
 	                        </button>
 	                    </div>
 	                `;
@@ -5456,7 +5456,7 @@ textarea.input {
 	            // 底部常驻按钮
 	            const addBtn = `
 	                <button class="wb-add-from-qbank" type="button" data-tune-action="open-qbank">
-	                    <span class="icon">➕</span><span class="text"> 从题库补充</span>
+	                    <span class="icon">➕</span>
 	                </button>
 	            `;
 
@@ -5489,17 +5489,21 @@ textarea.input {
 		                </button>
 		            ` : '';
 
+		            // 根据来源显示不同标题：题库→评测题目，点踩→用户意图
+		            const isFromQbank = q && (q.fromQbank || q.channel === 'official' || q.source === '题库');
+		            const questionTitle = isFromQbank ? '❓ 评测题目' : '&#128161; 用户意图';
+
 		            const questionBlock = q ? `
 		                <div class="callout" style="min-height:140px;">
 		                    ${contextBtn}
-		                    <div class="callout-title">&#128161; 用户意图</div>
+		                    <div class="callout-title">${questionTitle}</div>
 		                    <div class="callout-desc" style="margin-top:8px;font-size:13px;color:var(--eva-text-primary);line-height:1.7;">${escapeHtml(q.title)}</div>
 		                    ${renderQuestionMeta(q)}
 		                </div>
 		            ` : `
 		                <div class="callout">
-		                    <div class="callout-title">&#128235; 队列为空</div>
-		                    <div class="callout-desc">暂无待处理的用户意图。</div>
+		                    <div class="callout-title">&#128235; 暂无待处理</div>
+		                    <div class="callout-desc">从左侧添加评测题</div>
 		                </div>
 		            `;
 
@@ -5526,7 +5530,7 @@ textarea.input {
 			                            </div>
 			                        </div>
 			                        <div style="display:flex;justify-content:flex-end;margin-top:10px;">
-			                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+			                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除</button>
 			                        </div>
 			                    ` : `
 			                    <div class="mode-grid">
@@ -5546,7 +5550,7 @@ textarea.input {
 			                        </button>
 			                    </div>
 			                    <div style="display:flex;justify-content:flex-end;margin-top:10px;">
-			                        <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+			                        <button class="btn btn-ghost" type="button" data-tune-action="remove">移除</button>
 			                    </div>
 			                    `}
 			                </div>
@@ -5565,7 +5569,7 @@ textarea.input {
 		                            </div>
 		                        ` : ''}
 		                        <div class="tune-row" style="justify-content:space-between;align-items:center;">
-		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除</button>
 		                            <div style="display:flex;gap:8px;">
 		                                <button class="btn btn-ghost" type="button" data-tune-action="go-custom">直接输入正确答案</button>
 		                                <button class="btn btn-primary" type="button" data-tune-action="primary" data-next="generate">生成推荐回答</button>
@@ -5598,7 +5602,7 @@ textarea.input {
 		                            <div style="font-size:13px;color:var(--eva-text-secondary);">网络波动或服务繁忙，请稍后重试</div>
 		                        </div>
 		                        <div class="tune-row" style="justify-content:space-between;align-items:center;margin-top:16px;">
-		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除</button>
 		                            <div style="display:flex;gap:8px;">
 		                                <button class="btn btn-ghost" type="button" data-tune-action="retry-generate">重新生成</button>
 		                                <button class="btn btn-primary" type="button" data-tune-action="go-custom">直接输入正确答案</button>
@@ -5629,7 +5633,7 @@ textarea.input {
 		                            `).join('')}
 		                        </div>
 		                        <div class="tune-row" style="justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
-		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除</button>
 		                            <div style="display:flex;gap:8px;flex-wrap:wrap;">
 		                                <button class="btn btn-ghost" type="button" data-tune-action="edit-feedback">修改点评</button>
 		                                <button class="btn btn-ghost" type="button" data-tune-action="go-custom">直接输入正确答案</button>
@@ -5647,7 +5651,7 @@ textarea.input {
 		                    <div class="tune-form">
 		                        <textarea class="input" id="tuneDirectAnswer" rows="4" placeholder="请输入正确答案"></textarea>
 		                        <div class="tune-row" style="justify-content:space-between;align-items:center;">
-		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除此题</button>
+		                            <button class="btn btn-ghost" type="button" data-tune-action="remove">移除</button>
 		                            <div style="display:flex;gap:8px;">
 		                                <button class="btn btn-ghost" type="button" data-tune-action="go-feedback">点评Agent回答</button>
 		                                <button class="btn btn-primary" type="button" data-tune-action="primary" data-next="submit-custom">校验并提交</button>
@@ -5737,7 +5741,7 @@ textarea.input {
 		                    <div class="wb-side">
 		                        <div class="wb-side-head">
 	                            <div>
-	                                <div class="wb-side-title">待处理题目 (${a.pending})</div>
+	                                <div class="wb-side-title">待处理 (${a.pending})</div>
 	                                <button class="demo-clear-btn" type="button" data-tune-action="demo-clear-queue" title="清空队列（仅用于产品演示）">🧹 清空（演示）</button>
 	                            </div>
 	                        </div>
@@ -5807,7 +5811,7 @@ textarea.input {
 		        }
 
 		        function isInQueue(a, qbankId) {
-		            // 检查题目是否已在队列中（MVP只使用题库）
+		            // 检查是否已在队列中（MVP只使用题库）
 		            const prefix = 'qbank_o_';
 		            return a.queue && a.queue.some(q => q.id === prefix + qbankId);
 		        }
@@ -5834,7 +5838,7 @@ textarea.input {
 		            };
 
 		            const listHtml = pageList.length === 0
-		                ? `<div class="qbank-empty"><div class="qbank-empty-icon">📭</div><div class="qbank-empty-text">暂无符合条件的题目</div></div>`
+		                ? `<div class="qbank-empty"><div class="qbank-empty-icon">📭</div><div class="qbank-empty-text">暂无符合条件</div></div>`
 		                : pageList.map(q => {
 		                    const fullId = 'qbank_o_' + q.id;
 		                    const inQueue = isInQueue(a, q.id);
@@ -5865,11 +5869,11 @@ textarea.input {
 		            ` : '';
 
 		            openModal({
-		                title: '补充题目',
+		                title: '补充评测题',
 		                size: 'qbank-modal',
 		                bodyHtml: `
 		                    <div class="qbank-filters" style="padding-bottom: 8px; margin-bottom: 8px;">
-		                        <input type="text" class="qbank-search" id="qbankSearch" placeholder="搜索题目..." value="${escapeHtml(qbankState.searchQuery)}" style="flex:1;">
+		                        <input type="text" class="qbank-search" id="qbankSearch" placeholder="搜索..." value="${escapeHtml(qbankState.searchQuery)}" style="flex:1;">
 		                    </div>
 		                    <div class="qbank-list-wrap">
 		                        <label class="qbank-select-all" id="qbankSelectAll" style="display:flex; align-items:center; gap:8px;">
@@ -5983,7 +5987,7 @@ textarea.input {
 		            const wasEmpty = !a.queue || a.queue.length === 0;
 		            let firstAddedId = null;
 
-		            // 添加选中的题目到队列（MVP只使用题库）
+		            // 添加选中项到队列（MVP只使用题库）
 		            qbankState.selectedIds.forEach(fullId => {
 		                const qbankId = fullId.replace('qbank_o_', '');
 		                const list = getQbankList(a.id, 'official');
@@ -6008,7 +6012,7 @@ textarea.input {
 		            // 更新 pending 计数
 		            a.pending = (a.queue || []).length;
 
-		            // 如果之前队列为空，自动选中第一个添加的题目（仅二级页面）
+		            // 如果之前队列为空，自动选中第一个添加的项（仅二级页面）
 		            if (uiState.route === 'tuning' && wasEmpty && firstAddedId) {
 		                uiState.tuningQid = firstAddedId;
 		            }
@@ -6023,7 +6027,7 @@ textarea.input {
 		                renderAll(); // 刷新左侧卡片的 pending 数字
 		            }
 
-		            toast('success', '添加成功', `已添加 ${addedCount} 道题目到进化队列`, 2500);
+		            toast('success', '添加成功', `已添加 ${addedCount} 项`, 2500);
 		        }
 
 		        function handleTuneAction(action, el) {
@@ -6206,7 +6210,7 @@ textarea.input {
                 bodyHtml: `
                     <div class="callout">
                         <div class="callout-title">&#8505; 什么是知识缺口？</div>
-                        <div class="callout-desc">当题目所需资料在知识库中缺失时，进化无法解决根因。请先补充资料，再继续评测与进化。</div>
+                        <div class="callout-desc">当所需资料在知识库中缺失时，进化无法解决根因。请先补充资料，再继续评测与进化。</div>
                     </div>
                     <div class="callout" style="border-style:dashed;">
                         <div class="callout-title">&#128204; 处理方式</div>
@@ -6273,7 +6277,7 @@ textarea.input {
                     </div>
                     <div class="callout">
                         <div class="callout-title">&#128202; 本次进化摘要</div>
-                        <div class="callout-desc">进化题目数：<b>${s.total || 50}</b> 题 · 采纳回答：<b>${s.chosen || 32}</b> 题 · 自答：<b>${s.custom || 18}</b> 题 · 移除：<b>${s.removed || 0}</b> 题</div>
+                        <div class="callout-desc">已处理：<b>${s.total || 50}</b> · 采纳：<b>${s.chosen || 32}</b> · 自答：<b>${s.custom || 18}</b> · 移除：<b>${s.removed || 0}</b></div>
                     </div>
                     <div class="callout" style="border-style:dashed;">
                         <div class="callout-title">&#128161; 发布后</div>
