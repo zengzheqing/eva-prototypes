@@ -10,7 +10,7 @@
     
     
     <!-- ========== @END-FROZEN ========== -->
-    <!-- ========== 内联样式 (生成于 2026-02-06 17:39) ========== -->
+    <!-- ========== 内联样式 (生成于 2026-02-07 11:46) ========== -->
 <style>
 /* ========== eva-base.css ========== */
 /**
@@ -1552,18 +1552,18 @@ textarea.input {
         .content {
             flex: 1;
             display: flex;
-            padding: 24px;
-            gap: 24px;
+            padding: 0;
+            gap: 0;
             overflow: hidden;
         }
 
         /* ========== 会话列表 ========== */
         .session-list-panel {
-            width: 300px;
-            flex-shrink: 0;
+            flex: 0 0 35%;
+            min-width: 300px;
+            max-width: 420px;
             background: white;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
+            border-right: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -1599,7 +1599,7 @@ textarea.input {
         }
 
         .session-item {
-            padding: 16px 20px;
+            padding: 12px 16px;
             border-bottom: 1px solid var(--border-subtle);
             cursor: pointer;
             transition: all 0.2s;
@@ -1654,8 +1654,6 @@ textarea.input {
         .session-detail-panel {
             flex: 1;
             background: white;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
             display: flex;
             flex-direction: column;
             overflow: hidden;
@@ -1682,6 +1680,9 @@ textarea.input {
             flex: 1;
             overflow-y: auto;
             padding: 24px;
+            max-width: 960px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         /* ========== 消息气泡 ========== */
@@ -1692,15 +1693,15 @@ textarea.input {
         }
 
         .message.user {
-            align-items: flex-start;
-        }
-
-        .message.assistant {
             align-items: flex-end;
         }
 
+        .message.assistant {
+            align-items: flex-start;
+        }
+
         .message-bubble {
-            max-width: 75%;
+            max-width: 85%;
             padding: 14px 18px;
             border-radius: 16px;
             position: relative;
@@ -1708,12 +1709,12 @@ textarea.input {
 
         .message.user .message-bubble {
             background: var(--bg-subtle);
-            border-bottom-left-radius: 4px;
+            border-bottom-right-radius: 4px;
         }
 
         .message.assistant .message-bubble {
             background: var(--accent-light);
-            border-bottom-right-radius: 4px;
+            border-bottom-left-radius: 4px;
         }
 
         .message-header {
@@ -1949,6 +1950,40 @@ textarea.input {
             to { transform: rotate(360deg); }
         }
 
+        /* ========== 消息状态标识 ========== */
+        .message-status-canceled {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #d97706;
+            margin-left: 8px;
+        }
+
+        .message-status-failed {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #dc2626;
+            margin-left: 8px;
+        }
+
+        .message-content-partial {
+            opacity: 0.6;
+            font-style: italic;
+        }
+
         /* ========== 画板模式 ========== */
         .artboard-mode .content {
             flex-direction: column;
@@ -2099,7 +2134,7 @@ textarea.input {
             <div class="artboard" id="artboard-01">
                 <div class="artboard-label">01 骨架屏</div>
                 <div style="display: flex; gap: 24px; padding: 24px; height: 100%;">
-                    <div class="session-list-panel" style="width: 300px;">
+                    <div class="session-list-panel" style="width: 360px;">
                         <div class="session-list-header">
                             <span class="session-list-header-icon">📋</span>
                             <span class="session-list-header-title">会话列表</span>
@@ -2151,7 +2186,7 @@ textarea.input {
                         <div class="session-list-header">
                             <span class="session-list-header-icon">📋</span>
                             <span class="session-list-header-title">会话列表</span>
-                            <span class="session-list-header-count">共 12 条</span>
+                            <span class="session-list-header-count">今日/总会话：12/156</span>
                         </div>
                         <div class="session-list">
                             <div class="session-item active" onclick="selectSession(this)">
@@ -2160,7 +2195,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>今天 14:32</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>5条</span>
+                                    <span>5条消息</span>
                                 </div>
                             </div>
                             <div class="session-item" onclick="selectSession(this)">
@@ -2169,7 +2204,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>今天 13:15</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>3条</span>
+                                    <span>3条消息</span>
                                 </div>
                             </div>
                             <div class="session-item" onclick="selectSession(this)">
@@ -2178,7 +2213,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>昨天 16:45</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>8条</span>
+                                    <span>8条消息</span>
                                 </div>
                             </div>
                             <div class="session-item" onclick="selectSession(this)">
@@ -2187,7 +2222,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>昨天 10:22</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>12条</span>
+                                    <span>12条消息</span>
                                 </div>
                             </div>
                             <div class="session-item" onclick="selectSession(this)">
@@ -2196,7 +2231,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>02/03 09:15</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>4条</span>
+                                    <span>4条消息</span>
                                 </div>
                             </div>
                         </div>
@@ -2314,7 +2349,7 @@ textarea.input {
                         <div class="session-list-header">
                             <span class="session-list-header-icon">📋</span>
                             <span class="session-list-header-title">会话列表</span>
-                            <span class="session-list-header-count">共 0 条</span>
+                            <span class="session-list-header-count">今日/总会话：0/0</span>
                         </div>
                         <div class="empty-state">
                             <div class="empty-state-icon">📭</div>
@@ -2336,7 +2371,7 @@ textarea.input {
             <div class="artboard" id="artboard-04">
                 <div class="artboard-label">04 列表选中态（hover + active）</div>
                 <div style="padding: 24px;">
-                    <div class="session-list-panel" style="width: 300px;">
+                    <div class="session-list-panel" style="width: 360px;">
                         <div class="session-list-header">
                             <span class="session-list-header-icon">📋</span>
                             <span class="session-list-header-title">会话列表</span>
@@ -2348,7 +2383,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>今天 14:32</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>5条</span>
+                                    <span>5条消息</span>
                                 </div>
                             </div>
                             <div class="session-item" style="background: var(--bg-subtle);">
@@ -2357,7 +2392,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>今天 13:15</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>3条</span>
+                                    <span>3条消息</span>
                                 </div>
                             </div>
                             <div class="session-item">
@@ -2366,7 +2401,7 @@ textarea.input {
                                 <div class="session-item-meta">
                                     <span>昨天 16:45</span>
                                     <span class="session-item-meta-dot"></span>
-                                    <span>8条</span>
+                                    <span>8条消息</span>
                                 </div>
                             </div>
                         </div>
@@ -2464,6 +2499,72 @@ textarea.input {
                 </div>
             </div>
 
+            <!-- 画板07: 消息取消状态 -->
+            <div class="artboard" id="artboard-07">
+                <div class="artboard-label">07 消息取消状态</div>
+                <div style="padding: 24px; max-width: 600px;">
+                    <div class="message user">
+                        <div class="message-bubble">
+                            <div class="message-header">
+                                <span class="message-role-icon">👤</span>
+                                <span class="message-role">用户</span>
+                                <span class="message-time">14:35:10</span>
+                            </div>
+                            <div class="message-content">能帮我详细介绍一下你们的售后服务吗？</div>
+                        </div>
+                    </div>
+
+                    <div class="message assistant">
+                        <div class="message-bubble">
+                            <div class="message-header">
+                                <span class="message-role-icon">🤖</span>
+                                <span class="message-role">Agent</span>
+                                <span class="message-time">14:35:12</span>
+                                <span class="message-status-canceled">⚠ 已取消</span>
+                            </div>
+                            <div class="message-content message-content-partial">我们提供全方位的售后服务保障。首先，所有商品均享受7天无理由退货服务，您只需要...</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); font-size: 13px; color: var(--text-secondary);">
+                        <strong>说明：</strong>C端用户在 Agent 生成过程中取消，显示已输出的部分内容 + 已取消标识。内容以半透明斜体表示未完成。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 画板08: 消息失败状态 -->
+            <div class="artboard" id="artboard-08">
+                <div class="artboard-label">08 消息失败状态</div>
+                <div style="padding: 24px; max-width: 600px;">
+                    <div class="message user">
+                        <div class="message-bubble">
+                            <div class="message-header">
+                                <span class="message-role-icon">👤</span>
+                                <span class="message-role">用户</span>
+                                <span class="message-time">14:36:40</span>
+                            </div>
+                            <div class="message-content">你们支持哪些支付方式？</div>
+                        </div>
+                    </div>
+
+                    <div class="message assistant">
+                        <div class="message-bubble" style="background: #fef2f2;">
+                            <div class="message-header">
+                                <span class="message-role-icon">🤖</span>
+                                <span class="message-role">Agent</span>
+                                <span class="message-time">14:36:45</span>
+                                <span class="message-status-failed">✕ 生成失败</span>
+                            </div>
+                            <div class="message-content" style="color: var(--text-muted);">消息生成失败</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; padding: 16px; background: var(--bg-subtle); border-radius: var(--radius); font-size: 13px; color: var(--text-secondary);">
+                        <strong>说明：</strong>Agent 回复生成过程中出错，显示失败状态标识。气泡背景变为浅红色。
+                    </div>
+                </div>
+            </div>
+
             <!-- 交互模式的默认内容 -->
             <div id="interactive-content" style="display: flex; gap: 24px; height: 100%;">
                 <!-- 会话列表 -->
@@ -2471,7 +2572,7 @@ textarea.input {
                     <div class="session-list-header">
                         <span class="session-list-header-icon">📋</span>
                         <span class="session-list-header-title">会话列表</span>
-                        <span class="session-list-header-count">共 12 条</span>
+                        <span class="session-list-header-count">今日/总会话：12/156</span>
                     </div>
                     <div class="session-list">
                         <div class="session-item active" onclick="selectSession(this)">
@@ -2480,7 +2581,7 @@ textarea.input {
                             <div class="session-item-meta">
                                 <span>今天 14:32</span>
                                 <span class="session-item-meta-dot"></span>
-                                <span>5条</span>
+                                <span>5条消息</span>
                             </div>
                         </div>
                         <div class="session-item" onclick="selectSession(this)">
@@ -2489,7 +2590,7 @@ textarea.input {
                             <div class="session-item-meta">
                                 <span>今天 13:15</span>
                                 <span class="session-item-meta-dot"></span>
-                                <span>3条</span>
+                                <span>3条消息</span>
                             </div>
                         </div>
                         <div class="session-item" onclick="selectSession(this)">
@@ -2498,7 +2599,7 @@ textarea.input {
                             <div class="session-item-meta">
                                 <span>昨天 16:45</span>
                                 <span class="session-item-meta-dot"></span>
-                                <span>8条</span>
+                                <span>8条消息</span>
                             </div>
                         </div>
                         <div class="session-item" onclick="selectSession(this)">
@@ -2507,7 +2608,7 @@ textarea.input {
                             <div class="session-item-meta">
                                 <span>昨天 10:22</span>
                                 <span class="session-item-meta-dot"></span>
-                                <span>12条</span>
+                                <span>12条消息</span>
                             </div>
                         </div>
                         <div class="session-item" onclick="selectSession(this)">
@@ -2516,7 +2617,7 @@ textarea.input {
                             <div class="session-item-meta">
                                 <span>02/03 09:15</span>
                                 <span class="session-item-meta-dot"></span>
-                                <span>4条</span>
+                                <span>4条消息</span>
                             </div>
                         </div>
                     </div>
